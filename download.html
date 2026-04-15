@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>下载 - 游译者 GameLingo</title>
+    <style>
+      :root{
+        --bg:#070b15;
+        --bg2:#060a13;
+        --panel:#0f1728;
+        --panel2:#0b1222;
+        --line:rgba(255,255,255,.10);
+        --line2:rgba(255,255,255,.07);
+        --text:#f4f8ff;
+        --muted:#9db1cf;
+        --muted2:#7f96bb;
+        --mint:#84ffd2;
+        --blue:#8bbdff;
+        --shadow:0 24px 60px rgba(0,0,0,.38);
+      }
+      *{ box-sizing:border-box; }
+      body{
+        margin:0;
+        color:var(--text);
+        font-family:"Inter","SF Pro Display","Segoe UI","Microsoft YaHei",sans-serif;
+        background:
+          radial-gradient(900px 420px at 18% -10%, rgba(58,104,170,.42) 0%, rgba(10,18,34,0) 60%),
+          radial-gradient(820px 520px at 88% 0%, rgba(132,255,210,.10) 0%, rgba(7,11,21,0) 58%),
+          linear-gradient(180deg,var(--bg2),var(--bg));
+        letter-spacing:.01em;
+        min-height:100vh;
+      }
+      a{ color:#b9d7ff; text-decoration:none; }
+      a:hover{ text-decoration:underline; }
+
+      .container{ width:min(1080px,92vw); margin:0 auto; }
+      .nav{
+        position:sticky; top:0; z-index:30;
+        backdrop-filter:blur(14px);
+        background:rgba(7,11,21,.68);
+        border-bottom:1px solid rgba(255,255,255,.07);
+      }
+      .nav .container{ display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
+      .brand{ display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.01em; }
+      .brand img{ width:34px; height:34px; border-radius:8px; }
+      .nav-links{ display:flex; align-items:center; gap:10px; }
+      .nav-links a{
+        height:34px; padding:0 12px; display:inline-flex; align-items:center;
+        border-radius:10px; border:1px solid #2a3a5d; background:#0d1527; color:#e4efff;
+        font-size:13px; transition:.25s ease;
+      }
+      .nav-links a:hover{ border-color:#4f6a97; transform:translateY(-1px); text-decoration:none; }
+
+      main{ padding:28px 0 56px; }
+      .hero{
+        border:1px solid rgba(255,255,255,.12);
+        background:linear-gradient(145deg,rgba(20,30,49,.90),rgba(13,21,36,.96));
+        border-radius:22px;
+        box-shadow:var(--shadow);
+        padding:22px;
+        overflow:hidden;
+        position:relative;
+      }
+      .hero:before{
+        content:""; position:absolute; inset:-40% -20% auto auto; width:320px; height:320px; border-radius:50%;
+        background:radial-gradient(circle,rgba(139,189,255,.30) 0,rgba(139,189,255,0) 70%); opacity:.6;
+      }
+      .hero > *{ position:relative; z-index:1; }
+      .tag{
+        display:inline-flex; align-items:center; gap:8px;
+        padding:6px 12px; border:1px solid rgba(139,189,255,.25);
+        border-radius:999px; color:#c3d8ff; font-size:12px;
+        background:rgba(255,255,255,.02);
+      }
+      h1{ margin:12px 0 10px; font-size:clamp(28px,3.4vw,44px); letter-spacing:-.03em; line-height:1.1; }
+      p{ margin:0; color:var(--muted); line-height:1.9; max-width:78ch; }
+
+      .grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+      .card{
+        border:1px solid var(--line);
+        border-radius:18px;
+        background:linear-gradient(180deg,rgba(15,23,40,.98),rgba(11,18,34,.98));
+        padding:18px;
+      }
+      .card h2{ margin:0 0 8px; font-size:18px; letter-spacing:-.01em; }
+      .muted{ color:var(--muted); }
+      .meta{ margin-top:10px; padding-top:10px; border-top:1px dashed rgba(255,255,255,.10); font-size:13px; color:var(--muted2); line-height:1.85; }
+
+      .platform{
+        display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+      }
+      .p-left{ display:flex; gap:12px; align-items:flex-start; min-width:0; }
+      .p-ico{
+        width:44px; height:44px; border-radius:14px;
+        display:grid; place-items:center;
+        border:1px solid rgba(255,255,255,.10);
+        background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+        flex:0 0 auto;
+      }
+      .p-ico img{ width:22px; height:22px; display:block; }
+      .p-title{ font-weight:900; margin:0; }
+      .p-sub{ font-size:13px; color:var(--muted); line-height:1.7; margin-top:4px; }
+      .pill{
+        font-size:12px; border-radius:999px; padding:6px 10px;
+        border:1px solid rgba(255,255,255,.12);
+        background:rgba(255,255,255,.03); color:#d7e8ff;
+        white-space:nowrap;
+      }
+      .pill.ok{ border-color:rgba(132,255,210,.35); background:rgba(6,45,33,.55); color:#b8ffe0; }
+      .pill.dev{ border-color:rgba(201,177,255,.25); background:rgba(30,18,52,.35); color:#e7dbff; }
+
+      .btns{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+      .btn{
+        height:44px; padding:0 16px; border-radius:13px;
+        font-weight:900; text-decoration:none; display:inline-flex; align-items:center;
+        border:1px solid #2d4067; transition:.28s ease;
+        background:rgba(255,255,255,.02); color:#dce8ff;
+      }
+      .btn.primary{
+        border:none; color:#02261b;
+        background:linear-gradient(120deg,var(--mint),#98e2ff);
+      }
+      .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 28px rgba(0,0,0,.25); text-decoration:none; }
+      .list{ margin:12px 0 0 18px; color:var(--muted); line-height:1.85; font-size:13px; }
+
+      .note{
+        margin-top:14px;
+        border:1px solid rgba(255,255,255,.10);
+        border-radius:16px;
+        background:rgba(255,255,255,.02);
+        padding:14px 16px;
+        color:var(--muted);
+        line-height:1.85;
+        font-size:13px;
+      }
+      .note strong{ color:#e8f2ff; }
+
+      @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
+      @media (prefers-reduced-motion: reduce){
+        *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="container">
+        <div class="brand">
+          <img src="./assets/logo.svg" alt="GameLingo Logo" />
+          <span>游译者 GameLingo</span>
+        </div>
+        <div class="nav-links">
+          <a href="./index.html">返回首页</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="tag">Download</div>
+        <h1>下载中心</h1>
+        <p>Windows 测试版已开放下载。Android 版本正在规划中，后续会在这里同步进度。</p>
+
+        <div class="grid">
+          <article class="card">
+            <div class="platform">
+              <div class="p-left">
+                <div class="p-ico" aria-hidden="true">
+                  <img src="./assets/icons/windows.svg" alt="" />
+                </div>
+                <div style="min-width:0">
+                  <div class="p-title">Windows</div>
+                  <div class="p-sub">推荐：Windows 10/11 · x64 安装包</div>
+                </div>
+              </div>
+              <span class="pill ok">可下载</span>
+            </div>
+
+            <div class="meta">
+              版本：<span id="winVer">v0.1.0-beta</span><br />
+              更新时间：<span id="winDate">2026-03-23</span><br />
+              文件：<span id="winFile">GameLingo-Setup-0.1.0.exe</span>
+            </div>
+
+            <div class="btns">
+              <a class="btn primary" id="btnDownloadWin" href="javascript:void(0)">下载 Windows 安装包</a>
+            </div>
+
+            <ul class="list">
+              <li>首次运行建议允许网络访问（用于翻译接口）。</li>
+              <li>若被安全软件拦截，请添加为可信程序。</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="platform">
+              <div class="p-left">
+                <div class="p-ico" aria-hidden="true">
+                  <img src="./assets/icons/android.svg" alt="" />
+                </div>
+                <div style="min-width:0">
+                  <div class="p-title">Android</div>
+                  <div class="p-sub">计划后续开发 · 优先把 Windows 体验打磨稳定</div>
+                </div>
+              </div>
+              <span class="pill dev">规划中</span>
+            </div>
+
+            <div class="note">
+              <strong>现阶段说明</strong><br />
+              - Android 版本正在评估可行性与交互方案。<br />
+              - 你可以先在 Windows 版验证效果，我们会优先完善主流程与引擎覆盖。
+            </div>
+          </article>
+        </div>
+
+        <div class="note" style="margin-top:16px;">
+          <strong>校验与说明</strong><br />
+          - SHA256：<span class="muted">发布时填写</span><br />
+          - 下载按钮当前为占位：发布时只需要把链接改成你的真实安装包地址（对象存储/CDN）即可上线。
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.getElementById("btnDownloadWin").addEventListener("click", () => {
+        window.open("./assets/releases.json", "_blank");
+        alert("当前为占位下载信息。发布时把此链接替换成真实安装包地址（推荐：对象存储+CDN）。");
+      });
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ - 游译者 GameLingo</title>
+    <style>
+      body { margin: 0; font-family: "Microsoft YaHei", sans-serif; background: #0a172f; color: #eef7ff; }
+      .wrap { width: min(920px, 92vw); margin: 0 auto; padding: 24px 0 40px; }
+      .item { background: #132540; border: 1px solid #345884; border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+      h1 { margin: 0 0 12px; }
+      h3 { margin: 0 0 6px; }
+      p { margin: 0; color: #b8d1e6; line-height: 1.75; }
+      a { color: #9ddcff; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <a href="./index.html">返回首页</a>
+      <h1>常见问题 FAQ</h1>
+      <section class="item">
+        <h3>Q: 为什么提示 3030 端口占用？</h3>
+        <p>A: 说明旧后端未关闭。结束旧进程后再启动即可。</p>
+      </section>
+      <section class="item">
+        <h3>Q: 免费版和会员版如何区分？</h3>
+        <p>A: 登录后由服务端根据订阅状态自动判定，客户端不可绕过。</p>
+      </section>
+      <section class="item">
+        <h3>Q: 翻译引擎可以换吗？</h3>
+        <p>A: 可以。免费版可用火山/百度；订阅版默认 DeepSeek；专业级默认 ChatGPT，同时仍保留免费引擎作为备用。</p>
+      </section>
+      <section class="item">
+        <h3>Q: 下载后为什么不能直接翻译？</h3>
+        <p>A: 需先登录账号；未登录状态不允许翻译接口调用。</p>
+      </section>
+      <section class="item">
+        <h3>Q: 为什么会提示“需要下载依赖”？安全吗？</h3>
+        <p>A: 为了实现真注入/运行时 Hook，某些引擎需要额外工具（例如 Unity 的 BepInEx、SRPG Studio 的开源解包工具）。软件会弹窗说明来源，只有你点“确定”才会下载，并且只在本机使用，不上传你的游戏文件。</p>
+      </section>
+    </main>
+  </body>
+</html>
+

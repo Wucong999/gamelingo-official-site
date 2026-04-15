@@ -1,0 +1,14 @@
+{
+  "product": "GameLingo",
+  "channel": "beta",
+  "latestVersion": "0.1.0",
+  "windows": {
+    "arch": "x64",
+    "fileName": "GameLingo-Setup-0.1.0.exe",
+    "downloadUrl": "https://your-domain.com/downloads/GameLingo-Setup-0.1.0.exe",
+    "sha256": "TO_BE_FILLED_WHEN_RELEASED",
+    "sizeMb": 0
+  },
+  "updatedAt": "2026-03-23T00:00:00+08:00"
+}
+
