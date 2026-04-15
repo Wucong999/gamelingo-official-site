@@ -21,6 +21,7 @@
         --shadow:0 24px 60px rgba(0,0,0,.38);
       }
       * { box-sizing:border-box; }
+      img, svg, video, canvas { max-width:100%; height:auto; }
       body{
         margin:0;
         color:var(--text);
@@ -121,6 +122,13 @@
         80%{ opacity:0; transform:translate3d(320px, 22px, 0) scale(.98); }
         100%{ opacity:0; transform:translate3d(320px, 22px, 0) scale(.98); }
       }
+      @keyframes dragMoveSm {
+        0%{ opacity:0; transform:translate3d(0,0,0) scale(.98); }
+        10%{ opacity:1; transform:translate3d(0,0,0) scale(1); }
+        60%{ opacity:1; transform:translate3d(160px, 18px, 0) scale(1); }
+        80%{ opacity:0; transform:translate3d(176px, 18px, 0) scale(.98); }
+        100%{ opacity:0; transform:translate3d(176px, 18px, 0) scale(.98); }
+      }
       @keyframes barFill {
         0%{ width:0%; }
         35%{ width:0%; }
@@ -142,6 +150,9 @@
       .hero-card .drag-file{ animation:dragMove 9.6s cubic-bezier(.2,.8,.2,1) infinite; }
       .hero-card .bar{ animation:barFill 9.6s cubic-bezier(.2,.8,.2,1) infinite; }
       .hero-card .file.hot{ animation:pulseHot 9.6s cubic-bezier(.2,.8,.2,1) infinite; }
+      @media (max-width:640px){
+        .hero-card .drag-file{ animation-name:dragMoveSm; }
+      }
       @keyframes stageActive1{ 0%, 32%{ opacity:1; } 33%,100%{ opacity:.55; } }
       @keyframes stageActive2{ 0%, 33%{ opacity:.55; } 34%, 66%{ opacity:1; } 67%,100%{ opacity:.55; } }
       @keyframes stageActive3{ 0%, 66%{ opacity:.55; } 67%, 100%{ opacity:1; } }
@@ -252,7 +263,7 @@
         background:rgba(13,22,40,.92);
       }
       .step.active .t{ color:#eafff8; }
-      .pricing { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+      .pricing { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
       .pricing-head { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:16px; flex-wrap:wrap; }
       .billing-switch { display:flex; background:#0d1527; border:1px solid #2a3a5d; border-radius:999px; padding:4px; }
       .billing-switch button { border:none; background:transparent; color:#c7dbf8; height:32px; padding:0 14px; border-radius:999px; cursor:pointer; font-weight:700; }
@@ -279,6 +290,35 @@
         .section h2{font-size:34px;}
         .card{min-height:unset;}
         .compare-row{grid-template-columns:1fr;}
+      }
+      /* Mobile polish (narrow phones): prevent overflow & keep layout stable */
+      @media (max-width:640px){
+        .container{ width:min(1160px, calc(100vw - 24px)); }
+        .nav .container{ flex-wrap:wrap; gap:10px; padding:12px 0; }
+        .actions{ width:100%; justify-content:flex-end; flex-wrap:wrap; }
+
+        .hero{ padding:54px 0 42px; gap:20px; }
+        h1{ font-size:clamp(30px, 10vw, 44px); }
+        .lead{ font-size:15px; line-height:1.8; }
+
+        .hero-card{ min-height:420px; }
+        .demo{ grid-template-columns:1fr; gap:12px; }
+        .demo-panel{ display:none; }
+        .drag-file{ left:12px; top:58px; right:12px; }
+        .stage{ left:12px; right:12px; }
+
+        .section{ padding:44px 0; }
+        .section h2{ font-size:28px; }
+
+        /* Pricing section uses inline columns on desktop; force single column on mobile */
+        .pricing{ grid-template-columns:1fr !important; }
+        .price .num{ font-size:38px; }
+      }
+      @media (max-width:420px){
+        .actions select,.actions a{ width:100%; justify-content:center; }
+        .btns .btn{ width:100%; justify-content:center; }
+        .hero-card{ min-height:440px; }
+        .bubble{ left:14px; right:14px; bottom:14px; }
       }
       @media (max-width:980px){
         .engine-grid{grid-template-columns:1fr;}
@@ -764,7 +804,7 @@
         <h2 id="pricingTitle">价格方案</h2>
         <p class="intro" id="pricingIntro">按月计费。到期后已翻译内容仍可离线使用，但无法继续进行付费翻译。</p>
 
-        <div class="pricing" style="grid-template-columns:1fr 1fr 1fr;">
+        <div class="pricing">
           <article class="price">
             <div class="name">免费版</div>
             <div class="num">¥0</div>
