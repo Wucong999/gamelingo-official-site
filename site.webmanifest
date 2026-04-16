@@ -1,0 +1,16 @@
+{
+  "name": "游译者 GameLingo",
+  "short_name": "GameLingo",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070b15",
+  "theme_color": "#070b15",
+  "icons": [
+    {
+      "src": "/assets/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
+

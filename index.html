@@ -4,7 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>游译者 GameLingo - 实时汉化助手官网</title>
-    <meta name="description" content="游译者 GameLingo：Hook + AI 沉浸式实时汉化。拖拽游戏，启动即翻译，原位覆盖显示，体验接近原生汉化。" />
+    <meta name="description" content="游译者 GameLingo：游戏翻译 / 实时汉化 / RPG 翻译工具。Hook + AI 沉浸式原位覆盖显示，拖拽游戏启动即翻译，术语统一、角色语气保持。" />
+    <link rel="canonical" href="https://www.gamelingo.cn/" />
+
+    <!-- Icons (best-effort compatibility) -->
+    <link rel="icon" href="https://www.gamelingo.cn/assets/logo.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="https://www.gamelingo.cn/assets/logo.svg" />
+    <link rel="mask-icon" href="https://www.gamelingo.cn/assets/logo.svg" color="#070b15" />
+    <link rel="manifest" href="https://www.gamelingo.cn/site.webmanifest" />
+    <meta name="theme-color" content="#070b15" />
+    <meta name="robots" content="index,follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="游译者 GameLingo - 实时汉化助手官网" />
+    <meta property="og:description" content="游戏翻译 / 实时汉化 / RPG 翻译工具。Hook + AI 沉浸式原位覆盖显示，拖拽游戏启动即翻译。" />
+    <meta property="og:url" content="https://www.gamelingo.cn/" />
+    <meta property="og:site_name" content="游译者 GameLingo" />
+    <meta property="og:image" content="https://www.gamelingo.cn/assets/logo.svg" />
+    <meta name="twitter:card" content="summary" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "GameLingo（游译者）",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Windows",
+        "description": "Hook + AI 沉浸式实时汉化助手。拖拽游戏启动即翻译，原位覆盖显示，术语统一。",
+        "offers": [
+          { "@type": "Offer", "price": "0", "priceCurrency": "CNY", "name": "Free" },
+          { "@type": "Offer", "price": "19.9", "priceCurrency": "CNY", "name": "Pro" },
+          { "@type": "Offer", "price": "39.9", "priceCurrency": "CNY", "name": "Ultra" }
+        ]
+      }
+    </script>
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
     <style>
       :root{
         --bg:#070b15;
@@ -33,8 +69,10 @@
         letter-spacing:.01em;
       }
       .container { width:min(1160px,92vw); margin:0 auto; }
-      .reveal { opacity:0; transform:translateY(14px); transition:opacity .62s cubic-bezier(.2,.8,.2,1), transform .62s cubic-bezier(.2,.8,.2,1); }
-      .reveal.on { opacity:1; transform:none; }
+      /* Default: content visible for SEO/no-JS; JS enhances with reveal animation */
+      .reveal { opacity:1; transform:none; }
+      .js .reveal { opacity:0; transform:translateY(14px); transition:opacity .62s cubic-bezier(.2,.8,.2,1), transform .62s cubic-bezier(.2,.8,.2,1); }
+      .js .reveal.on { opacity:1; transform:none; }
       .nav { position:sticky; top:0; z-index:30; backdrop-filter:blur(14px); background:rgba(7,11,21,.68); border-bottom:1px solid rgba(255,255,255,.07); }
       .nav .container { display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
       .brand { display:flex; gap:10px; align-items:center; font-weight:700; }
@@ -349,6 +387,8 @@
       @media (prefers-reduced-motion: reduce){
         *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
       }
+      /* Performance: skip offscreen rendering work */
+      .section{ content-visibility:auto; contain-intrinsic-size: 1px 900px; }
     </style>
   </head>
   <body>
@@ -853,7 +893,7 @@
         </div>
       </footer>
     </main>
-    <script src="./scripts/site.js"></script>
+    <script src="./scripts/site.js" defer></script>
   </body>
 </html>
 
