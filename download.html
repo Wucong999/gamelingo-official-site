@@ -4,24 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>下载 - 游译者 GameLingo</title>
-    <meta name="description" content="下载游译者 GameLingo（Windows 10/11）。游戏翻译 / 实时汉化工具：拖拽游戏启动，Hook + AI 原位覆盖显示。" />
-    <link rel="canonical" href="https://www.gamelingo.cn/download.html" />
-
-    <!-- Icons (best-effort compatibility) -->
-    <link rel="icon" href="https://www.gamelingo.cn/assets/logo.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="https://www.gamelingo.cn/assets/logo.svg" />
-    <link rel="mask-icon" href="https://www.gamelingo.cn/assets/logo.svg" color="#070b15" />
-    <link rel="manifest" href="https://www.gamelingo.cn/site.webmanifest" />
-    <meta name="theme-color" content="#070b15" />
-    <meta name="robots" content="index,follow" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="下载 - 游译者 GameLingo" />
-    <meta property="og:description" content="下载 Windows 版本。拖拽游戏启动即翻译，沉浸式原位显示。" />
-    <meta property="og:url" content="https://www.gamelingo.cn/download.html" />
-    <meta property="og:site_name" content="游译者 GameLingo" />
-    <meta property="og:image" content="https://www.gamelingo.cn/assets/logo.svg" />
-    <meta name="twitter:card" content="summary" />
     <style>
       :root{
         --bg:#070b15;
@@ -158,6 +140,12 @@
       @media (prefers-reduced-motion: reduce){
         *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
       }
+      .btn.disabled{
+        opacity:.55;
+        filter:grayscale(35%);
+        pointer-events:none;
+        cursor:not-allowed;
+      }
     </style>
   </head>
   <body>
@@ -175,23 +163,22 @@
 
     <main class="container">
       <section class="hero">
-        <div class="tag">Download</div>
         <h1>下载中心</h1>
-        <p>Windows 测试版已开放下载。Android 版本正在规划中，后续会在这里同步进度。</p>
+        <p>Windows 后续不久将提供下载。Android 版本正在规划中，后续会在这里同步进度谢谢，个人开发项目进度稍慢还请理解</p>
 
         <div class="grid">
           <article class="card">
             <div class="platform">
               <div class="p-left">
                 <div class="p-ico" aria-hidden="true">
-                  <img src="./assets/icons/windows.svg" alt="" />
+                  <img src="./assets/icons/windows.png" alt="" />
                 </div>
                 <div style="min-width:0">
                   <div class="p-title">Windows</div>
                   <div class="p-sub">推荐：Windows 10/11 · x64 安装包</div>
                 </div>
               </div>
-              <span class="pill ok">可下载</span>
+              <span class="pill dev">预计5-6月可下载</span>
             </div>
 
             <div class="meta">
@@ -201,7 +188,7 @@
             </div>
 
             <div class="btns">
-              <a class="btn primary" id="btnDownloadWin" href="javascript:void(0)">下载 Windows 安装包</a>
+              <a class="btn primary disabled" id="btnDownloadWin" href="javascript:void(0)" aria-disabled="true">下载 Windows 安装包</a>
             </div>
 
             <ul class="list">
@@ -214,7 +201,7 @@
             <div class="platform">
               <div class="p-left">
                 <div class="p-ico" aria-hidden="true">
-                  <img src="./assets/icons/android.svg" alt="" />
+                  <img src="./assets/icons/android.png" alt="" />
                 </div>
                 <div style="min-width:0">
                   <div class="p-title">Android</div>
@@ -232,20 +219,10 @@
           </article>
         </div>
 
-        <div class="note" style="margin-top:16px;">
-          <strong>校验与说明</strong><br />
-          - SHA256：<span class="muted">发布时填写</span><br />
-          - 下载按钮当前为占位：发布时只需要把链接改成你的真实安装包地址（对象存储/CDN）即可上线。
-        </div>
       </section>
     </main>
 
-    <script>
-      document.getElementById("btnDownloadWin").addEventListener("click", () => {
-        window.open("./assets/releases.json", "_blank");
-        alert("当前为占位下载信息。发布时把此链接替换成真实安装包地址（推荐：对象存储+CDN）。");
-      });
-    </script>
+    <script></script>
   </body>
 </html>
 

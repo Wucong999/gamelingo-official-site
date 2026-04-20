@@ -174,6 +174,150 @@ window.localStorage.setItem("gamelingo_site_logo_theme", "logo.svg");
 applyLogoTheme("logo.svg");
 applyLanguage(window.localStorage.getItem("gamelingo_site_lang") || "zh");
 
+// --- Simple checkout (static-site friendly) ---
+const checkoutModal = document.getElementById("checkoutModal");
+const checkoutClose = document.getElementById("checkoutClose");
+const redeemCodeBox = document.getElementById("redeemCodeBox");
+const redeemHint = document.getElementById("redeemHint");
+const aliQr = document.getElementById("aliQr");
+const aliStatus = document.getElementById("aliStatus");
+
+function apiBase() {
+  const b = String(window.GAMELINGO_API_BASE || "").trim();
+  if (b) return b.replace(/\/+$/, "");
+  // fallback: same origin (http/https) OR local API when opened as file://
+  try {
+    if (window.location && window.location.protocol === "file:") {
+      return "http://127.0.0.1:3030";
+    }
+  } catch (_e) {}
+  return "";
+}
+
+function qsEscape(s) {
+  return encodeURIComponent(String(s || ""));
+}
+
+function makeQrImg(url) {
+  const img = document.createElement("img");
+  // Use a public QR image service to keep the site static.
+  // You can replace it later with an inlined QR library if you prefer zero third-party calls.
+  img.alt = "QR";
+  img.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${qsEscape(url)}`;
+  return img;
+}
+
+function setQr(container, qrUrl) {
+  if (!container) return;
+  container.innerHTML = "";
+  if (!qrUrl) {
+    const span = document.createElement("span");
+    span.className = "muted";
+    span.textContent = "生成二维码失败";
+    container.appendChild(span);
+    return;
+  }
+  container.appendChild(makeQrImg(qrUrl));
+}
+
+function openCheckout() {
+  if (!checkoutModal) return;
+  checkoutModal.classList.add("on");
+  checkoutModal.setAttribute("aria-hidden", "false");
+}
+
+function closeCheckout() {
+  if (!checkoutModal) return;
+  checkoutModal.classList.remove("on");
+  checkoutModal.setAttribute("aria-hidden", "true");
+}
+
+if (checkoutClose) checkoutClose.addEventListener("click", closeCheckout);
+if (checkoutModal) {
+  checkoutModal.addEventListener("click", (e) => {
+    if (e.target === checkoutModal) closeCheckout();
+  });
+}
+
+let activePollTimer = 0;
+function stopPoll() {
+  if (activePollTimer) window.clearInterval(activePollTimer);
+  activePollTimer = 0;
+}
+
+async function fetchJson(url, opts) {
+  const res = await fetch(url, {
+    method: "GET",
+    ...(opts || {}),
+    headers: {
+      "Content-Type": "application/json",
+      ...(opts && opts.headers ? opts.headers : {})
+    }
+  });
+  const j = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(j.message || `HTTP ${res.status}`);
+  return j;
+}
+
+async function postJson(url, body) {
+  return await fetchJson(url, {
+    method: "POST",
+    body: JSON.stringify(body || {})
+  });
+}
+
+async function startCheckout(plan, amountFen) {
+  stopPoll();
+  if (redeemCodeBox) redeemCodeBox.style.display = "none";
+  if (redeemHint) redeemHint.style.display = "none";
+  if (aliStatus) aliStatus.textContent = "下单中…";
+  if (aliQr) aliQr.innerHTML = '<span class="muted">等待生成二维码…</span>';
+
+  openCheckout();
+
+  const base = apiBase();
+  // Alipay only (WeChat disabled for now).
+  const aliVal = await postJson(`${base}/api/billing/create-order`, { plan, channel: "alipay", amountFen }).catch(() => null);
+  if (aliVal?.ok) {
+    setQr(aliQr, aliVal.qrCodeUrl);
+    if (aliStatus) aliStatus.textContent = "请用支付宝扫码支付";
+  } else {
+    if (aliStatus) aliStatus.textContent = "支付宝下单失败（检查后端支付配置）";
+  }
+
+  const orderIds = [aliVal?.orderId].filter(Boolean);
+  if (!orderIds.length) return;
+
+  activePollTimer = window.setInterval(async () => {
+    try {
+      for (const id of orderIds) {
+        const r = await fetchJson(`${base}/api/billing/order/${qsEscape(id)}`);
+        const st = r?.order?.status;
+        const code = r?.order?.redeemCode;
+        if (st === "paid" && code) {
+          stopPoll();
+          if (redeemCodeBox) {
+            redeemCodeBox.style.display = "block";
+            redeemCodeBox.textContent = `兑换码：${code}`;
+          }
+          if (redeemHint) redeemHint.style.display = "block";
+          if (aliStatus) aliStatus.textContent = "支付成功";
+          return;
+        }
+      }
+    } catch (_e) {}
+  }, 2000);
+}
+
+document.querySelectorAll(".js-buy").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const plan = String(btn.getAttribute("data-plan") || "").trim();
+    const amountFen = Number(btn.getAttribute("data-amount-fen") || 0);
+    if (!plan || !amountFen) return;
+    startCheckout(plan, amountFen);
+  });
+});
+
 // Progressive reveal animation for a modern landing-page feel.
 const observer = new IntersectionObserver(
   (entries) => {
@@ -198,6 +342,106 @@ document.querySelectorAll(".engine-card").forEach((card) => {
     card.classList.toggle("open");
   });
 });
+
+// Feedback modal (server-side email)
+const feedbackLink = document.getElementById("feedbackLink");
+const feedbackModal = document.getElementById("feedbackModal");
+const feedbackClose = document.getElementById("feedbackClose");
+const feedbackText = document.getElementById("feedbackText");
+const feedbackSend = document.getElementById("feedbackSend");
+const feedbackStatus = document.getElementById("feedbackStatus");
+let feedbackCooldownUntil = 0;
+let feedbackCooldownTimer = 0;
+
+function setStatus(text, type) {
+  if (!feedbackStatus) return;
+  feedbackStatus.classList.remove("ok", "err");
+  if (type === "ok") feedbackStatus.classList.add("ok");
+  if (type === "err") feedbackStatus.classList.add("err");
+  feedbackStatus.textContent = text || "";
+}
+
+function setSendEnabled(enabled, label) {
+  if (!feedbackSend) return;
+  feedbackSend.disabled = !enabled;
+  feedbackSend.textContent = label || "发送";
+}
+
+function startCooldown(seconds) {
+  const s = Math.max(1, Number(seconds) || 60);
+  feedbackCooldownUntil = Date.now() + s * 1000;
+  window.clearInterval(feedbackCooldownTimer);
+  feedbackCooldownTimer = window.setInterval(() => {
+    const left = Math.ceil((feedbackCooldownUntil - Date.now()) / 1000);
+    if (left <= 0) {
+      window.clearInterval(feedbackCooldownTimer);
+      feedbackCooldownTimer = 0;
+      setSendEnabled(true, "发送");
+      return;
+    }
+    setSendEnabled(false, `发送（${left}s）`);
+  }, 250);
+  setSendEnabled(false, `发送（${s}s）`);
+}
+
+function openModal(el) {
+  if (!el) return;
+  el.classList.add("on");
+  el.setAttribute("aria-hidden", "false");
+}
+function closeModal(el) {
+  if (!el) return;
+  el.classList.remove("on");
+  el.setAttribute("aria-hidden", "true");
+}
+
+if (feedbackLink) {
+  feedbackLink.addEventListener("click", () => {
+    setStatus("");
+    openModal(feedbackModal);
+    setTimeout(() => feedbackText && feedbackText.focus(), 60);
+  });
+}
+if (feedbackClose) feedbackClose.addEventListener("click", () => closeModal(feedbackModal));
+if (feedbackModal) {
+  feedbackModal.addEventListener("click", (e) => {
+    if (e.target === feedbackModal) closeModal(feedbackModal);
+  });
+}
+
+async function sendFeedback() {
+  const left = Math.ceil((feedbackCooldownUntil - Date.now()) / 1000);
+  if (left > 0) {
+    setStatus(`发送过于频繁，请 ${left}s 后再试。`, "err");
+    startCooldown(left);
+    return;
+  }
+  const text = String(feedbackText?.value || "").trim();
+  if (!text) {
+    setStatus("请先填写问题描述。", "err");
+    return;
+  }
+  setSendEnabled(false, "发送中…");
+  setStatus("发送中…");
+  try {
+    const base = apiBase();
+    const res = await fetch(`${base}/api/feedback`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: text, page: String(window.location.href || "") })
+    });
+    const j = await res.json().catch(() => ({}));
+    if (!res.ok || !j.ok) throw new Error(j.message || `HTTP ${res.status}`);
+    setStatus("已发送，感谢反馈！", "ok");
+    if (feedbackText) feedbackText.value = "";
+    startCooldown(60);
+  } catch (e) {
+    setSendEnabled(true, "发送");
+    setStatus(`发送失败：${e?.message || String(e)}`, "err");
+  }
+}
+
+if (feedbackSend) feedbackSend.addEventListener("click", () => void sendFeedback());
 
 // Engine tooltip (desktop): float panel with small delay, no layout shift.
 const isCoarsePointer = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;

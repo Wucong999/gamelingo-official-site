@@ -4,43 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>游译者 GameLingo - 实时汉化助手官网</title>
-    <meta name="description" content="游译者 GameLingo：游戏翻译 / 实时汉化 / RPG 翻译工具。Hook + AI 沉浸式原位覆盖显示，拖拽游戏启动即翻译，术语统一、角色语气保持。" />
-    <link rel="canonical" href="https://www.gamelingo.cn/" />
-
-    <!-- Icons (best-effort compatibility) -->
-    <link rel="icon" href="https://www.gamelingo.cn/assets/logo.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="https://www.gamelingo.cn/assets/logo.svg" />
-    <link rel="mask-icon" href="https://www.gamelingo.cn/assets/logo.svg" color="#070b15" />
-    <link rel="manifest" href="https://www.gamelingo.cn/site.webmanifest" />
-    <meta name="theme-color" content="#070b15" />
-    <meta name="robots" content="index,follow" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="游译者 GameLingo - 实时汉化助手官网" />
-    <meta property="og:description" content="游戏翻译 / 实时汉化 / RPG 翻译工具。Hook + AI 沉浸式原位覆盖显示，拖拽游戏启动即翻译。" />
-    <meta property="og:url" content="https://www.gamelingo.cn/" />
-    <meta property="og:site_name" content="游译者 GameLingo" />
-    <meta property="og:image" content="https://www.gamelingo.cn/assets/logo.svg" />
-    <meta name="twitter:card" content="summary" />
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "GameLingo（游译者）",
-        "applicationCategory": "UtilitiesApplication",
-        "operatingSystem": "Windows",
-        "description": "Hook + AI 沉浸式实时汉化助手。拖拽游戏启动即翻译，原位覆盖显示，术语统一。",
-        "offers": [
-          { "@type": "Offer", "price": "0", "priceCurrency": "CNY", "name": "Free" },
-          { "@type": "Offer", "price": "19.9", "priceCurrency": "CNY", "name": "Pro" },
-          { "@type": "Offer", "price": "39.9", "priceCurrency": "CNY", "name": "Ultra" }
-        ]
-      }
-    </script>
-    <script>
-      document.documentElement.classList.add("js");
-    </script>
+    <meta name="description" content="游译者 GameLingo：Hook + AI 沉浸式实时汉化。拖拽游戏，启动即翻译，原位覆盖显示，体验接近原生汉化。" />
     <style>
       :root{
         --bg:#070b15;
@@ -57,7 +21,6 @@
         --shadow:0 24px 60px rgba(0,0,0,.38);
       }
       * { box-sizing:border-box; }
-      img, svg, video, canvas { max-width:100%; height:auto; }
       body{
         margin:0;
         color:var(--text);
@@ -69,10 +32,8 @@
         letter-spacing:.01em;
       }
       .container { width:min(1160px,92vw); margin:0 auto; }
-      /* Default: content visible for SEO/no-JS; JS enhances with reveal animation */
-      .reveal { opacity:1; transform:none; }
-      .js .reveal { opacity:0; transform:translateY(14px); transition:opacity .62s cubic-bezier(.2,.8,.2,1), transform .62s cubic-bezier(.2,.8,.2,1); }
-      .js .reveal.on { opacity:1; transform:none; }
+      .reveal { opacity:0; transform:translateY(14px); transition:opacity .62s cubic-bezier(.2,.8,.2,1), transform .62s cubic-bezier(.2,.8,.2,1); }
+      .reveal.on { opacity:1; transform:none; }
       .nav { position:sticky; top:0; z-index:30; backdrop-filter:blur(14px); background:rgba(7,11,21,.68); border-bottom:1px solid rgba(255,255,255,.07); }
       .nav .container { display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
       .brand { display:flex; gap:10px; align-items:center; font-weight:700; }
@@ -160,13 +121,6 @@
         80%{ opacity:0; transform:translate3d(320px, 22px, 0) scale(.98); }
         100%{ opacity:0; transform:translate3d(320px, 22px, 0) scale(.98); }
       }
-      @keyframes dragMoveSm {
-        0%{ opacity:0; transform:translate3d(0,0,0) scale(.98); }
-        10%{ opacity:1; transform:translate3d(0,0,0) scale(1); }
-        60%{ opacity:1; transform:translate3d(160px, 18px, 0) scale(1); }
-        80%{ opacity:0; transform:translate3d(176px, 18px, 0) scale(.98); }
-        100%{ opacity:0; transform:translate3d(176px, 18px, 0) scale(.98); }
-      }
       @keyframes barFill {
         0%{ width:0%; }
         35%{ width:0%; }
@@ -188,9 +142,6 @@
       .hero-card .drag-file{ animation:dragMove 9.6s cubic-bezier(.2,.8,.2,1) infinite; }
       .hero-card .bar{ animation:barFill 9.6s cubic-bezier(.2,.8,.2,1) infinite; }
       .hero-card .file.hot{ animation:pulseHot 9.6s cubic-bezier(.2,.8,.2,1) infinite; }
-      @media (max-width:640px){
-        .hero-card .drag-file{ animation-name:dragMoveSm; }
-      }
       @keyframes stageActive1{ 0%, 32%{ opacity:1; } 33%,100%{ opacity:.55; } }
       @keyframes stageActive2{ 0%, 33%{ opacity:.55; } 34%, 66%{ opacity:1; } 67%,100%{ opacity:.55; } }
       @keyframes stageActive3{ 0%, 66%{ opacity:.55; } 67%, 100%{ opacity:1; } }
@@ -301,7 +252,7 @@
         background:rgba(13,22,40,.92);
       }
       .step.active .t{ color:#eafff8; }
-      .pricing { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+      .pricing { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
       .pricing-head { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:16px; flex-wrap:wrap; }
       .billing-switch { display:flex; background:#0d1527; border:1px solid #2a3a5d; border-radius:999px; padding:4px; }
       .billing-switch button { border:none; background:transparent; color:#c7dbf8; height:32px; padding:0 14px; border-radius:999px; cursor:pointer; font-weight:700; }
@@ -313,6 +264,55 @@
       .price .num { margin:12px 0 8px; font-size:46px; letter-spacing:-.03em; font-weight:800; }
       .price .sub { color:#8ea8c9; font-size:13px; margin-bottom:12px; }
       .price ul { margin:0; padding-left:18px; color:var(--muted); line-height:2; }
+      .price .cta{ margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+      .btn.small{ height:38px; padding:0 14px; font-size:13px; border-radius:12px; }
+
+      .modal{
+        position:fixed; inset:0; z-index:80;
+        display:none; align-items:center; justify-content:center;
+        background:rgba(0,0,0,.55);
+      }
+      .modal.on{ display:flex; }
+      .modal .panel{
+        width:min(560px, calc(100vw - 24px));
+        border:1px solid rgba(255,255,255,.12);
+        background:rgba(13,22,40,.92);
+        border-radius:18px;
+        box-shadow:0 22px 60px rgba(0,0,0,.45);
+        padding:16px;
+      }
+      .modal .head{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+      .modal .title{ font-weight:800; letter-spacing:-.01em; }
+      .modal .close{ cursor:pointer; border:1px solid rgba(255,255,255,.14); background:transparent; color:#d7e9ff; border-radius:12px; height:36px; padding:0 12px; }
+      .modal .body{ margin-top:10px; color:#b7cbe8; font-size:13px; line-height:1.7; }
+      .pay-grid{ margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+      .pay-col{ border:1px solid rgba(255,255,255,.10); border-radius:16px; padding:12px; background:rgba(255,255,255,.02); }
+      .pay-col .k{ font-weight:800; color:#e8f2ff; margin-bottom:8px; }
+      .qr{ display:flex; align-items:center; justify-content:center; min-height:240px; border-radius:12px; background:rgba(0,0,0,.22); border:1px dashed rgba(255,255,255,.14); overflow:hidden; }
+      .qr img{ width:220px; height:220px; }
+      .status{ margin-top:8px; color:#9db9db; }
+      .redeem{ margin-top:10px; padding:10px 12px; border-radius:14px; border:1px solid rgba(132,255,210,.26); background:rgba(132,255,210,.06); color:#d9fff0; font-weight:800; }
+      .fb-text{
+        width:100%; min-height:140px; resize:vertical;
+        border-radius:16px; padding:12px 12px;
+        border:1px solid rgba(255,255,255,.16);
+        background:linear-gradient(180deg,rgba(10,17,34,.92),rgba(8,14,28,.94));
+        color:#e8f2ff; line-height:1.65;
+        outline:none;
+        box-shadow:0 0 0 0 rgba(152,226,255,.0);
+        transition:box-shadow .18s ease, border-color .18s ease;
+      }
+      .fb-text:focus{
+        border-color:rgba(152,226,255,.38);
+        box-shadow:0 0 0 4px rgba(152,226,255,.12);
+      }
+      .fb-actions{ display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap; margin-top:10px; align-items:center; }
+      .fb-actions .btn{ height:38px; padding:0 14px; font-size:13px; border-radius:12px; }
+      .fb-actions .btn[disabled]{ opacity:.55; cursor:not-allowed; }
+      .fb-status{ margin-top:10px; color:#9db9db; }
+      .fb-status.ok{ color:#b8ffe0; }
+      .fb-status.err{ color:#ffb4cc; }
+      @media (max-width:980px){ .pay-grid{ grid-template-columns:1fr; } }
       .compare { margin-top:16px; border:1px solid var(--line); border-radius:14px; overflow:hidden; }
       .compare-row { display:grid; grid-template-columns:1.6fr 1fr 1fr; }
       .compare-row > div { padding:10px 12px; border-top:1px solid rgba(255,255,255,.06); font-size:13px; color:#b7cbe8; }
@@ -328,35 +328,6 @@
         .section h2{font-size:34px;}
         .card{min-height:unset;}
         .compare-row{grid-template-columns:1fr;}
-      }
-      /* Mobile polish (narrow phones): prevent overflow & keep layout stable */
-      @media (max-width:640px){
-        .container{ width:min(1160px, calc(100vw - 24px)); }
-        .nav .container{ flex-wrap:wrap; gap:10px; padding:12px 0; }
-        .actions{ width:100%; justify-content:flex-end; flex-wrap:wrap; }
-
-        .hero{ padding:54px 0 42px; gap:20px; }
-        h1{ font-size:clamp(30px, 10vw, 44px); }
-        .lead{ font-size:15px; line-height:1.8; }
-
-        .hero-card{ min-height:420px; }
-        .demo{ grid-template-columns:1fr; gap:12px; }
-        .demo-panel{ display:none; }
-        .drag-file{ left:12px; top:58px; right:12px; }
-        .stage{ left:12px; right:12px; }
-
-        .section{ padding:44px 0; }
-        .section h2{ font-size:28px; }
-
-        /* Pricing section uses inline columns on desktop; force single column on mobile */
-        .pricing{ grid-template-columns:1fr !important; }
-        .price .num{ font-size:38px; }
-      }
-      @media (max-width:420px){
-        .actions select,.actions a{ width:100%; justify-content:center; }
-        .btns .btn{ width:100%; justify-content:center; }
-        .hero-card{ min-height:440px; }
-        .bubble{ left:14px; right:14px; bottom:14px; }
       }
       @media (max-width:980px){
         .engine-grid{grid-template-columns:1fr;}
@@ -387,8 +358,6 @@
       @media (prefers-reduced-motion: reduce){
         *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
       }
-      /* Performance: skip offscreen rendering work */
-      .section{ content-visibility:auto; contain-intrinsic-size: 1px 900px; }
     </style>
   </head>
   <body>
@@ -844,13 +813,13 @@
         <h2 id="pricingTitle">价格方案</h2>
         <p class="intro" id="pricingIntro">按月计费。到期后已翻译内容仍可离线使用，但无法继续进行付费翻译。</p>
 
-        <div class="pricing">
+        <div class="pricing" style="grid-template-columns:1fr 1fr 1fr;">
           <article class="price">
             <div class="name">免费版</div>
             <div class="num">¥0</div>
             <div class="sub">适合体验与兼容性测试</div>
             <ul>
-              <li>可用：火山 / 百度</li>
+              <li>可用：离线 Opus-MT / 火山</li>
               <li>每日额度：50 次</li>
               <li>支持：离线补丁可继续使用</li>
             </ul>
@@ -861,10 +830,13 @@
             <div class="num">¥19.9/月</div>
             <div class="sub">$3/月</div>
             <ul>
-              <li>解锁 Pro 模型通道（DeepSeek）</li>
+              <li>解锁 Pro 模型通道（百度通用/火山）</li>
               <li>更高额度 + 更高优先级</li>
               <li>单次/批量有合理上限（防刷）</li>
             </ul>
+            <div class="cta">
+              <button class="btn primary small js-buy" data-plan="pro" data-amount-fen="1990">立即购买</button>
+            </div>
           </article>
 
           <article class="price">
@@ -873,14 +845,13 @@
             <div class="sub">$7/月</div>
             <ul>
               <li>包含 Pro 全部能力</li>
-              <li>解锁 Ultra 模型通道（OpenAI）</li>
+              <li>解锁 Ultra 模型通道（百度大模型 / OpenAI / Claude）</li>
               <li>更高额度 + 更高优先级</li>
             </ul>
+            <div class="cta">
+              <button class="btn primary small js-buy" data-plan="pro_plus" data-amount-fen="3990">立即购买</button>
+            </div>
           </article>
-        </div>
-
-        <div class="note" style="margin-top:14px;">
-          说明：我们会在软件内明确标注“当前套餐可用模型/额度/限制”。为控制成本与防刷，付费套餐也会有合理的单次文本大小与每日预算限制。
         </div>
       </section>
 
@@ -890,10 +861,57 @@
           <a href="./privacy.html">隐私政策</a>
           <a href="./terms.html">服务条款</a>
           <a href="./faq.html">常见问题</a>
+          <a id="feedbackLink" href="javascript:void(0)">问题反馈</a>
         </div>
       </footer>
     </main>
-    <script src="./scripts/site.js" defer></script>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal" aria-hidden="true">
+      <div class="panel" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+        <div class="head">
+          <div class="title" id="checkoutTitle">购买 GameLingo</div>
+          <button class="close" id="checkoutClose">关闭</button>
+        </div>
+        <div class="body">
+          <div id="checkoutDesc">请选择支付方式，扫码支付成功后会显示兑换码（在客户端里兑换即可升级）。</div>
+          <div class="pay-grid">
+            <div class="pay-col">
+              <div class="k">支付宝</div>
+              <div class="qr" id="aliQr"><span class="muted">等待生成二维码…</span></div>
+              <div class="status" id="aliStatus"></div>
+            </div>
+          </div>
+          <div class="redeem" id="redeemCodeBox" style="display:none;"></div>
+          <div class="status" id="redeemHint" style="display:none;">打开客户端 → 账号/会员 → 输入兑换码升级。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div class="modal" id="feedbackModal" aria-hidden="true">
+      <div class="panel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+        <div class="head">
+          <div class="title" id="feedbackTitle">问题反馈</div>
+          <button class="close" id="feedbackClose">关闭</button>
+        </div>
+        <div class="body">
+          <div class="muted">请简要描述问题（例如：哪个页面/按钮、出现了什么提示、你期望的结果）。</div>
+          <textarea class="fb-text" id="feedbackText" placeholder="在这里输入问题描述…"></textarea>
+          <div class="fb-actions">
+            <button class="btn primary" id="feedbackSend">发送</button>
+          </div>
+          <div class="fb-status" id="feedbackStatus"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Configure API base (if your site and API are on different domains).
+      // Example: https://api.yourdomain.com
+      window.GAMELINGO_API_BASE = "http://127.0.0.1:3030";
+    </script>
+    <script src="./scripts/site.js"></script>
   </body>
 </html>
 
