@@ -10,36 +10,133 @@
     <meta name="theme-color" content="#0d1831" />
     <link rel="icon" href="./assets/logo.svg" type="image/svg+xml" />
     <style>
-      body { margin: 0; font-family: "Microsoft YaHei", sans-serif; background: #0d1831; color: #edf6ff; }
-      .wrap { width: min(900px, 92vw); margin: 0 auto; padding: 24px 0 40px; }
-      .card { background: #152844; border: 1px solid #355a85; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
-      h1, h2 { margin: 0 0 8px; }
-      p, li { color: #b7d0e5; line-height: 1.75; }
-      a { color: #9edcff; text-decoration: none; }
+      :root{
+        --bg:#070b15;
+        --bg2:#060a13;
+        --panel:#0f1728;
+        --line:rgba(255,255,255,.10);
+        --text:#f4f8ff;
+        --muted:#9db1cf;
+        --shadow:0 24px 60px rgba(0,0,0,.38);
+      }
+      *{ box-sizing:border-box; }
+      body{
+        margin:0;
+        color:var(--text);
+        font-family:"Inter","SF Pro Display","Segoe UI","Microsoft YaHei",sans-serif;
+        background:
+          radial-gradient(900px 420px at 18% -10%, rgba(58,104,170,.42) 0%, rgba(10,18,34,0) 60%),
+          radial-gradient(820px 520px at 88% 0%, rgba(132,255,210,.10) 0%, rgba(7,11,21,0) 58%),
+          linear-gradient(180deg,var(--bg2),var(--bg));
+        letter-spacing:.01em;
+        min-height:100vh;
+      }
+      a{ color:#b9d7ff; text-decoration:none; }
+      a:hover{ text-decoration:underline; }
+
+      .container{ width:min(920px,92vw); margin:0 auto; }
+      .nav{
+        position:sticky; top:0; z-index:30;
+        backdrop-filter:blur(14px);
+        background:rgba(7,11,21,.68);
+        border-bottom:1px solid rgba(255,255,255,.07);
+      }
+      .nav .container{ display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
+      .brand{ display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.01em; }
+      .brand img{ width:34px; height:34px; border-radius:8px; }
+      .nav-links{ display:flex; align-items:center; gap:10px; }
+      .nav-links a{
+        height:34px; padding:0 12px; display:inline-flex; align-items:center;
+        border-radius:10px; border:1px solid #2a3a5d; background:#0d1527; color:#e4efff;
+        font-size:13px; transition:.25s ease;
+      }
+      .nav-links a:hover{ border-color:#4f6a97; transform:translateY(-1px); text-decoration:none; }
+
+      main{ padding:28px 0 56px; }
+      .hero{
+        border:1px solid rgba(255,255,255,.12);
+        background:linear-gradient(145deg,rgba(20,30,49,.90),rgba(13,21,36,.96));
+        border-radius:22px;
+        box-shadow:var(--shadow);
+        padding:22px;
+      }
+      h1{ margin:0 0 10px; font-size:clamp(26px,3.2vw,40px); letter-spacing:-.03em; line-height:1.1; }
+      h2{ margin:0 0 8px; font-size:18px; letter-spacing:-.01em; }
+      p, li{ color:var(--muted); line-height:1.9; }
+      .card{
+        border:1px solid var(--line);
+        border-radius:18px;
+        background:linear-gradient(180deg,rgba(15,23,40,.98),rgba(11,18,34,.98));
+        padding:18px;
+        margin-top:14px;
+      }
+      .note{
+        margin-top:12px;
+        border:1px solid rgba(255,255,255,.10);
+        border-radius:16px;
+        background:rgba(255,255,255,.02);
+        padding:14px 16px;
+        color:var(--muted);
+        line-height:1.9;
+        font-size:13px;
+      }
     </style>
   </head>
   <body>
-    <main class="wrap">
-      <a href="./index.html">返回首页</a>
-      <div class="card">
+    <header class="nav">
+      <div class="container">
+        <div class="brand">
+          <img src="./assets/logo.svg" alt="GameLingo Logo" />
+          <span>游译者 GameLingo</span>
+        </div>
+        <div class="nav-links">
+          <a href="./index.html">返回首页</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
         <h1>服务条款</h1>
-        <p>使用本软件即表示你同意在合法合规前提下使用翻译辅助服务，不得用于攻击、抓取或滥用系统资源。</p>
-      </div>
-      <div class="card">
-        <h2>账号与订阅</h2>
-        <ul>
-          <li>用户需妥善保管账号凭证</li>
-          <li>免费版与会员版权益以服务端判定为准</li>
-          <li>严禁通过逆向或接口伪造绕过订阅限制</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>免责声明</h2>
-        <ul>
-          <li>翻译结果由模型生成，可能存在误差</li>
-          <li>请遵守相关游戏及平台的使用规则</li>
-        </ul>
-      </div>
+        <p>为了保护你和我们的服务稳定性，请在使用前了解以下条款（通俗版）。</p>
+
+        <div class="card">
+          <h2>你可以做什么</h2>
+          <ul>
+            <li>使用软件对游戏文本进行“辅助理解/翻译”，提升阅读体验</li>
+            <li>使用术语表与本地缓存，让同一词汇的翻译更一致</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>你不可以做什么</h2>
+          <ul>
+            <li>不得对接口进行恶意刷量、攻击、爬取、破坏服务</li>
+            <li>不得通过逆向/篡改客户端或伪造请求来绕过免费/会员限制</li>
+            <li>不得利用本服务从事违法违规用途</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>会员与权益（重要）</h2>
+          <ul>
+            <li>会员状态以服务端判定为准（客户端显示仅作提示）</li>
+            <li>不同套餐的可用模型/额度可能因成本与稳定性动态调整，并在软件内提示</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>免责声明</h2>
+          <ul>
+            <li>翻译由模型生成，可能出现错译、漏译、风格不一致等情况</li>
+            <li>请遵守游戏本体、平台与当地法律法规的使用规则</li>
+          </ul>
+        </div>
+
+        <div class="note">
+          我们会尽力保证服务可用性，但也可能因上游模型/网络等原因出现波动；如遇到问题，建议通过“问题反馈”提交截图或短视频，方便我们快速定位。
+        </div>
+      </section>
     </main>
   </body>
 </html>

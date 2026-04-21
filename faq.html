@@ -10,38 +10,110 @@
     <meta name="theme-color" content="#0a172f" />
     <link rel="icon" href="./assets/logo.svg" type="image/svg+xml" />
     <style>
-      body { margin: 0; font-family: "Microsoft YaHei", sans-serif; background: #0a172f; color: #eef7ff; }
-      .wrap { width: min(920px, 92vw); margin: 0 auto; padding: 24px 0 40px; }
-      .item { background: #132540; border: 1px solid #345884; border-radius: 12px; padding: 14px; margin-bottom: 10px; }
-      h1 { margin: 0 0 12px; }
-      h3 { margin: 0 0 6px; }
-      p { margin: 0; color: #b8d1e6; line-height: 1.75; }
-      a { color: #9ddcff; text-decoration: none; }
+      :root{
+        --bg:#070b15;
+        --bg2:#060a13;
+        --line:rgba(255,255,255,.10);
+        --text:#f4f8ff;
+        --muted:#9db1cf;
+        --shadow:0 24px 60px rgba(0,0,0,.38);
+      }
+      *{ box-sizing:border-box; }
+      body{
+        margin:0;
+        color:var(--text);
+        font-family:"Inter","SF Pro Display","Segoe UI","Microsoft YaHei",sans-serif;
+        background:
+          radial-gradient(900px 420px at 18% -10%, rgba(58,104,170,.42) 0%, rgba(10,18,34,0) 60%),
+          radial-gradient(820px 520px at 88% 0%, rgba(132,255,210,.10) 0%, rgba(7,11,21,0) 58%),
+          linear-gradient(180deg,var(--bg2),var(--bg));
+        letter-spacing:.01em;
+        min-height:100vh;
+      }
+      a{ color:#b9d7ff; text-decoration:none; }
+      a:hover{ text-decoration:underline; }
+
+      .container{ width:min(980px,92vw); margin:0 auto; }
+      .nav{
+        position:sticky; top:0; z-index:30;
+        backdrop-filter:blur(14px);
+        background:rgba(7,11,21,.68);
+        border-bottom:1px solid rgba(255,255,255,.07);
+      }
+      .nav .container{ display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
+      .brand{ display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.01em; }
+      .brand img{ width:34px; height:34px; border-radius:8px; }
+      .nav-links{ display:flex; align-items:center; gap:10px; }
+      .nav-links a{
+        height:34px; padding:0 12px; display:inline-flex; align-items:center;
+        border-radius:10px; border:1px solid #2a3a5d; background:#0d1527; color:#e4efff;
+        font-size:13px; transition:.25s ease;
+      }
+      .nav-links a:hover{ border-color:#4f6a97; transform:translateY(-1px); text-decoration:none; }
+
+      main{ padding:28px 0 56px; }
+      .hero{
+        border:1px solid rgba(255,255,255,.12);
+        background:linear-gradient(145deg,rgba(20,30,49,.90),rgba(13,21,36,.96));
+        border-radius:22px;
+        box-shadow:var(--shadow);
+        padding:22px;
+      }
+      h1{ margin:0 0 14px; font-size:clamp(26px,3.2vw,40px); letter-spacing:-.03em; line-height:1.1; }
+      .item{
+        border:1px solid var(--line);
+        border-radius:18px;
+        background:linear-gradient(180deg,rgba(15,23,40,.98),rgba(11,18,34,.98));
+        padding:18px;
+        margin-top:12px;
+      }
+      h3{ margin:0 0 8px; font-size:16px; letter-spacing:-.01em; }
+      p, li{ margin:0; color:var(--muted); line-height:1.9; }
+      .lead{ color:var(--muted); line-height:1.9; margin:0 0 6px; }
     </style>
   </head>
   <body>
-    <main class="wrap">
-      <a href="./index.html">返回首页</a>
-      <h1>常见问题 FAQ</h1>
-      <section class="item">
-        <h3>Q: 为什么提示 3030 端口占用？</h3>
-        <p>A: 说明旧后端未关闭。结束旧进程后再启动即可。</p>
-      </section>
-      <section class="item">
-        <h3>Q: 免费版和会员版如何区分？</h3>
-        <p>A: 登录后由服务端根据订阅状态自动判定，客户端不可绕过。</p>
-      </section>
-      <section class="item">
-        <h3>Q: 翻译引擎可以换吗？</h3>
-        <p>A: 可以。免费版可用离线 Opus-MT/火山；Pro 版开放百度通用/火山；Ultra 版开放百度大模型/OpenAI/Claude（具体以软件内显示为准）。</p>
-      </section>
-      <section class="item">
-        <h3>Q: 下载后为什么不能直接翻译？</h3>
-        <p>A: 需先登录账号；未登录状态不允许翻译接口调用。</p>
-      </section>
-      <section class="item">
-        <h3>Q: 为什么会提示“需要下载依赖”？安全吗？</h3>
-        <p>A: 为了实现真注入/运行时 Hook，某些引擎需要额外工具（例如 Unity 的 BepInEx、SRPG Studio 的开源解包工具）。软件会弹窗说明来源，只有你点“确定”才会下载，并且只在本机使用，不上传你的游戏文件。</p>
+    <header class="nav">
+      <div class="container">
+        <div class="brand">
+          <img src="./assets/logo.svg" alt="GameLingo Logo" />
+          <span>游译者 GameLingo</span>
+        </div>
+        <div class="nav-links">
+          <a href="./index.html">返回首页</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1>常见问题 FAQ</h1>
+        <p class="lead">这里整理了新手最容易卡住的点。若仍解决不了，建议在首页“问题反馈”里附上截图/短视频。</p>
+
+        <section class="item">
+          <h3>Q：为什么提示 3030 端口占用？</h3>
+          <p>A：说明本机已有一个后端在运行。把旧窗口关掉，或重启电脑后再启动即可。</p>
+        </section>
+
+        <section class="item">
+          <h3>Q：为什么看不到翻译效果？</h3>
+          <p>A：最常见是两种情况：没进入“有文字显示”的场景，或当前引擎需要适配包但还没安装。你可以先进入对话/任务提示界面，再按软件提示安装适配包。</p>
+        </section>
+
+        <section class="item">
+          <h3>Q：翻译模型可以换吗？</h3>
+          <p>A：可以。不同套餐开放的模型通道不同，具体以软件内显示为准（会优先推荐更稳定/更省钱的通道）。</p>
+        </section>
+
+        <section class="item">
+          <h3>Q：为什么会提示“需要下载依赖/工具”？安全吗？</h3>
+          <p>A：为了做到“更像官中”的显示效果，部分引擎需要额外开源工具/适配包（例如 Unity 的 BepInEx 路线）。软件会弹窗说明来源，只有你确认才会下载；它们只在本机使用，不会上传你的游戏文件。</p>
+        </section>
+
+        <section class="item">
+          <h3>Q：反馈时应该写什么，才能更快解决？</h3>
+          <p>A：建议按这 4 个点写：你在哪个页面/按钮、你做了什么、出现了什么提示、你希望怎样。最好再附 1 张截图或 10 秒左右短视频。</p>
+        </section>
       </section>
     </main>
   </body>

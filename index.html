@@ -314,6 +314,11 @@
       .price ul { margin:0; padding-left:18px; color:var(--muted); line-height:2; }
       .price .cta{ margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
       .btn.small{ height:38px; padding:0 14px; font-size:13px; border-radius:12px; }
+      .price .cta .btn{ white-space:nowrap; }
+      @media (max-width:980px){
+        .price .cta{ flex-direction:column; align-items:stretch; }
+        .price .cta .btn{ width:100%; justify-content:center; }
+      }
 
       .modal{
         position:fixed; inset:0; z-index:80;
@@ -357,6 +362,19 @@
       .fb-actions{ display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap; margin-top:10px; align-items:center; }
       .fb-actions .btn{ height:38px; padding:0 14px; font-size:13px; border-radius:12px; }
       .fb-actions .btn[disabled]{ opacity:.55; cursor:not-allowed; }
+      .fb-files{ margin-top:10px; display:flex; flex-direction:column; gap:8px; }
+      .fb-files input[type="file"]{
+        width:100%;
+        padding:10px 12px;
+        border-radius:14px;
+        border:1px solid rgba(255,255,255,.10);
+        background:rgba(255,255,255,.02);
+        color:#d7e9ff;
+        font-size:13px;
+      }
+      .fb-hint{ color:#9db9db; font-size:12px; line-height:1.6; }
+      .fb-filelist{ margin:0; padding-left:18px; color:#9db9db; font-size:12px; line-height:1.7; }
+      .fb-filelist li{ margin:2px 0; }
       .fb-status{ margin-top:10px; color:#9db9db; }
       .fb-status.ok{ color:#b8ffe0; }
       .fb-status.err{ color:#ffb4cc; }
@@ -519,17 +537,17 @@
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/rm2k.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
-                    <div class="engine-name">RPG Maker 2000/2002</div>
+                    <div class="engine-name">RPG Maker 2000/2003</div>
                     <div class="engine-sub">RM2K / RM2K3</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill dev">计划中</span></div>
+                <div class="engine-meta"><span class="pill ok">已支持</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker 2000/2002 <span class="muted">（计划中）</span></div>
+                  <div class="tip-title">RPG Maker 2000/2003 <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
-                    <li>特点：经典像素</li>
-                    <li>适合：日式RPG</li>
-                    <li>支持：未接入</li>
+                    <li>翻译：免费完整支持（通过 EasyRPG 工具链）</li>
+                    <li>作弊：不与游戏进程交互（不提供实时作弊）</li>
+                    <li>备注：若资源组织/编码特殊，可能需要额外处理</li>
                   </ul>
                 </div></div>
               </div>
@@ -542,13 +560,13 @@
                     <div class="engine-sub">RGSS</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill dev">计划中</span></div>
+                <div class="engine-meta"><span class="pill part">适配中</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker XP <span class="muted">（计划中）</span></div>
+                  <div class="tip-title">RPG Maker XP <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
-                    <li>特点：RGSS脚本</li>
-                    <li>适合：日式RPG</li>
-                    <li>支持：未接入</li>
+                    <li>翻译：免费支持（受加密/封包/资源组织影响，部分作品可能需要额外适配）</li>
+                    <li>作弊：免费完整支持（目标：易用、实时）— 当前适配中</li>
+                    <li>备注：RGSS 时代版本差异大，需按样本逐步补齐闭环</li>
                   </ul>
                 </div></div>
               </div>
@@ -561,13 +579,13 @@
                     <div class="engine-sub">RGSS2</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill dev">计划中</span></div>
+                <div class="engine-meta"><span class="pill part">适配中</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker VX <span class="muted">（计划中）</span></div>
+                  <div class="tip-title">RPG Maker VX <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
-                    <li>特点：RGSS2脚本</li>
-                    <li>适合：日式RPG</li>
-                    <li>支持：未接入</li>
+                    <li>翻译：免费支持（受加密/封包/资源组织影响，部分作品可能需要额外适配）</li>
+                    <li>作弊：免费完整支持（目标：易用、实时）— 当前适配中</li>
+                    <li>备注：RGSS 时代版本差异大，需按样本逐步补齐闭环</li>
                   </ul>
                 </div></div>
               </div>
@@ -580,13 +598,13 @@
                     <div class="engine-sub">RGSS3</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill dev">计划中</span></div>
+                <div class="engine-meta"><span class="pill part">适配中</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker VX Ace <span class="muted">（计划中）</span></div>
+                  <div class="tip-title">RPG Maker VX Ace <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
-                    <li>特点：RGSS3脚本</li>
-                    <li>适合：日式RPG</li>
-                    <li>支持：未接入</li>
+                    <li>翻译：免费支持（受加密/封包/资源组织影响，部分作品可能需要额外适配）</li>
+                    <li>作弊：免费完整支持（目标：易用、实时）— 当前适配中</li>
+                    <li>备注：RGSS 时代版本差异大，需按样本逐步补齐闭环</li>
                   </ul>
                 </div></div>
               </div>
@@ -599,13 +617,32 @@
                     <div class="engine-sub">mkxp-z</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill dev">计划中</span></div>
+                <div class="engine-meta"><span class="pill part">适配中</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">mkxp <span class="muted">（计划中）</span></div>
+                  <div class="tip-title">mkxp <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
-                    <li>特点：RGSS兼容</li>
-                    <li>适合：RM系作品</li>
-                    <li>支持：未接入</li>
+                    <li>翻译：免费支持（受封包/资源组织影响，部分作品可能需要额外适配）</li>
+                    <li>作弊：免费完整支持（目标：易用、实时）— 当前适配中</li>
+                    <li>备注：不同打包/魔改版本差异较大，需按样本逐步补齐闭环</li>
+                  </ul>
+                </div></div>
+              </div>
+
+              <div class="engine-card" data-engine="rgu" tabindex="0">
+                <div class="engine-left">
+                  <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/mkxp-z.ico" alt="" loading="lazy" /></div>
+                  <div style="min-width:0">
+                    <div class="engine-name">RPG Maker RGU</div>
+                    <div class="engine-sub">RGSS 1/2/3 兼容</div>
+                  </div>
+                </div>
+                <div class="engine-meta"><span class="pill part">适配中</span></div>
+                <div class="tip"><div class="tip-box">
+                  <div class="tip-title">RPG Maker RGU <span class="muted">（适配中）</span></div>
+                  <ul class="tip-list">
+                    <li>翻译：免费支持（受封包/资源组织影响，部分作品可能需要额外适配）</li>
+                    <li>作弊：免费完整支持（目标：易用、实时）— 当前适配中</li>
+                    <li>备注：不同整合包/魔改版本差异较大，需按样本逐步补齐闭环</li>
                   </ul>
                 </div></div>
               </div>
@@ -622,9 +659,9 @@
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">RPG Maker MV <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
-                    <li>特点：JSON工程</li>
-                    <li>适合：日式RPG</li>
-                    <li>支持：补丁注入</li>
+                    <li>翻译：免费完整支持</li>
+                    <li>作弊：免费完整支持（易用、实时）</li>
+                    <li>范围：道具/武器/防具/人物/开关/变量/地图列表+传送</li>
                   </ul>
                 </div></div>
               </div>
@@ -641,9 +678,9 @@
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">RPG Maker MZ <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
-                    <li>特点：JSON工程</li>
-                    <li>适合：日式RPG</li>
-                    <li>支持：补丁注入</li>
+                    <li>翻译：免费完整支持</li>
+                    <li>作弊：免费完整支持（易用、实时）</li>
+                    <li>范围：道具/武器/防具/人物/开关/变量/地图列表+传送</li>
                   </ul>
                 </div></div>
               </div>
@@ -656,13 +693,13 @@
                     <div class="engine-sub">WOLF RPG Editor</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill part">指引支持</span></div>
+                <div class="engine-meta"><span class="pill part">适配中</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">Wolf RPG <span class="muted">（指引支持）</span></div>
+                  <div class="tip-title">Wolf RPG <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
-                    <li>特点：常见日式</li>
-                    <li>适合：剧情RPG</li>
-                    <li>支持：先看指引</li>
+                    <li>翻译：免费完整支持</li>
+                    <li>作弊：完整数据修改（Pro 及以上）— 当前适配中</li>
+                    <li>备注：不同加密/封包差异大，需按样本逐步补齐闭环</li>
                   </ul>
                 </div></div>
               </div>
@@ -675,13 +712,13 @@
                     <div class="engine-sub">SGB</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill dev">指引支持</span></div>
+                <div class="engine-meta"><span class="pill part">适配中</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">SMILE GAME BUILDER <span class="muted">（指引支持）</span></div>
+                  <div class="tip-title">SMILE GAME BUILDER <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
-                    <li>特点：易上手</li>
-                    <li>适合：轻量RPG</li>
-                    <li>支持：先看指引</li>
+                    <li>翻译：免费完整支持</li>
+                    <li>作弊：免费完整支持（易用、实时）— 当前适配中</li>
+                    <li>备注：兼容 Unity 导出游戏（将优先走 Unity 注入链路）</li>
                   </ul>
                 </div></div>
               </div>
@@ -694,13 +731,13 @@
                     <div class="engine-sub">Bakin</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill dev">指引支持</span></div>
+                <div class="engine-meta"><span class="pill part">适配中</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Developer Bakin <span class="muted">（指引支持）</span></div>
+                  <div class="tip-title">RPG Developer Bakin <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
-                    <li>特点：3D/现代</li>
-                    <li>适合：RPG</li>
-                    <li>支持：先看指引</li>
+                    <li>翻译：免费完整支持</li>
+                    <li>作弊：免费完整支持（易用、实时）— 当前适配中</li>
+                    <li>备注：若为 Unity 导出，将优先走 Unity 注入链路</li>
                   </ul>
                 </div></div>
               </div>
@@ -722,9 +759,9 @@
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">TyranoBuilder <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
-                    <li>特点：脚本明文</li>
-                    <li>适合：AVG/VN</li>
-                    <li>支持：补丁注入</li>
+                    <li>翻译：免费完整支持</li>
+                    <li>作弊：简易数据修改（免费）</li>
+                    <li>备注：能力取决于游戏脚本/变量组织方式</li>
                   </ul>
                 </div></div>
               </div>
@@ -737,13 +774,13 @@
                     <div class="engine-sub">xp3 / ks / tjs</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill part">部分支持</span></div>
+                <div class="engine-meta"><span class="pill ok">已支持</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">Kirikiri 2/Z <span class="muted">（部分支持）</span></div>
+                  <div class="tip-title">Kirikiri 2/Z <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
-                    <li>特点：xp3封包</li>
-                    <li>适合：ADV/VN</li>
-                    <li>支持：需解包</li>
+                    <li>翻译：免费支持（部分特殊加密游戏除外）</li>
+                    <li>作弊：简易数据修改（免费）</li>
+                    <li>备注：封包/加密形态不同会影响可用性</li>
                   </ul>
                 </div></div>
               </div>
@@ -756,13 +793,13 @@
                     <div class="engine-sub">game/ 脚本</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill part">部分支持</span></div>
+                <div class="engine-meta"><span class="pill ok">已支持</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">Ren'Py <span class="muted">（部分支持）</span></div>
+                  <div class="tip-title">Ren'Py <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
-                    <li>特点：脚本清晰</li>
-                    <li>适合：VN/ADV</li>
-                    <li>支持：明文补丁</li>
+                    <li>翻译：免费完整支持</li>
+                    <li>作弊：数据修改（Pro 及以上）</li>
+                    <li>备注：部分封包/编译脚本需解包/反编译</li>
                   </ul>
                 </div></div>
               </div>
@@ -775,13 +812,13 @@
                     <div class="engine-sub">VNM</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill dev">指引支持</span></div>
+                <div class="engine-meta"><span class="pill part">免费支持</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">Visual Novel Maker <span class="muted">（指引支持）</span></div>
+                  <div class="tip-title">Visual Novel Maker <span class="muted">（免费支持）</span></div>
                   <ul class="tip-list">
-                    <li>特点：可视化</li>
-                    <li>适合：VN/AVG</li>
-                    <li>支持：先看指引</li>
+                    <li>翻译：免费支持（具体取决于游戏资源组织方式）</li>
+                    <li>作弊：不提供</li>
+                    <li>备注：若资源被封包/加密，可能需要额外处理</li>
                   </ul>
                 </div></div>
               </div>
@@ -794,13 +831,13 @@
                     <div class="engine-sub">文字互动</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill dev">指引支持</span></div>
+                <div class="engine-meta"><span class="pill ok">已支持</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">ChoiceScript <span class="muted">（指引支持）</span></div>
+                  <div class="tip-title">ChoiceScript <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
-                    <li>特点：纯文字</li>
-                    <li>适合：互动小说</li>
-                    <li>支持：先看指引</li>
+                    <li>翻译：免费完整支持</li>
+                    <li>作弊：不提供</li>
+                    <li>备注：以文本为主，翻译效果取决于脚本结构</li>
                   </ul>
                 </div></div>
               </div>
@@ -822,9 +859,9 @@
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">SRPG Studio <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
-                    <li>特点：data.dts</li>
-                    <li>适合：策略RPG</li>
-                    <li>支持：补丁注入</li>
+                    <li>翻译：免费完整支持</li>
+                    <li>作弊：免费完整支持（易用、实时）</li>
+                    <li>范围：开关/变量（已实现）；单位/物品/资金/地图进度等（规划中）</li>
                   </ul>
                 </div></div>
               </div>
@@ -842,13 +879,13 @@
                     <div class="engine-sub">像素动作/平台</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill dev">指引支持</span></div>
+                <div class="engine-meta"><span class="pill ok">已支持</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">Pixel Game Maker MV <span class="muted">（指引支持）</span></div>
+                  <div class="tip-title">Pixel Game Maker MV <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
-                    <li>特点：资源多样</li>
-                    <li>适合：动作像素</li>
-                    <li>支持：先看指引</li>
+                    <li>翻译：免费完整支持</li>
+                    <li>作弊：开关/变量修改（Pro 及以上，已支持）</li>
+                    <li>备注：不同作品资源组织方式差异较大</li>
                   </ul>
                 </div></div>
               </div>
@@ -867,37 +904,45 @@
             <div class="num">¥0</div>
             <div class="sub">适合体验与兼容性测试</div>
             <ul>
-              <li>可用：离线 Opus-MT / 火山</li>
-              <li>每日额度：50 次</li>
-              <li>支持：离线补丁可继续使用</li>
+              <li>可用：免费模型 Opus-MT</li>
+              <li>几乎不限量的使用</li>
+              <li>支持：修改数值道具等功能</li>
             </ul>
           </article>
 
           <article class="price pro">
-            <div class="name">GameLingo Pro（Level.1）</div>
-            <div class="num">¥19.9/月</div>
-            <div class="sub">$3/月</div>
+            <div class="name">GameLingo Pro</div>
+            <div class="num">¥22/月</div>           
             <ul>
-              <li>解锁 Pro 模型通道（百度通用/火山）</li>
-              <li>更高额度 + 更高优先级</li>
-              <li>单次/批量有合理上限（防刷）</li>
+              <li>解锁 Pro 模型通道（百度通用文本/火山引擎）</li>
+              <li>更高额度 + 翻译队列更高优先级</li> 
+              <li>更复杂的游戏引擎数值道具修改功能</li>            
             </ul>
             <div class="cta">
-              <button class="btn primary small js-buy" data-plan="pro" data-amount-fen="1990">立即购买</button>
+              <a
+                class="btn primary small"
+                href="https://ifdian.net/a/gamelingo"
+                target="_blank"
+                rel="noopener"
+              >前往爱发电</a>
             </div>
           </article>
 
           <article class="price">
-            <div class="name">GameLingo Ultra（Level.2）</div>
-            <div class="num">¥39.9/月</div>
-            <div class="sub">$7/月</div>
+            <div class="name">GameLingo Ultra</div>
+            <div class="num">¥48/月</div>           
             <ul>
               <li>包含 Pro 全部能力</li>
-              <li>解锁 Ultra 模型通道（百度大模型 / OpenAI / Claude）</li>
-              <li>更高额度 + 更高优先级</li>
+              <li>解锁 Ultra 模型通道（百度大模型文本 / Gpt-4.1-Mini）</li>
+              <li>在反馈里填入订单截图，优先支持您的诉求</li>
             </ul>
             <div class="cta">
-              <button class="btn primary small js-buy" data-plan="pro_plus" data-amount-fen="3990">立即购买</button>
+              <a
+                class="btn primary small"
+                href="https://ifdian.net/a/gamelingo"
+                target="_blank"
+                rel="noopener"
+              >前往爱发电</a>
             </div>
           </article>
         </div>
@@ -914,28 +959,6 @@
       </footer>
     </main>
 
-    <!-- Checkout Modal -->
-    <div class="modal" id="checkoutModal" aria-hidden="true">
-      <div class="panel" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
-        <div class="head">
-          <div class="title" id="checkoutTitle">购买 GameLingo</div>
-          <button class="close" id="checkoutClose">关闭</button>
-        </div>
-        <div class="body">
-          <div id="checkoutDesc">请选择支付方式，扫码支付成功后会显示兑换码（在客户端里兑换即可升级）。</div>
-          <div class="pay-grid">
-            <div class="pay-col">
-              <div class="k">支付宝</div>
-              <div class="qr" id="aliQr"><span class="muted">等待生成二维码…</span></div>
-              <div class="status" id="aliStatus"></div>
-            </div>
-          </div>
-          <div class="redeem" id="redeemCodeBox" style="display:none;"></div>
-          <div class="status" id="redeemHint" style="display:none;">打开客户端 → 账号/会员 → 输入兑换码升级。</div>
-        </div>
-      </div>
-    </div>
-
     <!-- Feedback Modal -->
     <div class="modal" id="feedbackModal" aria-hidden="true">
       <div class="panel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
@@ -944,8 +967,13 @@
           <button class="close" id="feedbackClose">关闭</button>
         </div>
         <div class="body">
-          <div class="muted">请简要描述问题（例如：哪个页面/按钮、出现了什么提示、你期望的结果）。</div>
+          <div class="muted">请按“在哪/做了什么/出现什么/期望什么”描述。建议附 1 张截图或短视频，定位会更快。</div>
           <textarea class="fb-text" id="feedbackText" placeholder="在这里输入问题描述…"></textarea>
+          <div class="fb-files">
+            <input id="feedbackFiles" type="file" accept="image/*,video/*" multiple />
+            <div class="fb-hint">附件限制：最多 2 个文件；单个不超过 8MB。超出会提示失败（建议先截图/压缩/剪短视频）。</div>
+            <ul class="fb-filelist" id="feedbackFileList" style="display:none;"></ul>
+          </div>
           <div class="fb-actions">
             <button class="btn primary" id="feedbackSend">发送</button>
           </div>
@@ -955,9 +983,7 @@
     </div>
 
     <script>
-      // Configure API base (if your site and API are on different domains).
-      // Example: https://api.yourdomain.com
-      window.GAMELINGO_API_BASE = "http://127.0.0.1:3030";
+      // (reserved)
     </script>
     <script src="./scripts/site.js"></script>
   </body>
