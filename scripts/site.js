@@ -49,7 +49,7 @@ const i18n = {
     pricingTitle: "价格方案",
     pricingIntro: "按月计费。到期后已翻译内容仍可离线使用，但无法继续进行付费翻译。",
     engineMatrixTitle: "\u652f\u6301\u7684\u6e38\u620f\u5f15\u64ce",
-    engineMatrixIntro: "\u60ac\u505c\u67e5\u770b\u5f15\u64ce\u7279\u70b9\u4e0e\u5f53\u524d\u652f\u6301\u7a0b\u5ea6\uff08\u79fb\u52a8\u7aef\u70b9\u51fb\u5c55\u5f00\uff09\u3002\u6211\u4eec\u4f1a\u628a\u201c\u5df2\u652f\u6301\u201d\u9010\u6b65\u505a\u6ee1\u3002",
+    engineMatrixIntro: "桌面端悬停查看详情（提示跟随鼠标），手机端点击卡片展开。",
     promoYearly: ""
   },
   en: {
@@ -95,7 +95,7 @@ const i18n = {
     pricingTitle: "Pricing",
     pricingIntro: "Monthly billing. After expiry, offline patched content still works, but paid translation is disabled.",
     engineMatrixTitle: "Supported Game Engines",
-    engineMatrixIntro: "Hover to see engine traits and current support level (tap to expand on mobile). We’ll keep expanding coverage.",
+    engineMatrixIntro: "Highlighted engines are in beta or supported; gray cards are planned. Hover for details (tooltip follows cursor); tap to expand on mobile.",
     promoYearly: ""
   }
 };
@@ -194,13 +194,6 @@ if (heroCard) {
   // Keep hero motion subtle and non-janky: avoid mousemove-driven transforms.
   // (We rely on low-frequency CSS animations in index.html instead.)
 }
-
-// Mobile-friendly: tap engine cards to expand details
-document.querySelectorAll(".engine-card").forEach((card) => {
-  card.addEventListener("click", () => {
-    card.classList.toggle("open");
-  });
-});
 
 // Feedback modal (server-side email)
 const feedbackLink = document.getElementById("feedbackLink");
@@ -358,10 +351,32 @@ const isCoarsePointer = window.matchMedia && window.matchMedia("(pointer: coarse
 const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const enableFloatTip = !isCoarsePointer;
 
+// Engine cards: gray out planned engines
+const ENGINE_LIVE = new Set(["unity", "rpgmv", "rpgmz", "renpy"]);
+document.querySelectorAll(".engine-card").forEach((card) => {
+  const key = card.dataset.engine || "";
+  if (!card.classList.contains("engine-card--live") && !ENGINE_LIVE.has(key)) {
+    card.classList.add("engine-card--planned");
+  }
+});
+
+// Mobile: tap engine cards to expand inline details
+if (isCoarsePointer) {
+  document.querySelectorAll(".engine-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      const wasOpen = card.classList.contains("open");
+      document.querySelectorAll(".engine-card.open").forEach((other) => other.classList.remove("open"));
+      if (!wasOpen) card.classList.add("open");
+    });
+  });
+}
+
 let floatTipEl = null;
 let showTimer = 0;
 let hideTimer = 0;
 let lastCard = null;
+let pointerX = 0;
+let pointerY = 0;
 
 function ensureFloatTip() {
   if (floatTipEl) return floatTipEl;
@@ -384,28 +399,23 @@ function setFloatTipFromCard(card) {
   return true;
 }
 
-function positionFloatTipNearCard(card) {
+function positionFloatTipAtPointer(x, y) {
   const el = ensureFloatTip();
-  const r = card.getBoundingClientRect();
-
-  // Measure after content set
   el.style.left = "0px";
   el.style.top = "0px";
   el.classList.add("on");
 
   const tipRect = el.getBoundingClientRect();
-  const margin = 10;
-
-  // Prefer right side; fallback to left; then below.
-  let left = r.right + 12;
-  let top = r.top + (r.height - tipRect.height) / 2;
+  const margin = 12;
+  const offset = 18;
+  let left = x + offset;
+  let top = y + offset;
 
   if (left + tipRect.width > window.innerWidth - margin) {
-    left = r.left - 12 - tipRect.width;
+    left = x - tipRect.width - offset;
   }
-  if (left < margin) {
-    left = r.left;
-    top = r.bottom + 10;
+  if (top + tipRect.height > window.innerHeight - margin) {
+    top = y - tipRect.height - offset;
   }
 
   left = clamp(left, margin, window.innerWidth - margin - tipRect.width);
@@ -415,11 +425,13 @@ function positionFloatTipNearCard(card) {
   el.style.top = `${Math.round(top)}px`;
 }
 
-function showFloatTip(card) {
+function showFloatTip(card, x, y) {
   if (!enableFloatTip) return;
   if (!card) return;
   if (!setFloatTipFromCard(card)) return;
-  positionFloatTipNearCard(card);
+  const px = Number.isFinite(x) ? x : pointerX;
+  const py = Number.isFinite(y) ? y : pointerY;
+  positionFloatTipAtPointer(px, py);
   lastCard = card;
 }
 
@@ -429,12 +441,12 @@ function hideFloatTip() {
   lastCard = null;
 }
 
-function scheduleShow(card) {
+function scheduleShow(card, x, y) {
   if (!enableFloatTip) return;
   window.clearTimeout(hideTimer);
   window.clearTimeout(showTimer);
-  const delay = prefersReducedMotion ? 0 : 140;
-  showTimer = window.setTimeout(() => showFloatTip(card), delay);
+  const delay = prefersReducedMotion ? 0 : 90;
+  showTimer = window.setTimeout(() => showFloatTip(card, x, y), delay);
 }
 
 function scheduleHide() {
@@ -446,20 +458,38 @@ function scheduleHide() {
 }
 
 if (enableFloatTip) {
+  document.addEventListener(
+    "pointermove",
+    (e) => {
+      pointerX = e.clientX;
+      pointerY = e.clientY;
+      if (lastCard) positionFloatTipAtPointer(pointerX, pointerY);
+    },
+    { passive: true }
+  );
+
   document.querySelectorAll(".engine-card").forEach((card) => {
-    card.addEventListener("pointerenter", () => scheduleShow(card));
+    card.addEventListener("pointerenter", (e) => {
+      pointerX = e.clientX;
+      pointerY = e.clientY;
+      scheduleShow(card);
+    });
+    card.addEventListener("pointermove", (e) => {
+      pointerX = e.clientX;
+      pointerY = e.clientY;
+      if (lastCard === card) positionFloatTipAtPointer(pointerX, pointerY);
+    });
     card.addEventListener("pointerleave", scheduleHide);
-    card.addEventListener("focusin", () => scheduleShow(card));
+    card.addEventListener("focusin", (e) => scheduleShow(card, e.clientX, e.clientY));
     card.addEventListener("focusout", scheduleHide);
   });
 
   window.addEventListener("scroll", () => {
-    // Keep it from lagging behind when scrolling quickly.
-    if (lastCard) positionFloatTipNearCard(lastCard);
+    if (lastCard) positionFloatTipAtPointer(pointerX, pointerY);
   }, { passive: true });
 
   window.addEventListener("resize", () => {
-    if (lastCard) positionFloatTipNearCard(lastCard);
+    if (lastCard) positionFloatTipAtPointer(pointerX, pointerY);
   });
 }
 
