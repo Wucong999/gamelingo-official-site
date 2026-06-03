@@ -11,25 +11,17 @@ const i18n = {
     siteBrandText: "游译者 GameLingo",
     navDownload: "下载",
     heroBadge: "没有汉化，也能玩懂全世界游戏！",
-    heroTitle: "大模型翻译沉浸汉化体验",
+    heroTitle: "大模型翻译更贴近游戏术语与风格<br />沉浸汉化体验",
     heroLead:
-      "二次元的世界就是这么简单易懂，内置术语库随意添加指定翻译，更加专注于剧情与战斗！",
+      "直接抓取游戏文本并即时翻译回写/覆盖显示，拖拽游戏一键启动、术语统一、角色语气保持，让你专注剧情与战斗！",
     heroBtnDownload: "下载 Windows 版",
-    featuresTitle: "核心功能",
-    featuresIntro: "为跨语言游戏玩家设计：专注“快上手、少干扰、看得懂”。",
-    featuresNote: "目标是让你把时间留给游戏本身，而不是花在折腾翻译工具上。",
-    k1: "实时翻译",
-    k2: "术语一致",
-    k3: "流程自检",
-    k4: "支持扩展",
-    f1t: "抓文本（Hook 优先）",
-    f1d: "优先走 Hook，尽量不靠 OCR；漏翻更少、更沉浸。",
-    f2t: "官译风格（更像本地化）",
-    f2d: "术语表 + 上下文记忆，减少“机翻味”。",
-    f3t: "流程自检 + 日志提示",
-    f3d: "告诉你卡在哪：没抓到文本 / 缺适配包 / 模型不可用。",
+    heroBtnEngines: "查看支持引擎",
+    heroDemoPill: "Beta 测试开放",
+    demoStep1: "STEP 1 拖入游戏",
+    demoStep2: "STEP 2 翻译中",
+    demoStep3: "STEP 3 完成重启",
     flowTitle: "使用流程",
-    flowIntro: "快速上手：拖入游戏 → 生成译文 → 自动写入。",
+    flowIntro: "三分钟上手：拖入游戏 → 生成补丁/安装适配 → 启动即可。",
     s1t: "下载并安装",
     s1d: "桌面端优先。",
     s2t: "拖入游戏 EXE",
@@ -38,67 +30,267 @@ const i18n = {
     s3d: "按提示一键完成。",
     s4t: "启动并体验",
     s4d: "进入文本场景生效。",
-    supportTitle: "支持范围",
-    supportIntro: "我们优先把玩家最常见的场景做稳：Windows + Unity。其他引擎会逐步补齐，并在软件里提示缺少的适配包。",
-    sup1t: "Windows 10/11",
-    sup1d: "桌面端优先，操作习惯贴近玩家。",
-    sup2t: "Unity（优先支持）",
-    sup2d: "提供一键安装适配包（BepInEx 5 路线）。",
-    sup3t: "RPGMaker / Ren’Py / 其他",
-    sup3d: "逐步补齐。未支持会明确提示“缺少什么适配包”。",
+    engineMatrixTitle: "支持的游戏引擎",
+    engineMatrixIntro:
+      "全部引擎开放 Beta 测试。桌面端鼠标悬停查看详情（提示跟随鼠标），手机端点击卡片展开。",
+    engineHeadRpg: "[RPG] 角色扮演引擎",
+    engineHeadVn: "[VN/ADV/AVG] 视觉小说引擎",
+    engineHeadSlg: "[SLG] 策略/模拟引擎",
+    engineHeadOther: "[OTHER] 其他引擎",
+    enginePillBeta: "Beta测试",
     pricingTitle: "价格方案",
-    pricingIntro: "按月计费。到期后已翻译内容仍可离线使用，但无法继续进行付费翻译。",
-    engineMatrixTitle: "\u652f\u6301\u7684\u6e38\u620f\u5f15\u64ce",
-    engineMatrixIntro: "桌面端悬停查看详情（提示跟随鼠标），手机端点击卡片展开。",
-    promoYearly: ""
+    pricingIntro: "当前为软件测试阶段，Pro 暂无定价；免费版可体验综合翻译与引擎能力。",
+    priceFreeName: "免费版",
+    priceFreeNum: "¥0",
+    priceFreeSub: "适合体验与日常游玩",
+    priceFreeF1: "可用：综合翻译包含 Bing、腾讯混元等（不定期调整）",
+    priceFreeF2: "几乎不限量的使用",
+    priceFreeF3: "支持：部分引擎的金手指功能",
+    priceProName: "GameLingo Pro",
+    priceProNum: "软件测试暂无定价",
+    priceProSub: "正式定价上线前敬请期待",
+    priceProF1: "解锁自定义模型 API Key",
+    priceProF2: "更高额度与翻译队列优先",
+    priceProF3: "更复杂的游戏引擎金手指支持",
+    priceProCta: "前往爱发电",
+    footerPrivacy: "隐私政策",
+    footerTerms: "服务条款",
+    footerFaq: "常见问题",
+    feedbackLink: "问题反馈",
+    feedbackTitle: "问题反馈",
+    feedbackClose: "关闭",
+    feedbackHint: "请按“在哪/做了什么/出现什么/期望什么”描述。建议附 1 张截图或短视频，定位会更快。",
+    feedbackPlaceholder: "在这里输入问题描述…",
+    feedbackFileHint: "附件限制：最多 2 个文件；单个不超过 8MB。超出会提示失败（建议先截图/压缩/剪短视频）。",
+    feedbackSend: "发送",
+    feedbackSending: "发送中…",
+    feedbackSuccess: "已发送，感谢反馈！",
+    feedbackEmpty: "请先填写问题描述。",
+    feedbackTooManyFiles: "附件最多选择 {n} 个文件。",
+    feedbackFileTooBig: "附件过大：{name}（{size}），单个上限 {max}。",
+    feedbackFail: "发送失败：{msg}",
+    feedbackCooldown: "发送过于频繁，请 {n}s 后再试。",
+    feedbackSendCooldown: "发送（{n}s）",
+    metaDescription:
+      "游译者 GameLingo：游戏翻译 / RPG翻译工具。Hook + AI 沉浸式实时汉化，拖拽游戏即可翻译回写，原位覆盖显示。",
+    footerCopy: "游译者 GameLingo © 2026",
+    demoChip: "三步演示",
+    demoFolderTitle: "游戏文件夹",
+    demoFolderHint: "拖入 game.exe",
+    demoAppFlow: "识别 → 补丁 → 启动",
+    demoLog1: "[1] 识别引擎：RPG Maker",
+    demoLog2: "[2] 生成 _GameLingo_Patched…",
+    demoLog3: "[3] 应用翻译…",
+    demoLog4: "[4] 完成，重启游戏…",
+    demoDragHint: "拖入 GameLingo"
   },
   en: {
     pageTitle: "GameLingo - Official Site",
     siteBrandText: "GameLingo",
     navDownload: "Download",
     heroBadge: "No localization? Still enjoy games worldwide.",
-    heroTitle: "Real-time Hook + AI Translation<br />Immersive In-Game Localization",
+    heroTitle: "AI translation tuned for game terms<br />Immersive in-game localization",
     heroLead:
-      "Built for Unity and games unsupported by RPG/MTool workflows. It captures game text directly, translates in real time, and writes back or overlays in place. Launch by drag-and-drop and keep terminology and character tone consistent.",
+      "Capture in-game text, translate in real time, and write back or overlay in place. Drag-and-drop to launch, keep glossary and tone consistent—focus on the story and combat.",
     heroBtnDownload: "Download for Windows",
-    featuresTitle: "Core Features",
-    featuresIntro: "Built for cross-language players: fast setup, low distraction, clear understanding.",
-    featuresNote: "Spend your time in the game, not on translation tool setup.",
-    k1: "Real-time",
-    k2: "Glossary",
-    k3: "Self-check",
-    k4: "Expandable",
-    f1t: "Text capture (Hook-first)",
-    f1d: "Hook-first to reduce OCR errors and missed lines.",
-    f2t: "Localization-style AI",
-    f2d: "Glossary + context to reduce raw machine-translation feel.",
-    f3t: "Clear diagnostics",
-    f3d: "Tells you what’s missing: no text, missing adapter, model issue.",
+    heroBtnEngines: "Supported engines",
+    heroDemoPill: "Open beta",
+    demoStep1: "STEP 1 Drop game",
+    demoStep2: "STEP 2 Translating",
+    demoStep3: "STEP 3 Restart",
     flowTitle: "Workflow",
-    flowIntro: "Get started in minutes: drop the EXE, install adapter or generate patch, then launch.",
+    flowIntro: "Get started in minutes: drop the game → patch/adapter → launch.",
     s1t: "Install",
     s1d: "Desktop-first.",
-    s2t: "Drop the EXE",
+    s2t: "Drop game EXE",
     s2d: "Auto-detect engine.",
-    s3t: "Adapter / Patch",
+    s3t: "Adapter / patch",
     s3d: "One-click guided.",
-    s4t: "Launch & Play",
+    s4t: "Launch & play",
     s4d: "Works in text scenes.",
-    supportTitle: "Support",
-    supportIntro: "We focus on the most common setup first: Windows + Unity. Other engines will be added with clear missing-adapter hints.",
-    sup1t: "Windows 10/11",
-    sup1d: "Desktop-first experience.",
-    sup2t: "Unity (priority)",
-    sup2d: "One-click adapter install (BepInEx 5 path).",
-    sup3t: "RPGMaker / Ren’Py / Others",
-    sup3d: "Coming next. We’ll tell you what adapter is missing.",
+    engineMatrixTitle: "Supported game engines",
+    engineMatrixIntro:
+      "All engines are in open beta. Hover for details (tooltip follows cursor); tap a card on mobile.",
+    engineHeadRpg: "[RPG] Role-playing engines",
+    engineHeadVn: "[VN/ADV/AVG] Visual novel engines",
+    engineHeadSlg: "[SLG] Strategy / simulation",
+    engineHeadOther: "[OTHER] Other engines",
+    enginePillBeta: "Beta",
     pricingTitle: "Pricing",
-    pricingIntro: "Monthly billing. After expiry, offline patched content still works, but paid translation is disabled.",
-    engineMatrixTitle: "Supported Game Engines",
-    engineMatrixIntro: "Highlighted engines are in beta or supported; gray cards are planned. Hover for details (tooltip follows cursor); tap to expand on mobile.",
-    promoYearly: ""
+    pricingIntro: "Software is in beta; Pro pricing TBD. Free tier includes integrated translation and engines.",
+    priceFreeName: "Free",
+    priceFreeNum: "¥0",
+    priceFreeSub: "For daily play and testing",
+    priceFreeF1: "Integrated translation: Bing, Tencent Hunyuan, etc. (may change)",
+    priceFreeF2: "Nearly unlimited usage",
+    priceFreeF3: "Cheats on select engines",
+    priceProName: "GameLingo Pro",
+    priceProNum: "Pricing TBD (beta)",
+    priceProSub: "Official pricing coming soon",
+    priceProF1: "Custom model API keys",
+    priceProF2: "Higher quota & queue priority",
+    priceProF3: "Advanced engine cheat tools",
+    priceProCta: "Support on Afdian",
+    footerPrivacy: "Privacy",
+    footerTerms: "Terms",
+    footerFaq: "FAQ",
+    feedbackLink: "Feedback",
+    feedbackTitle: "Feedback",
+    feedbackClose: "Close",
+    feedbackHint:
+      "Describe: where / what you did / what happened / what you expected. A screenshot or short video helps.",
+    feedbackPlaceholder: "Describe your issue here…",
+    feedbackFileHint: "Up to 2 files, 8MB each. Compress if upload fails.",
+    feedbackSend: "Send",
+    feedbackSending: "Sending…",
+    feedbackSuccess: "Sent. Thank you!",
+    feedbackEmpty: "Please describe the issue first.",
+    feedbackTooManyFiles: "At most {n} attachments.",
+    feedbackFileTooBig: "File too large: {name} ({size}), max {max}.",
+    feedbackFail: "Send failed: {msg}",
+    feedbackCooldown: "Too frequent. Try again in {n}s.",
+    feedbackSendCooldown: "Send ({n}s)",
+    metaDescription:
+      "GameLingo: game translation / RPG tools. Hook + AI real-time in-game localization with overlay display.",
+    footerCopy: "GameLingo © 2026",
+    demoChip: "3-Step Demo",
+    demoFolderTitle: "Game Folder",
+    demoFolderHint: "Drag game.exe",
+    demoAppFlow: "Detect → Patch → Launch",
+    demoLog1: "[1] Detected engine: RPG Maker",
+    demoLog2: "[2] Building _GameLingo_Patched…",
+    demoLog3: "[3] Applying translations…",
+    demoLog4: "[4] Done. Restart game…",
+    demoDragHint: "drag into GameLingo"
   }
 };
+
+function getLang() {
+  return window.localStorage.getItem("gamelingo_site_lang") === "en" ? "en" : "zh";
+}
+
+function getPageKey() {
+  const fromBody = document.body?.dataset?.page;
+  if (fromBody) return fromBody;
+  const path = (window.location.pathname || "").split("/").pop() || "index.html";
+  if (path === "" || path === "index.html") return "index";
+  return path.replace(/\.html$/i, "");
+}
+
+function tpl(str, vars) {
+  return String(str || "").replace(/\{(\w+)\}/g, (_, k) => String(vars?.[k] ?? ""));
+}
+
+function applyEngineI18n(safe) {
+  const engines = window.GAMELINGO_CONTENT?.engines;
+  if (!engines) return;
+  document.querySelectorAll("#engineMatrix .engine-card[data-engine]").forEach((card) => {
+    const key = card.dataset.engine;
+    const pack = engines[key]?.[safe];
+    if (!pack) return;
+    const name = card.querySelector(".engine-name")?.textContent?.trim() || key;
+    const subEl = card.querySelector(".engine-sub");
+    const subPack = engines[key]?.sub;
+    if (subEl && subPack) subEl.textContent = subPack[safe] || subPack.zh;
+
+    const titleEl = card.querySelector(".tip-title");
+    if (titleEl) {
+      titleEl.innerHTML = `${name} <span class="muted">${pack.status}</span>`;
+    }
+    const list = card.querySelector(".tip-list");
+    if (list && pack.lines) {
+      list.innerHTML = pack.lines.map((line) => `<li>${line}</li>`).join("");
+    }
+  });
+}
+
+const PAGE_I18N_IDS = {
+  download: [
+    "siteBrandText",
+    "navHome",
+    "h1",
+    "lead",
+    "winTitle",
+    "winSub",
+    "winPill",
+    "winBtn",
+    "winTip1",
+    "winTip2",
+    "androidTitle",
+    "androidSub",
+    "androidPill",
+    "androidNoteTitle",
+    "androidNote1",
+    "androidNote2"
+  ],
+  faq: ["siteBrandText", "navHome", "h1", "lead", "q1", "a1", "q2", "a2", "q3", "a3", "q4", "a4", "q5", "a5"],
+  privacy: [
+    "siteBrandText",
+    "navHome",
+    "h1",
+    "intro",
+    "c1h",
+    "c1l1",
+    "c1l2",
+    "c1l3",
+    "c2h",
+    "c2l1",
+    "c2l2",
+    "c2l3",
+    "c3h",
+    "c3l1",
+    "c3l2",
+    "c3l3",
+    "note"
+  ],
+  terms: [
+    "siteBrandText",
+    "navHome",
+    "h1",
+    "intro",
+    "c1h",
+    "c1l1",
+    "c1l2",
+    "c2h",
+    "c2l1",
+    "c2l2",
+    "c2l3",
+    "c3h",
+    "c3l1",
+    "c3l2",
+    "c4h",
+    "c4l1",
+    "c4l2",
+    "note"
+  ]
+};
+
+function applySubpageI18n(safe) {
+  const page = getPageKey();
+  if (page === "index") return;
+  const pack = window.GAMELINGO_CONTENT?.pages?.[page]?.[safe];
+  if (!pack) return;
+  document.title = pack.pageTitle || document.title;
+  const meta = document.querySelector('meta[name="description"]');
+  if (meta && pack.metaDescription) meta.setAttribute("content", pack.metaDescription);
+
+  const ids = PAGE_I18N_IDS[page] || [];
+  for (const id of ids) setText(id, pack[id]);
+
+  if (page === "download") {
+    const metaEl = document.getElementById("winMetaBlock");
+    if (metaEl && pack.winMeta) {
+      const ver = document.getElementById("winVer")?.textContent || "";
+      const date = document.getElementById("winDate")?.textContent || "";
+      const file = document.getElementById("winFile")?.textContent || "";
+      metaEl.innerHTML = `${pack.winMeta}<span id="winVer">${ver}</span><br />${pack.winMetaDate}<span id="winDate">${date}</span><br />${pack.winMetaFile}<span id="winFile">${file}</span>`;
+    }
+    const note = document.getElementById("androidNoteBody");
+    if (note) {
+      note.innerHTML = `<strong id="androidNoteTitle">${pack.androidNoteTitle}</strong><br />- <span id="androidNote1">${pack.androidNote1}</span><br />- <span id="androidNote2">${pack.androidNote2}</span>`;
+    }
+  }
+}
 
 function applyLogoTheme(fileName) {
   const safe = "logo.svg";
@@ -114,65 +306,107 @@ function setText(id, value, useHtml) {
   else el.textContent = value;
 }
 
+const I18N_IDS = [
+  "navDownload",
+  "heroBadge",
+  "heroTitle",
+  "heroLead",
+  "heroBtnDownload",
+  "heroBtnEngines",
+  "heroDemoPill",
+  "demoStep1",
+  "demoStep2",
+  "demoStep3",
+  "flowTitle",
+  "flowIntro",
+  "s1t",
+  "s1d",
+  "s2t",
+  "s2d",
+  "s3t",
+  "s3d",
+  "s4t",
+  "s4d",
+  "engineMatrixTitle",
+  "engineMatrixIntro",
+  "engineHeadRpg",
+  "engineHeadVn",
+  "engineHeadSlg",
+  "engineHeadOther",
+  "pricingTitle",
+  "pricingIntro",
+  "priceFreeName",
+  "priceFreeNum",
+  "priceFreeSub",
+  "priceFreeF1",
+  "priceFreeF2",
+  "priceFreeF3",
+  "priceProName",
+  "priceProNum",
+  "priceProSub",
+  "priceProF1",
+  "priceProF2",
+  "priceProF3",
+  "priceProCta",
+  "footerPrivacy",
+  "footerTerms",
+  "footerFaq",
+  "feedbackLink",
+  "feedbackTitle",
+  "feedbackClose",
+  "feedbackHint",
+  "feedbackFileHint",
+  "feedbackSend",
+  "footerCopy",
+  "demoChip",
+  "demoFolderTitle",
+  "demoFolderHint",
+  "demoAppFlow",
+  "demoLog1",
+  "demoLog2",
+  "demoLog3",
+  "demoLog4",
+  "demoDragHint"
+];
+
 function applyLanguage(lang) {
   const safe = lang === "en" ? "en" : "zh";
   const dict = i18n[safe];
   document.documentElement.lang = safe === "en" ? "en" : "zh-CN";
-  document.title = dict.pageTitle;
   if (langSelect) langSelect.value = safe;
-  if (siteBrandText) siteBrandText.textContent = dict.siteBrandText;
-  setText("navDownload", dict.navDownload);
-  setText("heroBadge", dict.heroBadge);
-  setText("heroTitle", dict.heroTitle, true);
-  setText("heroLead", dict.heroLead);
-  setText("heroBtnDownload", dict.heroBtnDownload);
-  setText("featuresTitle", dict.featuresTitle);
-  setText("featuresIntro", dict.featuresIntro);
-  setText("featuresNote", dict.featuresNote);
-  setText("k1", dict.k1);
-  setText("k2", dict.k2);
-  setText("k3", dict.k3);
-  setText("k4", dict.k4);
-  setText("f1t", dict.f1t);
-  setText("f1d", dict.f1d);
-  setText("f2t", dict.f2t);
-  setText("f2d", dict.f2d);
-  setText("f3t", dict.f3t);
-  setText("f3d", dict.f3d);
-  setText("flowTitle", dict.flowTitle);
-  setText("flowIntro", dict.flowIntro);
-  setText("s1t", dict.s1t);
-  setText("s1d", dict.s1d);
-  setText("s2t", dict.s2t);
-  setText("s2d", dict.s2d);
-  setText("s3t", dict.s3t);
-  setText("s3d", dict.s3d);
-  setText("s4t", dict.s4t);
-  setText("s4d", dict.s4d);
-  setText("supportTitle", dict.supportTitle);
-  setText("supportIntro", dict.supportIntro);
-  setText("sup1t", dict.sup1t);
-  setText("sup1d", dict.sup1d);
-  setText("sup2t", dict.sup2t);
-  setText("sup2d", dict.sup2d);
-  setText("sup3t", dict.sup3t);
-  setText("sup3d", dict.sup3d);
-  setText("pricingTitle", dict.pricingTitle);
-  setText("pricingIntro", dict.pricingIntro);
-  if (engineMatrixTitle) engineMatrixTitle.textContent = dict.engineMatrixTitle;
-  if (engineMatrixIntro) engineMatrixIntro.textContent = dict.engineMatrixIntro;
-  window.localStorage.setItem("gamelingo_site_lang", safe);
-}
 
-if (langSelect) {
-  langSelect.addEventListener("change", () => {
-    applyLanguage(langSelect.value);
-  });
+  const page = getPageKey();
+  if (page === "index") {
+    document.title = dict.pageTitle;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta && dict.metaDescription) meta.setAttribute("content", dict.metaDescription);
+    if (siteBrandText) siteBrandText.textContent = dict.siteBrandText;
+
+    setText("heroTitle", dict.heroTitle, true);
+    for (const id of I18N_IDS) {
+      if (id === "heroTitle") continue;
+      setText(id, dict[id]);
+    }
+
+    const fbText = document.getElementById("feedbackText");
+    if (fbText) fbText.placeholder = dict.feedbackPlaceholder;
+
+    document.querySelectorAll("#engineMatrix .pill.beta").forEach((pill) => {
+      pill.textContent = dict.enginePillBeta;
+    });
+
+    applyEngineI18n(safe);
+  } else {
+    const brand = document.getElementById("siteBrandText");
+    if (brand) brand.textContent = window.GAMELINGO_CONTENT?.pages?.[page]?.[safe]?.siteBrandText || brand.textContent;
+    applySubpageI18n(safe);
+  }
+
+  window.localStorage.setItem("gamelingo_site_lang", safe);
 }
 
 window.localStorage.setItem("gamelingo_site_logo_theme", "logo.svg");
 applyLogoTheme("logo.svg");
-applyLanguage(window.localStorage.getItem("gamelingo_site_lang") || "zh");
 
 // Purchase: use Afdian external link (no local payment modal).
 // Keeping this script lightweight avoids mobile layout/script issues.
@@ -242,7 +476,8 @@ function setStatus(text, type) {
 function setSendEnabled(enabled, label) {
   if (!feedbackSend) return;
   feedbackSend.disabled = !enabled;
-  feedbackSend.textContent = label || "发送";
+  const dict = i18n[getLang()];
+  feedbackSend.textContent = label || dict.feedbackSend;
 }
 
 function startCooldown(seconds) {
@@ -254,12 +489,14 @@ function startCooldown(seconds) {
     if (left <= 0) {
       window.clearInterval(feedbackCooldownTimer);
       feedbackCooldownTimer = 0;
-      setSendEnabled(true, "发送");
+      setSendEnabled(true);
       return;
     }
-    setSendEnabled(false, `发送（${left}s）`);
+    const dict = i18n[getLang()];
+    setSendEnabled(false, tpl(dict.feedbackSendCooldown, { n: left }));
   }, 250);
-  setSendEnabled(false, `发送（${s}s）`);
+  const dict0 = i18n[getLang()];
+  setSendEnabled(false, tpl(dict0.feedbackSendCooldown, { n: s }));
 }
 
 function openModal(el) {
@@ -291,8 +528,9 @@ if (feedbackFiles) {
   feedbackFiles.addEventListener("change", () => {
     refreshSelectedFilesUi();
     const files = Array.from(feedbackFiles.files || []);
+    const dictCh = i18n[getLang()];
     if (files.length > FEEDBACK_MAX_FILES) {
-      setStatus(`附件最多选择 ${FEEDBACK_MAX_FILES} 个文件。`, "err");
+      setStatus(tpl(dictCh.feedbackTooManyFiles, { n: FEEDBACK_MAX_FILES }), "err");
     } else {
       setStatus("");
     }
@@ -300,30 +538,38 @@ if (feedbackFiles) {
 }
 
 async function sendFeedback() {
+  const dict = i18n[getLang()];
   const left = Math.ceil((feedbackCooldownUntil - Date.now()) / 1000);
   if (left > 0) {
-    setStatus(`发送过于频繁，请 ${left}s 后再试。`, "err");
+    setStatus(tpl(dict.feedbackCooldown, { n: left }), "err");
     startCooldown(left);
     return;
   }
   const text = String(feedbackText?.value || "").trim();
   if (!text) {
-    setStatus("请先填写问题描述。", "err");
+    setStatus(dict.feedbackEmpty, "err");
     return;
   }
   const files = Array.from(feedbackFiles?.files || []);
   if (files.length > FEEDBACK_MAX_FILES) {
-    setStatus(`附件最多选择 ${FEEDBACK_MAX_FILES} 个文件。`, "err");
+    setStatus(tpl(dict.feedbackTooManyFiles, { n: FEEDBACK_MAX_FILES }), "err");
     return;
   }
   for (const f of files) {
     if ((Number(f.size) || 0) > FEEDBACK_MAX_FILE_BYTES) {
-      setStatus(`附件过大：${f.name}（${bytesHuman(f.size)}），单个上限 ${bytesHuman(FEEDBACK_MAX_FILE_BYTES)}。`, "err");
+      setStatus(
+        tpl(dict.feedbackFileTooBig, {
+          name: f.name,
+          size: bytesHuman(f.size),
+          max: bytesHuman(FEEDBACK_MAX_FILE_BYTES)
+        }),
+        "err"
+      );
       return;
     }
   }
-  setSendEnabled(false, "发送中…");
-  setStatus("发送中…");
+  setSendEnabled(false, dict.feedbackSending);
+  setStatus(dict.feedbackSending);
   try {
     const fd = new FormData();
     fd.append("message", text);
@@ -333,14 +579,14 @@ async function sendFeedback() {
     const res = await fetch(`/api/feedback`, { method: "POST", body: fd });
     const j = await res.json().catch(() => ({}));
     if (!res.ok || !j.ok) throw new Error(j.message || `HTTP ${res.status}`);
-    setStatus("已发送，感谢反馈！", "ok");
+    setStatus(dict.feedbackSuccess, "ok");
     if (feedbackText) feedbackText.value = "";
     if (feedbackFiles) feedbackFiles.value = "";
     refreshSelectedFilesUi();
     startCooldown(60);
   } catch (e) {
-    setSendEnabled(true, "发送");
-    setStatus(`发送失败：${e?.message || String(e)}`, "err");
+    setSendEnabled(true);
+    setStatus(tpl(dict.feedbackFail, { msg: e?.message || String(e) }), "err");
   }
 }
 
@@ -351,13 +597,9 @@ const isCoarsePointer = window.matchMedia && window.matchMedia("(pointer: coarse
 const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const enableFloatTip = !isCoarsePointer;
 
-// Engine cards: gray out planned engines
-const ENGINE_LIVE = new Set(["unity", "rpgmv", "rpgmz", "renpy"]);
+// 全部引擎卡片统一高亮（Beta 开放）
 document.querySelectorAll(".engine-card").forEach((card) => {
-  const key = card.dataset.engine || "";
-  if (!card.classList.contains("engine-card--live") && !ENGINE_LIVE.has(key)) {
-    card.classList.add("engine-card--planned");
-  }
+  card.classList.add("engine-card--live");
 });
 
 // Mobile: tap engine cards to expand inline details
@@ -522,5 +764,17 @@ if (steps.length && timeline) {
     { threshold: [0.25, 0.45, 0.65] }
   );
   steps.forEach((s) => stepObserver.observe(s));
+}
+
+applyLanguage(window.localStorage.getItem("gamelingo_site_lang") || "zh");
+
+if (langSelect) {
+  langSelect.addEventListener("change", () => {
+    applyLanguage(langSelect.value);
+    if (lastCard && floatTipEl?.classList.contains("on")) {
+      setFloatTipFromCard(lastCard);
+      positionFloatTipAtPointer(pointerX, pointerY);
+    }
+  });
 }
 

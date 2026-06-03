@@ -46,10 +46,12 @@
         "description": "游戏翻译 / RPG翻译工具。Hook + AI 沉浸式实时汉化，拖拽游戏即可翻译回写，原位覆盖显示。",
         "url": "https://www.gamelingo.cn/",
         "image": "https://www.gamelingo.cn/assets/logo-neon.svg",
-        "offers": [
-          { "@type": "Offer", "name": "免费版", "price": "0", "priceCurrency": "CNY" },
-          { "@type": "Offer", "name": "Pro", "price": "29.9", "priceCurrency": "CNY" }
-        ]
+        "offers": {
+          "@type": "Offer",
+          "name": "免费版",
+          "price": "0",
+          "priceCurrency": "CNY"
+        }
       }
     </script>
     <style>
@@ -247,7 +249,13 @@
       .engine-meta{ grid-area:meta; }
       .engine-left{ display:flex; align-items:center; gap:10px; min-width:0; }
       .engine-ico{ width:36px; height:36px; border-radius:12px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.10); background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02)); flex:0 0 auto; overflow:hidden; }
-      .engine-ico img{ width:28px; height:28px; display:block; }
+      .engine-ico img{
+        width:28px; height:28px;
+        max-width:none;
+        display:block;
+        object-fit:contain;
+        object-position:center;
+      }
       .engine-name{ font-weight:800; letter-spacing:-.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
       .engine-sub{ font-size:12px; color:var(--muted); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
       .engine-meta{ display:flex; align-items:center; gap:8px; flex:0 0 auto; }
@@ -268,25 +276,13 @@
         border-color:rgba(132,255,210,.28);
         background:linear-gradient(145deg,rgba(132,255,210,.12),rgba(255,255,255,.04));
       }
-      .engine-card--live .engine-ico img{ width:40px; height:40px; }
+      .engine-card--live .engine-ico img{
+        width:40px; height:40px;
+        max-width:none;
+        object-fit:contain;
+        object-position:center;
+      }
       .engine-card--live .engine-name{ font-size:15px; }
-      /* 规划中：保持原卡片亮度，仅去色变灰（不要压暗） */
-      .engine-card--planned{
-        filter:grayscale(1) saturate(.25);
-        opacity:.82;
-      }
-      .engine-card--planned .engine-name{ color:#a8b8d4; }
-      .engine-card--planned .engine-sub{ color:#7f92b0; }
-      .engine-card--planned .engine-ico{
-        border-color:rgba(255,255,255,.08);
-        background:rgba(255,255,255,.03);
-      }
-      .engine-card--planned:hover{
-        transform:translateY(-1px);
-        border-color:rgba(255,255,255,.12);
-        box-shadow:0 8px 20px rgba(0,0,0,.12);
-        opacity:.88;
-      }
       .tip{ display:none; }
       .tip-box{
         border:1px solid rgba(255,255,255,.10);
@@ -434,7 +430,7 @@
         .engine-card .tip{ display:none; }
         .engine-card.open .tip{ display:block; }
         .engine-card--live .engine-ico{ width:48px; height:48px; }
-        .engine-card--live .engine-ico img{ width:36px; height:36px; }
+        .engine-card--live .engine-ico img{ width:36px; height:36px; max-width:none; object-fit:contain; }
       }
       @media (max-width:640px){
         .container{ width:min(1160px, calc(100vw - 24px)); }
@@ -482,7 +478,7 @@
       }
     </style>
   </head>
-  <body>
+  <body data-page="index">
     <header class="nav">
       <div class="container">
         <div class="brand">
@@ -507,19 +503,19 @@
           <p id="heroLead" class="lead">直接抓取游戏文本并即时翻译回写/覆盖显示，拖拽游戏一键启动、术语统一、角色语气保持，让你专注剧情与战斗！</p>
           <div class="btns">
             <a id="heroBtnDownload" class="btn primary" href="./download.html">下载 Windows 版</a>
-            <a class="btn ghost" href="#engineMatrixTitle">查看支持引擎</a>
+            <a id="heroBtnEngines" class="btn ghost" href="#engineMatrixTitle">查看支持引擎</a>
           </div>
         </div>
         <div class="glass hero-card">
-          <div class="chip">3-Step Demo</div>
+          <div class="chip" id="demoChip">3-Step Demo</div>
           <div class="demo" aria-label="GameLingo workflow demo">
             <div class="demo-panel">
               <div class="demo-head">
                 <div style="display:flex;align-items:center;gap:10px;">
                   <div class="demo-dots" aria-hidden="true"><span class="demo-dot"></span><span class="demo-dot"></span><span class="demo-dot"></span></div>
-                  <div>Game Folder</div>
+                  <div id="demoFolderTitle">Game Folder</div>
                 </div>
-                <div style="font-size:12px;color:var(--muted2);">Drag `game.exe`</div>
+                <div id="demoFolderHint" style="font-size:12px;color:var(--muted2);">Drag `game.exe`</div>
               </div>
               <div class="demo-body">
                 <div class="filelist">
@@ -535,21 +531,20 @@
               <div class="appshot">
                 <div class="app-top">
                   <div>GameLingo</div>
-                  <div style="font-size:12px;color:var(--muted2);">Detect → Patch → Launch</div>
+                  <div id="demoAppFlow" style="font-size:12px;color:var(--muted2);">Detect → Patch → Launch</div>
                 </div>
                 <div class="app-mid">
                   <div class="kpi">
-                    <span class="pill runtime">Unity · 运行时</span>
-                    <span class="pill beta">RPG Maker MV/MZ</span>
+                    <span class="pill beta" id="heroDemoPill">Beta 测试开放</span>
                   </div>
                   <div class="progress" aria-label="Translation progress">
                     <div class="bar"></div>
                   </div>
                   <div class="log" aria-label="Demo log">
-                    <div>[1] Detected engine: RPG Maker</div>
-                    <div>[2] Building _GameLingo_Patched…</div>
-                    <div>[3] Applying translations…</div>
-                    <div>[4] Done. Restart game…</div>
+                    <div id="demoLog1">[1] Detected engine: RPG Maker</div>
+                    <div id="demoLog2">[2] Building _GameLingo_Patched…</div>
+                    <div id="demoLog3">[3] Applying translations…</div>
+                    <div id="demoLog4">[4] Done. Restart game…</div>
                   </div>
                 </div>
               </div>
@@ -557,13 +552,13 @@
                 <div class="drag-badge">EXE</div>
                 <div class="drag-text">
                   <div class="name">game.exe</div>
-                  <div class="hint">drag into GameLingo</div>
+                  <div class="hint" id="demoDragHint">drag into GameLingo</div>
                 </div>
               </div>
               <div class="stage" aria-hidden="true">
-                <div class="s on">STEP 1 拖入游戏</div>
-                <div class="s">STEP 2 翻译中</div>
-                <div class="s">STEP 3 完成重启</div>
+                <div class="s on" id="demoStep1">STEP 1 拖入游戏</div>
+                <div class="s" id="demoStep2">STEP 2 翻译中</div>
+                <div class="s" id="demoStep3">STEP 3 完成重启</div>
               </div>
             </div>
           </div>
@@ -583,37 +578,13 @@
 
       <section class="section reveal">
         <h2 id="engineMatrixTitle">支持的游戏引擎</h2>
-        <p class="intro" id="engineMatrixIntro">桌面端鼠标悬停查看详情（提示跟随鼠标），手机端点击卡片展开。</p>
+        <p class="intro" id="engineMatrixIntro">全部引擎开放 Beta 测试。桌面端鼠标悬停查看详情（提示跟随鼠标），手机端点击卡片展开。</p>
 
         <div class="engine-wrap" id="engineMatrix">
           <div class="engine-group">
-            <div class="engine-head">[UNITY] 通用游戏引擎</div>
+            <div class="engine-head" id="engineHeadRpg">[RPG] 角色扮演引擎</div>
             <div class="engine-grid">
-              <div class="engine-card engine-card--live engine-card--unity" data-engine="unity" tabindex="0">
-                <div class="engine-left">
-                  <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/Unity.png" alt="" loading="lazy" /></div>
-                  <div style="min-width:0">
-                    <div class="engine-name">Unity</div>
-                    <div class="engine-sub">BepInEx / XUnity / 运行时翻译</div>
-                  </div>
-                </div>
-                <div class="engine-meta"><span class="pill runtime">已支持 · 运行时</span></div>
-                <div class="tip"><div class="tip-box">
-                  <div class="tip-title">Unity <span class="muted">（已支持 · 运行时）</span></div>
-                  <ul class="tip-list">
-                    <li>支持 Unity 运行时文本捕获与预翻译注入（BepInEx / XUnity）</li>
-                    <li>运行时替换对话、菜单、UI 等可捕获文本，可生成预翻译字典</li>
-                    <li>图片文字、自绘 UI、加密资源或特殊字体游戏可能需额外适配</li>
-                  </ul>
-                </div></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="engine-group">
-            <div class="engine-head">[RPG] 角色扮演引擎</div>
-            <div class="engine-grid">
-              <div class="engine-card" data-engine="rpgmaker2000" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="rpgmaker2000" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/rm2k.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -621,7 +592,7 @@
                     <div class="engine-sub">RM2K / RM2K3</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">RPG Maker 2000/2003 <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
@@ -632,7 +603,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card" data-engine="rpgxp" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="rpgxp" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/xp.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -640,7 +611,7 @@
                     <div class="engine-sub">RGSS</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">RPG Maker XP <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
@@ -651,7 +622,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card" data-engine="rpgvx" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="rpgvx" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/vx.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -659,7 +630,7 @@
                     <div class="engine-sub">RGSS2</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">RPG Maker VX <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
@@ -670,7 +641,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card" data-engine="rpgvxace" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="rpgvxace" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/vxace.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -678,7 +649,7 @@
                     <div class="engine-sub">RGSS3</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">RPG Maker VX Ace <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
@@ -689,7 +660,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card" data-engine="mkxp" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="mkxp" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/mkxp-z.ico" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -697,7 +668,7 @@
                     <div class="engine-sub">mkxp-z</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">mkxp <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
@@ -708,7 +679,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card" data-engine="rgu" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="rgu" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/mkxp-z.ico" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -716,7 +687,7 @@
                     <div class="engine-sub">RGSS 1/2/3 兼容</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">RPG Maker RGU <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
@@ -735,9 +706,9 @@
                     <div class="engine-sub">NW.js / data.json</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">正式测试中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker MV <span class="muted">（正式测试中）</span></div>
+                  <div class="tip-title">RPG Maker MV <span class="muted">（Beta测试）</span></div>
                   <ul class="tip-list">
                     <li>补丁注入翻译，拖拽启动即可体验</li>
                     <li>支持部分金手指（道具/开关/变量等）</li>
@@ -754,9 +725,9 @@
                     <div class="engine-sub">NW.js / data.json</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">正式测试中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker MZ <span class="muted">（正式测试中）</span></div>
+                  <div class="tip-title">RPG Maker MZ <span class="muted">（Beta测试）</span></div>
                   <ul class="tip-list">
                     <li>补丁注入翻译，拖拽启动即可体验</li>
                     <li>支持部分金手指（道具/开关/变量等）</li>
@@ -765,7 +736,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card" data-engine="wolf" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="wolf" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/wolf.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -773,7 +744,7 @@
                     <div class="engine-sub">WOLF RPG Editor</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">Wolf RPG <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
@@ -784,7 +755,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card" data-engine="sgb" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="sgb" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/SGB.jpg" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -792,7 +763,7 @@
                     <div class="engine-sub">SGB</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">SMILE GAME BUILDER <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
@@ -803,7 +774,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card" data-engine="bakin" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="bakin" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/Bakin.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -811,7 +782,7 @@
                     <div class="engine-sub">Bakin</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">RPG Developer Bakin <span class="muted">（适配中）</span></div>
                   <ul class="tip-list">
@@ -825,9 +796,9 @@
           </div>
 
           <div class="engine-group">
-            <div class="engine-head">[VN/ADV/AVG] 视觉小说引擎</div>
+            <div class="engine-head" id="engineHeadVn">[VN/ADV/AVG] 视觉小说引擎</div>
             <div class="engine-grid">
-              <div class="engine-card" data-engine="tyrano" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="tyrano" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/tyrano.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -835,7 +806,7 @@
                     <div class="engine-sub">.ks 脚本</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">TyranoBuilder <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
@@ -846,7 +817,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card" data-engine="kirikiri" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="kirikiri" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/kirikiriz.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -854,7 +825,7 @@
                     <div class="engine-sub">xp3 / ks / tjs</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">Kirikiri 2/Z <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
@@ -873,9 +844,9 @@
                     <div class="engine-sub">game/ 脚本</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">正式测试中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">Ren'Py <span class="muted">（正式测试中）</span></div>
+                  <div class="tip-title">Ren'Py <span class="muted">（Beta测试）</span></div>
                   <ul class="tip-list">
                     <li>脚本明文/补丁路线，拖拽即可开始翻译</li>
                     <li>部分封包作品可能需要额外解包</li>
@@ -884,7 +855,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card" data-engine="visualnovelmaker" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="visualnovelmaker" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/vnm.jpg" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -892,7 +863,7 @@
                     <div class="engine-sub">VNM</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">Visual Novel Maker <span class="muted">（免费支持）</span></div>
                   <ul class="tip-list">
@@ -903,7 +874,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card" data-engine="choicescript" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="choicescript" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/ChoiceScript.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -911,7 +882,7 @@
                     <div class="engine-sub">文字互动</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">ChoiceScript <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
@@ -925,9 +896,9 @@
           </div>
 
           <div class="engine-group">
-            <div class="engine-head">[SLG] 策略/模拟引擎</div>
+            <div class="engine-head" id="engineHeadSlg">[SLG] 策略/模拟引擎</div>
             <div class="engine-grid">
-              <div class="engine-card" data-engine="srpgstudio" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="srpgstudio" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/SRPG.ico" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -935,7 +906,7 @@
                     <div class="engine-sub">策略 RPG / SLG 常见</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">SRPG Studio <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
@@ -949,9 +920,28 @@
           </div>
 
           <div class="engine-group">
-            <div class="engine-head">[OTHER] 其他引擎</div>
+            <div class="engine-head" id="engineHeadOther">[OTHER] 其他引擎</div>
             <div class="engine-grid">
-              <div class="engine-card" data-engine="pixelgamaker" tabindex="0">
+              <div class="engine-card engine-card--live" data-engine="unity" tabindex="0">
+                <div class="engine-left">
+                  <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/Unity.png" alt="" loading="lazy" /></div>
+                  <div style="min-width:0">
+                    <div class="engine-name">Unity</div>
+                    <div class="engine-sub">BepInEx / XUnity / 运行时翻译</div>
+                  </div>
+                </div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="tip"><div class="tip-box">
+                  <div class="tip-title">Unity <span class="muted">（Beta测试）</span></div>
+                  <ul class="tip-list">
+                    <li>支持 Unity 运行时文本捕获与预翻译注入（BepInEx / XUnity）</li>
+                    <li>运行时替换对话、菜单、UI 等可捕获文本，可生成预翻译字典</li>
+                    <li>图片文字、自绘 UI、加密资源或特殊字体游戏可能需额外适配</li>
+                  </ul>
+                </div></div>
+              </div>
+
+              <div class="engine-card engine-card--live" data-engine="pixelgamaker" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/PixelGameMakerMV.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -959,7 +949,7 @@
                     <div class="engine-sub">像素动作/平台</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill planned">规划实验中</span></div>
+                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">Pixel Game Maker MV <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
@@ -976,32 +966,33 @@
 
       <section class="section reveal">
         <h2 id="pricingTitle">价格方案</h2>
-        <p class="intro" id="pricingIntro">按月计费。到期后已翻译内容仍可离线使用，但无法继续进行付费翻译。</p>
+        <p class="intro" id="pricingIntro">当前为软件测试阶段，Pro 暂无定价；免费版可体验综合翻译与引擎能力。</p>
 
         <div class="pricing">
           <article class="price">
-            <div class="name">免费版</div>
-            <div class="num">¥0</div>
-            <div class="sub">适合体验与日常游玩</div>
+            <div class="name" id="priceFreeName">免费版</div>
+            <div class="num" id="priceFreeNum">¥0</div>
+            <div class="sub" id="priceFreeSub">适合体验与日常游玩</div>
             <ul>
-              <li>可用：火山引擎、Bing 等综合翻译</li>
-              <li>一定量的基础额度使用</li>
-              <li>支持：部分引擎的金手指功能</li>
+              <li id="priceFreeF1">可用：综合翻译包含 Bing、腾讯混元等（不定期调整）</li>
+              <li id="priceFreeF2">几乎不限量的使用</li>
+              <li id="priceFreeF3">支持：部分引擎的金手指功能</li>
             </ul>
           </article>
 
           <article class="price pro">
-            <div class="name">GameLingo Pro</div>
-            <div class="num">¥29.9/月</div>
-            <div class="sub">进阶玩家与重度翻译需求</div>
+            <div class="name" id="priceProName">GameLingo Pro</div>
+            <div class="num" id="priceProNum" style="font-size:clamp(22px,4vw,32px);line-height:1.25;">软件测试暂无定价</div>
+            <div class="sub" id="priceProSub">正式定价上线前敬请期待</div>
             <ul>
-              <li>解锁自定义模型 API Key</li>
-              <li>更高额度与翻译队列优先</li>
-              <li>更复杂的游戏引擎金手指支持</li>
+              <li id="priceProF1">解锁自定义模型 API Key</li>
+              <li id="priceProF2">更高额度与翻译队列优先</li>
+              <li id="priceProF3">更复杂的游戏引擎金手指支持</li>
             </ul>
             <div class="cta">
               <a
                 class="btn primary small"
+                id="priceProCta"
                 href="https://ifdian.net/a/gamelingo"
                 target="_blank"
                 rel="noopener"
@@ -1012,11 +1003,11 @@
       </section>
 
       <footer class="footer reveal">
-        <div>游译者 GameLingo © 2026</div>
+        <div id="footerCopy">游译者 GameLingo © 2026</div>
         <div>
-          <a href="./privacy.html">隐私政策</a>
-          <a href="./terms.html">服务条款</a>
-          <a href="./faq.html">常见问题</a>
+          <a id="footerPrivacy" href="./privacy.html">隐私政策</a>
+          <a id="footerTerms" href="./terms.html">服务条款</a>
+          <a id="footerFaq" href="./faq.html">常见问题</a>
           <a id="feedbackLink" href="javascript:void(0)">问题反馈</a>
         </div>
       </footer>
@@ -1030,11 +1021,11 @@
           <button class="close" id="feedbackClose">关闭</button>
         </div>
         <div class="body">
-          <div class="muted">请按“在哪/做了什么/出现什么/期望什么”描述。建议附 1 张截图或短视频，定位会更快。</div>
+          <div class="muted" id="feedbackHint">请按“在哪/做了什么/出现什么/期望什么”描述。建议附 1 张截图或短视频，定位会更快。</div>
           <textarea class="fb-text" id="feedbackText" placeholder="在这里输入问题描述…"></textarea>
           <div class="fb-files">
             <input id="feedbackFiles" type="file" accept="image/*,video/*" multiple />
-            <div class="fb-hint">附件限制：最多 2 个文件；单个不超过 8MB。超出会提示失败（建议先截图/压缩/剪短视频）。</div>
+            <div class="fb-hint" id="feedbackFileHint">附件限制：最多 2 个文件；单个不超过 8MB。超出会提示失败（建议先截图/压缩/剪短视频）。</div>
             <ul class="fb-filelist" id="feedbackFileList" style="display:none;"></ul>
           </div>
           <div class="fb-actions">
@@ -1045,9 +1036,7 @@
       </div>
     </div>
 
-    <script>
-      // (reserved)
-    </script>
+    <script src="./scripts/i18n-content.js"></script>
     <script src="./scripts/site.js"></script>
   </body>
 </html>

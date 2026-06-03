@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FAQ - 游译者 GameLingo</title>
-    <meta name="description" content="游译者 GameLingo 常见问题：游戏翻译 / RPG翻译、套餐与权限说明、常见报错排查。" />
+    <meta name="description" content="游译者 GameLingo 常见问题：套餐、翻译、依赖与安全说明。" />
     <link rel="canonical" href="https://www.gamelingo.cn/faq.html" />
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#0a172f" />
@@ -44,7 +44,7 @@
       .brand{ display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.01em; }
       .brand img{ width:34px; height:34px; border-radius:8px; }
       .nav-links{ display:flex; align-items:center; gap:10px; }
-      .nav-links a{
+      .nav-links a,.nav-links select{
         height:34px; padding:0 12px; display:inline-flex; align-items:center;
         border-radius:10px; border:1px solid #2a3a5d; background:#0d1527; color:#e4efff;
         font-size:13px; transition:.25s ease;
@@ -68,54 +68,60 @@
         margin-top:12px;
       }
       h3{ margin:0 0 8px; font-size:16px; letter-spacing:-.01em; }
-      p, li{ margin:0; color:var(--muted); line-height:1.9; }
+      p{ margin:0; color:var(--muted); line-height:1.9; }
       .lead{ color:var(--muted); line-height:1.9; margin:0 0 6px; }
     </style>
   </head>
-  <body>
+  <body data-page="faq">
     <header class="nav">
       <div class="container">
         <div class="brand">
           <img src="./assets/logo.svg" alt="GameLingo Logo" />
-          <span>游译者 GameLingo</span>
+          <span id="siteBrandText">游译者 GameLingo</span>
         </div>
         <div class="nav-links">
-          <a href="./index.html">返回首页</a>
+          <select id="langSelect" aria-label="Language">
+            <option value="zh">中文</option>
+            <option value="en">English</option>
+          </select>
+          <a id="navHome" href="./index.html">返回首页</a>
         </div>
       </div>
     </header>
 
     <main class="container">
       <section class="hero">
-        <h1>常见问题 FAQ</h1>
-        <p class="lead">这里整理了新手最容易卡住的点。若仍解决不了，建议在首页“问题反馈”里附上截图/短视频。</p>
+        <h1 id="h1">常见问题 FAQ</h1>
+        <p class="lead" id="lead">这里整理了新手最容易卡住的点。若仍解决不了，建议在首页“问题反馈”里附上截图/短视频。</p>
 
         <section class="item">
-          <h3>Q：为什么提示 3030 端口占用？</h3>
-          <p>A：说明本机已有一个后端在运行。把旧窗口关掉，或重启电脑后再启动即可。</p>
+          <h3 id="q1">Q：为什么提示 3030 端口占用？</h3>
+          <p id="a1">A：说明本机已有一个后端在运行。把旧窗口关掉，或重启电脑后再启动即可。</p>
         </section>
 
         <section class="item">
-          <h3>Q：为什么看不到翻译效果？</h3>
-          <p>A：最常见是两种情况：没进入“有文字显示”的场景，或当前引擎需要适配包但还没安装。你可以先进入对话/任务提示界面，再按软件提示安装适配包。</p>
+          <h3 id="q2">Q：为什么看不到翻译效果？</h3>
+          <p id="a2">A：最常见是两种情况：没进入“有文字显示”的场景，或当前引擎需要适配包但还没安装。你可以先进入对话/任务提示界面，再按软件提示安装适配包。</p>
         </section>
 
         <section class="item">
-          <h3>Q：翻译模型可以换吗？</h3>
-          <p>A：可以。不同套餐开放的模型通道不同，具体以软件内显示为准（会优先推荐更稳定/更省钱的通道）。</p>
+          <h3 id="q3">Q：翻译模型可以换吗？</h3>
+          <p id="a3">A：可以。不同套餐开放的模型通道不同，具体以软件内显示为准（会优先推荐更稳定/更省钱的通道）。</p>
         </section>
 
         <section class="item">
-          <h3>Q：为什么会提示“需要下载依赖/工具”？安全吗？</h3>
-          <p>A：为了做到“更像官中”的显示效果，部分引擎需要额外开源工具/适配包（例如 Unity 的 BepInEx 路线）。软件会弹窗说明来源，只有你确认才会下载；它们只在本机使用，不会上传你的游戏文件。</p>
+          <h3 id="q4">Q：为什么会提示“需要下载依赖/工具”？安全吗？</h3>
+          <p id="a4">A：为了做到“更像官中”的显示效果，部分引擎需要额外开源工具/适配包（例如 Unity 的 BepInEx 路线）。软件会弹窗说明来源，只有你确认才会下载；它们只在本机使用，不会上传你的游戏文件。</p>
         </section>
 
         <section class="item">
-          <h3>Q：反馈时应该写什么，才能更快解决？</h3>
-          <p>A：建议按这 4 个点写：你在哪个页面/按钮、你做了什么、出现了什么提示、你希望怎样。最好再附 1 张截图或 10 秒左右短视频。</p>
+          <h3 id="q5">Q：反馈时应该写什么，才能更快解决？</h3>
+          <p id="a5">A：建议按这 4 个点写：你在哪个页面/按钮、你做了什么、出现了什么提示、你希望怎样。最好再附 1 张截图或 10 秒左右短视频。</p>
         </section>
       </section>
     </main>
+
+    <script src="./scripts/i18n-content.js"></script>
+    <script src="./scripts/site.js"></script>
   </body>
 </html>
-
