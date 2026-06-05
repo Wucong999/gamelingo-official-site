@@ -32,7 +32,7 @@ const i18n = {
     s4d: "进入文本场景生效。",
     engineMatrixTitle: "支持的游戏引擎",
     engineMatrixIntro:
-      "全部引擎开放 Beta 测试。桌面端鼠标悬停查看详情（提示跟随鼠标），手机端点击卡片展开。",
+      "全部引擎开放 Beta 测试。桌面端鼠标悬停查看详情；RGSS 系列悬停 XP 可展开同系列引擎。手机端点击卡片展开。",
     engineHeadRpg: "[RPG] 角色扮演引擎",
     engineHeadVn: "[VN/ADV/AVG] 视觉小说引擎",
     engineHeadSlg: "[SLG] 策略/模拟引擎",
@@ -110,7 +110,7 @@ const i18n = {
     s4d: "Works in text scenes.",
     engineMatrixTitle: "Supported game engines",
     engineMatrixIntro:
-      "All engines are in open beta. Hover for details (tooltip follows cursor); tap a card on mobile.",
+      "All engines are in open beta. Hover for details; hover RPG Maker XP to expand the RGSS family. Tap cards on mobile.",
     engineHeadRpg: "[RPG] Role-playing engines",
     engineHeadVn: "[VN/ADV/AVG] Visual novel engines",
     engineHeadSlg: "[SLG] Strategy / simulation",
@@ -181,6 +181,31 @@ function tpl(str, vars) {
   return String(str || "").replace(/\{(\w+)\}/g, (_, k) => String(vars?.[k] ?? ""));
 }
 
+function getEngineTipRoot(card) {
+  const item = card.closest(".engine-stack-item");
+  if (item) return item.querySelector(".engine-stack-item-detail");
+  return card.querySelector(".tip");
+}
+
+function setEngineStackActive(wrap, item) {
+  if (!wrap) return;
+  wrap.querySelectorAll(".engine-stack-item").forEach((el) => {
+    el.classList.toggle("stack-active", el === item);
+  });
+}
+
+function initEngineStacks() {
+  document.querySelectorAll(".engine-stack-wrap").forEach((wrap) => {
+    wrap.querySelectorAll(".engine-stack-item").forEach((item) => {
+      const card = item.querySelector(".engine-card[data-engine]");
+      if (!card) return;
+      const activate = () => setEngineStackActive(wrap, item);
+      item.addEventListener("pointerenter", activate);
+      card.addEventListener("focusin", activate);
+    });
+  });
+}
+
 function applyEngineI18n(safe) {
   const engines = window.GAMELINGO_CONTENT?.engines;
   if (!engines) return;
@@ -188,16 +213,18 @@ function applyEngineI18n(safe) {
     const key = card.dataset.engine;
     const pack = engines[key]?.[safe];
     if (!pack) return;
-    const name = card.querySelector(".engine-name")?.textContent?.trim() || key;
+    const nameEl = card.querySelector(".engine-name");
+    const name = nameEl?.textContent?.trim() || key;
     const subEl = card.querySelector(".engine-sub");
     const subPack = engines[key]?.sub;
     if (subEl && subPack) subEl.textContent = subPack[safe] || subPack.zh;
 
-    const titleEl = card.querySelector(".tip-title");
+    const tipRoot = getEngineTipRoot(card);
+    const titleEl = tipRoot?.querySelector(".tip-title");
     if (titleEl) {
       titleEl.innerHTML = `${name} <span class="muted">${pack.status}</span>`;
     }
-    const list = card.querySelector(".tip-list");
+    const list = tipRoot?.querySelector(".tip-list");
     if (list && pack.lines) {
       list.innerHTML = pack.lines.map((line) => `<li>${line}</li>`).join("");
     }
@@ -602,9 +629,31 @@ document.querySelectorAll(".engine-card").forEach((card) => {
   card.classList.add("engine-card--live");
 });
 
+initEngineStacks();
+
 // Mobile: tap engine cards to expand inline details
 if (isCoarsePointer) {
+  document.querySelectorAll(".engine-stack-wrap").forEach((wrap) => {
+    const main = wrap.querySelector(".engine-stack-main");
+    if (!main) return;
+    main.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const wasOpen = wrap.classList.contains("open");
+      document.querySelectorAll(".engine-stack-wrap.open").forEach((w) => w.classList.remove("open"));
+      if (!wasOpen) wrap.classList.add("open");
+    });
+
+    wrap.querySelectorAll(".engine-stack-item").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.stopPropagation();
+        wrap.classList.add("open");
+        setEngineStackActive(wrap, item);
+      });
+    });
+  });
+
   document.querySelectorAll(".engine-card").forEach((card) => {
+    if (card.closest(".engine-stack-wrap")) return;
     card.addEventListener("click", () => {
       const wasOpen = card.classList.contains("open");
       document.querySelectorAll(".engine-card.open").forEach((other) => other.classList.remove("open"));
@@ -711,6 +760,7 @@ if (enableFloatTip) {
   );
 
   document.querySelectorAll(".engine-card").forEach((card) => {
+    if (card.closest(".engine-stack-wrap")) return;
     card.addEventListener("pointerenter", (e) => {
       pointerX = e.clientX;
       pointerY = e.clientY;

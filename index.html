@@ -220,7 +220,7 @@
       .kicker li{ display:inline-flex; align-items:center; gap:8px; padding:7px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.02); color:#cfe2ff; font-size:12px; }
       .kdot{ width:8px;height:8px;border-radius:50%; background:linear-gradient(120deg,var(--mint),#98e2ff); }
       .engine-wrap{ margin-top:20px; display:grid; gap:18px; }
-      .engine-group{ border:1px solid rgba(255,255,255,.08); border-radius:18px; background:rgba(13,21,36,.62); overflow:hidden; }
+      .engine-group{ border:1px solid rgba(255,255,255,.08); border-radius:18px; background:rgba(13,21,36,.62); overflow:visible; }
       .engine-head{ padding:12px 14px; background:linear-gradient(90deg,rgba(139,189,255,.14),rgba(132,255,210,.10)); border-bottom:1px solid rgba(255,255,255,.08); color:#e2f0ff; font-weight:900; letter-spacing:.02em; }
       .engine-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; padding:14px; }
       .engine-card{
@@ -283,6 +283,248 @@
         object-position:center;
       }
       .engine-card--live .engine-name{ font-size:15px; }
+      /* RGSS 系列：列表只显示 XP，悬停内联展开 + 底部详情区 */
+      @keyframes stackChipIn{
+        from{ opacity:0; transform:translateY(10px); }
+        to{ opacity:1; transform:translateY(0); }
+      }
+      @keyframes stackDetailIn{
+        from{ opacity:0; transform:translateY(8px); }
+        to{ opacity:1; transform:translateY(0); }
+      }
+      .engine-stack-wrap{
+        grid-column:1 / -1;
+        position:relative;
+        border:1px solid rgba(132,255,210,.22);
+        border-radius:18px;
+        padding:12px;
+        background:linear-gradient(180deg,rgba(14,24,38,.96),rgba(9,16,28,.96));
+        transition:border-color .35s ease, box-shadow .45s cubic-bezier(.33,1,.68,1);
+      }
+      .engine-stack-wrap:hover,
+      .engine-stack-wrap.open,
+      .engine-stack-wrap:focus-within{
+        border-color:rgba(132,255,210,.42);
+        box-shadow:0 18px 40px rgba(0,0,0,.28);
+      }
+      .engine-stack-expand{
+        display:grid;
+        grid-template-rows:0fr;
+        opacity:0;
+        transition:grid-template-rows .48s cubic-bezier(.33,1,.68,1), opacity .36s ease;
+      }
+      .engine-stack-wrap:hover .engine-stack-expand,
+      .engine-stack-wrap.open .engine-stack-expand,
+      .engine-stack-wrap:focus-within .engine-stack-expand{
+        grid-template-rows:1fr;
+        opacity:1;
+      }
+      .engine-stack-expand-inner{
+        overflow:hidden;
+        min-height:0;
+        padding-top:0;
+        border-top:1px solid transparent;
+        transition:padding-top .48s cubic-bezier(.33,1,.68,1), border-color .36s ease;
+      }
+      .engine-stack-wrap:hover .engine-stack-expand-inner,
+      .engine-stack-wrap.open .engine-stack-expand-inner,
+      .engine-stack-wrap:focus-within .engine-stack-expand-inner{
+        padding-top:12px;
+        border-top-color:rgba(255,255,255,.08);
+      }
+      .engine-stack-main{
+        position:relative;
+        margin:0;
+        border:none;
+        background:transparent;
+        box-shadow:none;
+        padding:4px 2px;
+      }
+      .engine-stack-main::before,
+      .engine-stack-main::after{
+        content:"";
+        position:absolute;
+        left:18px;
+        top:50%;
+        width:36px;
+        height:36px;
+        border-radius:12px;
+        border:1px solid rgba(255,255,255,.08);
+        background:linear-gradient(180deg,rgba(12,18,30,.92),rgba(9,14,24,.92));
+        transform:translateY(-50%);
+        z-index:0;
+        pointer-events:none;
+      }
+      .engine-stack-main::before{ margin-left:6px; opacity:.55; }
+      .engine-stack-main::after{ margin-left:12px; opacity:.32; }
+      .engine-stack-main .engine-left,
+      .engine-stack-main .engine-meta{ position:relative; z-index:1; }
+      .stack-more-badge{
+        font-size:11px;
+        border-radius:999px;
+        padding:4px 8px;
+        border:1px solid rgba(255,255,255,.12);
+        background:rgba(255,255,255,.04);
+        color:#9db1cf;
+        white-space:nowrap;
+      }
+      .engine-stack-more{
+        display:grid;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:10px;
+        padding-bottom:2px;
+        align-items:stretch;
+      }
+      .engine-stack-item{
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+        min-width:0;
+      }
+      .engine-stack-item-detail{
+        flex:1;
+        opacity:.92;
+        transition:opacity .25s ease;
+      }
+      .engine-stack-wrap:hover .engine-stack-item-detail,
+      .engine-stack-wrap.open .engine-stack-item-detail,
+      .engine-stack-wrap:focus-within .engine-stack-item-detail{
+        animation:stackDetailIn .38s cubic-bezier(.33,1,.68,1) backwards;
+      }
+      .engine-stack-wrap:hover .engine-stack-item:nth-child(1) .engine-stack-item-detail,
+      .engine-stack-wrap.open .engine-stack-item:nth-child(1) .engine-stack-item-detail,
+      .engine-stack-wrap:focus-within .engine-stack-item:nth-child(1) .engine-stack-item-detail{ animation-delay:.14s; }
+      .engine-stack-wrap:hover .engine-stack-item:nth-child(2) .engine-stack-item-detail,
+      .engine-stack-wrap.open .engine-stack-item:nth-child(2) .engine-stack-item-detail,
+      .engine-stack-wrap:focus-within .engine-stack-item:nth-child(2) .engine-stack-item-detail{ animation-delay:.20s; }
+      .engine-stack-wrap:hover .engine-stack-item:nth-child(3) .engine-stack-item-detail,
+      .engine-stack-wrap.open .engine-stack-item:nth-child(3) .engine-stack-item-detail,
+      .engine-stack-wrap:focus-within .engine-stack-item:nth-child(3) .engine-stack-item-detail{ animation-delay:.26s; }
+      .engine-stack-wrap:hover .engine-stack-item:nth-child(4) .engine-stack-item-detail,
+      .engine-stack-wrap.open .engine-stack-item:nth-child(4) .engine-stack-item-detail,
+      .engine-stack-wrap:focus-within .engine-stack-item:nth-child(4) .engine-stack-item-detail{ animation-delay:.32s; }
+      .engine-stack-item:hover .engine-stack-item-detail,
+      .engine-stack-item.stack-active .engine-stack-item-detail{
+        opacity:1;
+      }
+      .engine-stack-item-detail .tip-box{
+        height:100%;
+        padding:10px 10px;
+        background:rgba(7,11,21,.68);
+        border-color:rgba(255,255,255,.10);
+      }
+      .engine-stack-item-detail .tip-title{
+        font-size:12px;
+        margin-bottom:5px;
+      }
+      .engine-stack-item-detail .tip-list{
+        font-size:11px;
+        line-height:1.62;
+        padding-left:16px;
+      }
+      .engine-stack-more .engine-card,
+      .engine-stack-more .engine-card.engine-card--live{
+        grid-template-columns:1fr;
+        grid-template-areas:"left";
+        gap:6px;
+        padding:12px 8px 16px;
+        text-align:center;
+        cursor:default;
+        box-shadow:none !important;
+        position:relative;
+        border:1px solid rgba(255,255,255,.14) !important;
+        border-radius:14px;
+        background:linear-gradient(180deg,rgba(14,22,36,.95),rgba(10,18,30,.95)) !important;
+        transition:border-color .28s ease, background .28s ease, transform .28s cubic-bezier(.33,1,.68,1);
+      }
+      .engine-stack-more .engine-card:hover{
+        box-shadow:none !important;
+      }
+      .engine-stack-item:hover .engine-card,
+      .engine-stack-item.stack-active .engine-card{
+        border-color:rgba(132,255,210,.45) !important;
+        background:linear-gradient(180deg,rgba(18,32,48,.98),rgba(10,22,36,.98)) !important;
+        transform:translateY(-2px);
+      }
+      .engine-stack-more .engine-card::after{
+        content:"";
+        position:absolute;
+        left:14%;
+        right:14%;
+        bottom:7px;
+        height:2px;
+        border-radius:999px;
+        background:rgba(139,189,255,.32);
+        transition:background .28s ease, box-shadow .28s ease, transform .28s ease;
+      }
+      .engine-stack-wrap:hover .engine-stack-item,
+      .engine-stack-wrap.open .engine-stack-item,
+      .engine-stack-wrap:focus-within .engine-stack-item{
+        animation:stackChipIn .42s cubic-bezier(.33,1,.68,1) backwards;
+      }
+      .engine-stack-wrap:hover .engine-stack-item:nth-child(1),
+      .engine-stack-wrap.open .engine-stack-item:nth-child(1),
+      .engine-stack-wrap:focus-within .engine-stack-item:nth-child(1){ animation-delay:.05s; }
+      .engine-stack-wrap:hover .engine-stack-item:nth-child(2),
+      .engine-stack-wrap.open .engine-stack-item:nth-child(2),
+      .engine-stack-wrap:focus-within .engine-stack-item:nth-child(2){ animation-delay:.10s; }
+      .engine-stack-wrap:hover .engine-stack-item:nth-child(3),
+      .engine-stack-wrap.open .engine-stack-item:nth-child(3),
+      .engine-stack-wrap:focus-within .engine-stack-item:nth-child(3){ animation-delay:.15s; }
+      .engine-stack-wrap:hover .engine-stack-item:nth-child(4),
+      .engine-stack-wrap.open .engine-stack-item:nth-child(4),
+      .engine-stack-wrap:focus-within .engine-stack-item:nth-child(4){ animation-delay:.20s; }
+      .engine-stack-item:hover .engine-card::after,
+      .engine-stack-item.stack-active .engine-card::after{
+        background:linear-gradient(90deg,rgba(132,255,210,.95),rgba(139,189,255,.95));
+        box-shadow:0 0 10px rgba(132,255,210,.35);
+        transform:scaleX(1.06);
+      }
+      .engine-stack-more .engine-left{
+        flex-direction:column;
+        align-items:center;
+        gap:6px;
+      }
+      .engine-stack-more .engine-ico{ width:40px; height:40px; }
+      .engine-stack-more .engine-ico img{ width:30px; height:30px; }
+      .engine-stack-more .engine-name{ font-size:12px; white-space:normal; line-height:1.25; }
+      .engine-stack-more .engine-sub{ font-size:11px; white-space:normal; }
+      .engine-stack-more .engine-meta{ display:none; }
+      @media (max-width:980px){
+        .engine-stack-more{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+        .engine-stack-main::before,
+        .engine-stack-main::after{ display:none; }
+        .engine-stack-expand{
+          grid-template-rows:1fr;
+          opacity:1;
+          display:none;
+        }
+        .engine-stack-wrap.open .engine-stack-expand{ display:grid; }
+        .engine-stack-wrap.open .engine-stack-expand-inner{
+          padding-top:12px;
+          border-top-color:rgba(255,255,255,.08);
+        }
+      }
+      @media (prefers-reduced-motion: reduce){
+        .engine-stack-expand,
+        .engine-stack-expand-inner,
+        .engine-stack-item{
+          transition:none !important;
+          animation:none !important;
+        }
+        .engine-stack-wrap:hover .engine-stack-expand,
+        .engine-stack-wrap.open .engine-stack-expand,
+        .engine-stack-wrap:focus-within .engine-stack-expand{
+          grid-template-rows:1fr;
+          opacity:1;
+        }
+        .engine-stack-wrap:hover .engine-stack-expand-inner,
+        .engine-stack-wrap.open .engine-stack-expand-inner,
+        .engine-stack-wrap:focus-within .engine-stack-expand-inner{
+          padding-top:12px;
+          border-top-color:rgba(255,255,255,.08);
+        }
+      }
       .tip{ display:none; }
       .tip-box{
         border:1px solid rgba(255,255,255,.10);
@@ -578,7 +820,7 @@
 
       <section class="section reveal">
         <h2 id="engineMatrixTitle">支持的游戏引擎</h2>
-        <p class="intro" id="engineMatrixIntro">全部引擎开放 Beta 测试。桌面端鼠标悬停查看详情（提示跟随鼠标），手机端点击卡片展开。</p>
+        <p class="intro" id="engineMatrixIntro">全部引擎开放 Beta 测试。桌面端鼠标悬停查看详情；RGSS 系列悬停 XP 可展开同系列引擎。手机端点击卡片展开。</p>
 
         <div class="engine-wrap" id="engineMatrix">
           <div class="engine-group">
@@ -599,101 +841,6 @@
                     <li>翻译：免费完整支持（通过 EasyRPG 工具链）</li>
                     <li>作弊：不与游戏进程交互（不提供实时作弊）</li>
                     <li>备注：若资源组织/编码特殊，可能需要额外处理</li>
-                  </ul>
-                </div></div>
-              </div>
-
-              <div class="engine-card engine-card--live" data-engine="rpgxp" tabindex="0">
-                <div class="engine-left">
-                  <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/xp.png" alt="" loading="lazy" /></div>
-                  <div style="min-width:0">
-                    <div class="engine-name">RPG Maker XP</div>
-                    <div class="engine-sub">RGSS</div>
-                  </div>
-                </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
-                <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker XP <span class="muted">（适配中）</span></div>
-                  <ul class="tip-list">
-                    <li>翻译：免费支持（受加密/封包/资源组织影响，部分作品可能需要额外适配）</li>
-                    <li>作弊：免费完整支持（目标：易用、实时）— 当前适配中</li>
-                    <li>备注：RGSS 时代版本差异大，需按样本逐步补齐闭环</li>
-                  </ul>
-                </div></div>
-              </div>
-
-              <div class="engine-card engine-card--live" data-engine="rpgvx" tabindex="0">
-                <div class="engine-left">
-                  <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/vx.png" alt="" loading="lazy" /></div>
-                  <div style="min-width:0">
-                    <div class="engine-name">RPG Maker VX</div>
-                    <div class="engine-sub">RGSS2</div>
-                  </div>
-                </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
-                <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker VX <span class="muted">（适配中）</span></div>
-                  <ul class="tip-list">
-                    <li>翻译：免费支持（受加密/封包/资源组织影响，部分作品可能需要额外适配）</li>
-                    <li>作弊：免费完整支持（目标：易用、实时）— 当前适配中</li>
-                    <li>备注：RGSS 时代版本差异大，需按样本逐步补齐闭环</li>
-                  </ul>
-                </div></div>
-              </div>
-
-              <div class="engine-card engine-card--live" data-engine="rpgvxace" tabindex="0">
-                <div class="engine-left">
-                  <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/vxace.png" alt="" loading="lazy" /></div>
-                  <div style="min-width:0">
-                    <div class="engine-name">RPG Maker VX Ace</div>
-                    <div class="engine-sub">RGSS3</div>
-                  </div>
-                </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
-                <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker VX Ace <span class="muted">（适配中）</span></div>
-                  <ul class="tip-list">
-                    <li>翻译：免费支持（受加密/封包/资源组织影响，部分作品可能需要额外适配）</li>
-                    <li>作弊：免费完整支持（目标：易用、实时）— 当前适配中</li>
-                    <li>备注：RGSS 时代版本差异大，需按样本逐步补齐闭环</li>
-                  </ul>
-                </div></div>
-              </div>
-
-              <div class="engine-card engine-card--live" data-engine="mkxp" tabindex="0">
-                <div class="engine-left">
-                  <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/mkxp-z.ico" alt="" loading="lazy" /></div>
-                  <div style="min-width:0">
-                    <div class="engine-name">mkxp</div>
-                    <div class="engine-sub">mkxp-z</div>
-                  </div>
-                </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
-                <div class="tip"><div class="tip-box">
-                  <div class="tip-title">mkxp <span class="muted">（适配中）</span></div>
-                  <ul class="tip-list">
-                    <li>翻译：免费支持（受封包/资源组织影响，部分作品可能需要额外适配）</li>
-                    <li>作弊：免费完整支持（目标：易用、实时）— 当前适配中</li>
-                    <li>备注：不同打包/魔改版本差异较大，需按样本逐步补齐闭环</li>
-                  </ul>
-                </div></div>
-              </div>
-
-              <div class="engine-card engine-card--live" data-engine="rgu" tabindex="0">
-                <div class="engine-left">
-                  <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/mkxp-z.ico" alt="" loading="lazy" /></div>
-                  <div style="min-width:0">
-                    <div class="engine-name">RPG Maker RGU</div>
-                    <div class="engine-sub">RGSS 1/2/3 兼容</div>
-                  </div>
-                </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
-                <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker RGU <span class="muted">（适配中）</span></div>
-                  <ul class="tip-list">
-                    <li>翻译：免费支持（受封包/资源组织影响，部分作品可能需要额外适配）</li>
-                    <li>作弊：免费完整支持（目标：易用、实时）— 当前适配中</li>
-                    <li>备注：不同整合包/魔改版本差异较大，需按样本逐步补齐闭环</li>
                   </ul>
                 </div></div>
               </div>
@@ -755,25 +902,6 @@
                 </div></div>
               </div>
 
-              <div class="engine-card engine-card--live" data-engine="sgb" tabindex="0">
-                <div class="engine-left">
-                  <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/SGB.jpg" alt="" loading="lazy" /></div>
-                  <div style="min-width:0">
-                    <div class="engine-name">SMILE GAME BUILDER</div>
-                    <div class="engine-sub">SGB</div>
-                  </div>
-                </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
-                <div class="tip"><div class="tip-box">
-                  <div class="tip-title">SMILE GAME BUILDER <span class="muted">（适配中）</span></div>
-                  <ul class="tip-list">
-                    <li>翻译：免费完整支持</li>
-                    <li>作弊：免费完整支持（易用、实时）— 当前适配中</li>
-                    <li>备注：兼容 Unity 导出游戏（将优先走 Unity 注入链路）</li>
-                  </ul>
-                </div></div>
-              </div>
-
               <div class="engine-card engine-card--live" data-engine="bakin" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/Bakin.png" alt="" loading="lazy" /></div>
@@ -791,6 +919,127 @@
                     <li>备注：若为 Unity 导出，将优先走 Unity 注入链路</li>
                   </ul>
                 </div></div>
+              </div>
+
+              <div class="engine-stack-wrap">
+                <div class="engine-card engine-card--live engine-stack-main" data-engine="rpgxp" tabindex="0">
+                  <div class="engine-left">
+                    <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/xp.png" alt="" loading="lazy" /></div>
+                    <div style="min-width:0">
+                      <div class="engine-name">RPG Maker XP</div>
+                      <div class="engine-sub" id="rgssStackSub">悬停展开：VX · VX Ace · mkxp · RGSS</div>
+                    </div>
+                  </div>
+                  <div class="engine-meta">
+                    <span class="stack-more-badge">+4</span>
+                    <span class="pill beta">Beta测试</span>
+                  </div>
+                  <div class="tip"><div class="tip-box">
+                    <div class="tip-title">RPG Maker XP <span class="muted">（Beta测试）</span></div>
+                    <ul class="tip-list">
+                      <li>翻译：免费支持（受加密/封包/资源组织影响）</li>
+                      <li>作弊：目标为易用、实时的完整支持 — 持续适配中</li>
+                      <li>备注：RGSS 系列版本差异大，悬停可展开同系列引擎</li>
+                    </ul>
+                  </div></div>
+                </div>
+                <div class="engine-stack-expand">
+                  <div class="engine-stack-expand-inner">
+                <div class="engine-stack-more" aria-hidden="true">
+                  <div class="engine-stack-item">
+                    <div class="engine-card engine-card--live" data-engine="rpgvx" tabindex="0">
+                      <div class="engine-left">
+                        <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/vx.png" alt="" loading="lazy" /></div>
+                        <div style="min-width:0">
+                          <div class="engine-name">RPG Maker VX</div>
+                          <div class="engine-sub">RGSS2</div>
+                        </div>
+                      </div>
+                      <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                    </div>
+                    <div class="engine-stack-item-detail">
+                      <div class="tip-box">
+                        <div class="tip-title">RPG Maker VX <span class="muted">（Beta测试）</span></div>
+                        <ul class="tip-list">
+                          <li>翻译：免费支持（受加密/封包/资源组织影响）</li>
+                          <li>作弊：目标为易用、实时的完整支持 — 持续适配中</li>
+                          <li>备注：RGSS 时代版本差异大，按样本逐步补齐</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="engine-stack-item">
+                    <div class="engine-card engine-card--live" data-engine="rpgvxace" tabindex="0">
+                      <div class="engine-left">
+                        <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/vxace.png" alt="" loading="lazy" /></div>
+                        <div style="min-width:0">
+                          <div class="engine-name">RPG Maker VX Ace</div>
+                          <div class="engine-sub">RGSS3</div>
+                        </div>
+                      </div>
+                      <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                    </div>
+                    <div class="engine-stack-item-detail">
+                      <div class="tip-box">
+                        <div class="tip-title">RPG Maker VX Ace <span class="muted">（Beta测试）</span></div>
+                        <ul class="tip-list">
+                          <li>翻译：免费支持（受加密/封包/资源组织影响）</li>
+                          <li>作弊：目标为易用、实时的完整支持 — 持续适配中</li>
+                          <li>备注：RGSS 时代版本差异大，按样本逐步补齐</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="engine-stack-item">
+                    <div class="engine-card engine-card--live" data-engine="mkxp" tabindex="0">
+                      <div class="engine-left">
+                        <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/mkxp-z.ico" alt="" loading="lazy" /></div>
+                        <div style="min-width:0">
+                          <div class="engine-name">mkxp</div>
+                          <div class="engine-sub">mkxp-z</div>
+                        </div>
+                      </div>
+                      <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                    </div>
+                    <div class="engine-stack-item-detail">
+                      <div class="tip-box">
+                        <div class="tip-title">mkxp <span class="muted">（Beta测试）</span></div>
+                        <ul class="tip-list">
+                          <li>翻译：免费支持（受封包/资源组织影响）</li>
+                          <li>作弊：目标为易用、实时的完整支持 — 持续适配中</li>
+                          <li>备注：不同打包/魔改版本差异较大</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="engine-stack-item">
+                    <div class="engine-card engine-card--live" data-engine="rgss" tabindex="0">
+                      <div class="engine-left">
+                        <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/xp.png" alt="" loading="lazy" /></div>
+                        <div style="min-width:0">
+                          <div class="engine-name">RGSS</div>
+                          <div class="engine-sub">RGSS1/2/3 运行时</div>
+                        </div>
+                      </div>
+                      <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                    </div>
+                    <div class="engine-stack-item-detail">
+                      <div class="tip-box">
+                        <div class="tip-title">RGSS <span class="muted">（Beta测试）</span></div>
+                        <ul class="tip-list">
+                          <li>翻译：免费支持（受封包/资源组织影响）</li>
+                          <li>作弊：目标为易用、实时的完整支持 — 持续适配中</li>
+                          <li>备注：不同整合包/魔改版本差异较大</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

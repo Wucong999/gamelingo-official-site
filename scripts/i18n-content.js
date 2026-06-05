@@ -21,13 +21,13 @@ window.GAMELINGO_CONTENT = {
       }
     },
     rpgxp: {
-      sub: { zh: "RGSS", en: "RGSS" },
+      sub: { zh: "悬停展开：VX · VX Ace · mkxp · RGSS", en: "Hover: VX · VX Ace · mkxp · RGSS" },
       zh: {
         status: "（Beta测试）",
         lines: [
           "翻译：免费支持（受加密/封包/资源组织影响）",
           "作弊：目标为易用、实时的完整支持 — 持续适配中",
-          "备注：RGSS 时代版本差异大，按样本逐步补齐"
+          "备注：RGSS 系列版本差异大，悬停可展开同系列引擎"
         ]
       },
       en: {
@@ -35,7 +35,7 @@ window.GAMELINGO_CONTENT = {
         lines: [
           "Translation: free (may vary with encryption/packs/layout)",
           "Cheats: aiming for easy real-time edits — adapting",
-          "Note: RGSS-era builds differ; coverage expands per title"
+          "Note: RGSS family varies; hover to expand related engines"
         ]
       }
     },
@@ -96,8 +96,8 @@ window.GAMELINGO_CONTENT = {
         ]
       }
     },
-    rgu: {
-      sub: { zh: "RGSS 1/2/3 兼容", en: "RGSS 1/2/3 compatible" },
+    rgss: {
+      sub: { zh: "RGSS1/2/3 运行时", en: "RGSS1/2/3 runtime" },
       zh: {
         status: "（Beta测试）",
         lines: [
@@ -169,25 +169,6 @@ window.GAMELINGO_CONTENT = {
           "Translation: full free support",
           "Cheats: full data edits (Pro+) — adapting",
           "Note: encryption/pack formats vary"
-        ]
-      }
-    },
-    sgb: {
-      sub: { zh: "SGB", en: "SGB" },
-      zh: {
-        status: "（Beta测试）",
-        lines: [
-          "翻译：免费完整支持",
-          "作弊：目标为易用、实时 — 持续适配中",
-          "备注：Unity 导出作品优先走 Unity 链路"
-        ]
-      },
-      en: {
-        status: "(Beta)",
-        lines: [
-          "Translation: full free support",
-          "Cheats: easy real-time edits — adapting",
-          "Note: Unity exports use the Unity path first"
         ]
       }
     },
