@@ -11,15 +11,15 @@ const i18n = {
     siteBrandText: "游译者 GameLingo",
     navDownload: "下载",
     heroBadge: "没有汉化，也能玩懂全世界游戏！",
-    heroTitle: "大模型翻译更贴近游戏术语与风格<br />沉浸汉化体验",
-    heroLead:
-      "直接抓取游戏文本并即时翻译回写/覆盖显示，拖拽游戏一键启动、术语统一、角色语气保持，让你专注剧情与战斗！",
+    heroTitle:
+      "识别游戏文本，AI 翻译回写",
+    heroLead: "当前专注 RPG Maker MV/MZ，其他引擎持续验证中",
     heroBtnDownload: "下载 Windows 版",
     heroBtnEngines: "查看支持引擎",
-    heroDemoPill: "Beta 测试开放",
-    demoStep1: "STEP 1 拖入游戏",
-    demoStep2: "STEP 2 翻译中",
-    demoStep3: "STEP 3 完成重启",
+    flowStep1Title: "步骤1: 拖入游戏",
+    flowStep1Desc: "将游戏可执行文件从资源管理器拖入 GameLingo 窗口，工具将自动检测并连接游戏",
+    flowStep2Title: "步骤2: 开始翻译",
+    flowStep2Desc: "选择翻译模式与目标语言，点击「开始翻译」即可实时汉化",
     flowTitle: "使用流程",
     flowIntro: "三分钟上手：拖入游戏 → 生成补丁/安装适配 → 启动即可。",
     s1t: "下载并安装",
@@ -32,12 +32,15 @@ const i18n = {
     s4d: "进入文本场景生效。",
     engineMatrixTitle: "支持的游戏引擎",
     engineMatrixIntro:
-      "全部引擎开放 Beta 测试。桌面端鼠标悬停查看详情；RGSS 系列悬停 XP 可展开同系列引擎。手机端点击卡片展开。",
+      "RPG Maker MV/MZ 为当前推荐使用；Ren'Py、Unity 为实验中；其余引擎尚未完成验证。桌面端悬停查看详情，手机端点击卡片展开。",
     engineHeadRpg: "[RPG] 角色扮演引擎",
     engineHeadVn: "[VN/ADV/AVG] 视觉小说引擎",
     engineHeadSlg: "[SLG] 策略/模拟引擎",
     engineHeadOther: "[OTHER] 其他引擎",
-    enginePillBeta: "Beta测试",
+    enginePillRec: "推荐使用",
+    enginePillExp: "实验中",
+    enginePillUnverified: "未验证支持",
+    flowEnlargeHint: "截图较小？点击可放大查看",
     pricingTitle: "价格方案",
     pricingIntro: "当前为软件测试阶段，Pro 暂无定价；免费版可体验综合翻译与引擎能力。",
     priceFreeName: "免费版",
@@ -73,31 +76,23 @@ const i18n = {
     feedbackSendCooldown: "发送（{n}s）",
     metaDescription:
       "游译者 GameLingo：游戏翻译 / RPG翻译工具。Hook + AI 沉浸式实时汉化，拖拽游戏即可翻译回写，原位覆盖显示。",
-    footerCopy: "游译者 GameLingo © 2026",
-    demoChip: "三步演示",
-    demoFolderTitle: "游戏文件夹",
-    demoFolderHint: "拖入 game.exe",
-    demoAppFlow: "识别 → 补丁 → 启动",
-    demoLog1: "[1] 识别引擎：RPG Maker",
-    demoLog2: "[2] 生成 _GameLingo_Patched…",
-    demoLog3: "[3] 应用翻译…",
-    demoLog4: "[4] 完成，重启游戏…",
-    demoDragHint: "拖入 GameLingo"
+    footerCopy: "游译者 GameLingo © 2026"
   },
   en: {
     pageTitle: "GameLingo - Official Site",
     siteBrandText: "GameLingo",
     navDownload: "Download",
     heroBadge: "No localization? Still enjoy games worldwide.",
-    heroTitle: "AI translation tuned for game terms<br />Immersive in-game localization",
-    heroLead:
-      "Capture in-game text, translate in real time, and write back or overlay in place. Drag-and-drop to launch, keep glossary and tone consistent—focus on the story and combat.",
+    heroTitle:
+      "Auto-detect game text, translate with AI, and write back or overlay in place,<br />preserving variables, line breaks, tone, and game terminology.",
+    heroLead: "Currently focused on RPG Maker MV/MZ; other engines are being validated.",
     heroBtnDownload: "Download for Windows",
     heroBtnEngines: "Supported engines",
-    heroDemoPill: "Open beta",
-    demoStep1: "STEP 1 Drop game",
-    demoStep2: "STEP 2 Translating",
-    demoStep3: "STEP 3 Restart",
+    flowStep1Title: "Step 1: Drop the game",
+    flowStep1Desc:
+      "Drag the game executable from File Explorer into GameLingo; the tool auto-detects and connects.",
+    flowStep2Title: "Step 2: Start translation",
+    flowStep2Desc: "Choose translation mode and target language, then click Start Translation.",
     flowTitle: "Workflow",
     flowIntro: "Get started in minutes: drop the game → patch/adapter → launch.",
     s1t: "Install",
@@ -110,12 +105,15 @@ const i18n = {
     s4d: "Works in text scenes.",
     engineMatrixTitle: "Supported game engines",
     engineMatrixIntro:
-      "All engines are in open beta. Hover for details; hover RPG Maker XP to expand the RGSS family. Tap cards on mobile.",
+      "RPG Maker MV/MZ are recommended; Ren'Py and Unity are experimental; other engines are unverified.",
     engineHeadRpg: "[RPG] Role-playing engines",
     engineHeadVn: "[VN/ADV/AVG] Visual novel engines",
     engineHeadSlg: "[SLG] Strategy / simulation",
     engineHeadOther: "[OTHER] Other engines",
-    enginePillBeta: "Beta",
+    enginePillRec: "Recommended",
+    enginePillExp: "Experimental",
+    enginePillUnverified: "Unverified",
+    flowEnlargeHint: "Too small? Click to enlarge",
     pricingTitle: "Pricing",
     pricingIntro: "Software is in beta; Pro pricing TBD. Free tier includes integrated translation and engines.",
     priceFreeName: "Free",
@@ -152,16 +150,7 @@ const i18n = {
     feedbackSendCooldown: "Send ({n}s)",
     metaDescription:
       "GameLingo: game translation / RPG tools. Hook + AI real-time in-game localization with overlay display.",
-    footerCopy: "GameLingo © 2026",
-    demoChip: "3-Step Demo",
-    demoFolderTitle: "Game Folder",
-    demoFolderHint: "Drag game.exe",
-    demoAppFlow: "Detect → Patch → Launch",
-    demoLog1: "[1] Detected engine: RPG Maker",
-    demoLog2: "[2] Building _GameLingo_Patched…",
-    demoLog3: "[3] Applying translations…",
-    demoLog4: "[4] Done. Restart game…",
-    demoDragHint: "drag into GameLingo"
+    footerCopy: "GameLingo © 2026"
   }
 };
 
@@ -340,10 +329,9 @@ const I18N_IDS = [
   "heroLead",
   "heroBtnDownload",
   "heroBtnEngines",
-  "heroDemoPill",
-  "demoStep1",
-  "demoStep2",
-  "demoStep3",
+  "flowStepTitle",
+  "flowStepDesc",
+  "flowEnlargeHint",
   "flowTitle",
   "flowIntro",
   "s1t",
@@ -384,16 +372,12 @@ const I18N_IDS = [
   "feedbackHint",
   "feedbackFileHint",
   "feedbackSend",
-  "footerCopy",
-  "demoChip",
-  "demoFolderTitle",
-  "demoFolderHint",
-  "demoAppFlow",
-  "demoLog1",
-  "demoLog2",
-  "demoLog3",
-  "demoLog4",
-  "demoDragHint"
+  "footerCopy"
+];
+
+const HERO_FLOW_STEPS = [
+  { titleKey: "flowStep1Title", descKey: "flowStep1Desc" },
+  { titleKey: "flowStep2Title", descKey: "flowStep2Desc" }
 ];
 
 function applyLanguage(lang) {
@@ -411,15 +395,22 @@ function applyLanguage(lang) {
 
     setText("heroTitle", dict.heroTitle, true);
     for (const id of I18N_IDS) {
-      if (id === "heroTitle") continue;
+      if (id === "heroTitle" || id === "flowStepTitle" || id === "flowStepDesc") continue;
       setText(id, dict[id]);
     }
+    updateHeroFlowText(dict);
 
     const fbText = document.getElementById("feedbackText");
     if (fbText) fbText.placeholder = dict.feedbackPlaceholder;
 
-    document.querySelectorAll("#engineMatrix .pill.beta").forEach((pill) => {
-      pill.textContent = dict.enginePillBeta;
+    document.querySelectorAll("#engineMatrix .pill.rec").forEach((pill) => {
+      pill.textContent = dict.enginePillRec;
+    });
+    document.querySelectorAll("#engineMatrix .pill.exp").forEach((pill) => {
+      pill.textContent = dict.enginePillExp;
+    });
+    document.querySelectorAll("#engineMatrix .pill.unverified").forEach((pill) => {
+      pill.textContent = dict.enginePillUnverified;
     });
 
     applyEngineI18n(safe);
@@ -449,12 +440,99 @@ const observer = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-// Subtle hero parallax for a polished "big brand" feel.
-const heroCard = document.querySelector(".hero-card");
-if (heroCard) {
-  // Keep hero motion subtle and non-janky: avoid mousemove-driven transforms.
-  // (We rely on low-frequency CSS animations in index.html instead.)
+let heroFlowIndex = 0;
+let heroFlowTimer = null;
+
+function updateHeroFlowText(dict) {
+  const step = HERO_FLOW_STEPS[heroFlowIndex];
+  if (!step || !dict) return;
+  setText("flowStepTitle", dict[step.titleKey]);
+  setText("flowStepDesc", dict[step.descKey]);
 }
+
+function setHeroFlowStep(index, dict) {
+  const flow = document.getElementById("heroFlow");
+  if (!flow) return;
+  const max = HERO_FLOW_STEPS.length - 1;
+  heroFlowIndex = Math.max(0, Math.min(max, Number(index) || 0));
+
+  flow.querySelectorAll(".flow-node").forEach((node) => {
+    const step = Number(node.dataset.step);
+    const isActive = step === heroFlowIndex;
+    const isDone = step < heroFlowIndex;
+    node.classList.toggle("active", isActive);
+    node.classList.toggle("done", isDone);
+    node.setAttribute("aria-selected", isActive ? "true" : "false");
+  });
+  flow.querySelectorAll(".flow-seg").forEach((seg) => {
+    const segIndex = Number(seg.dataset.seg);
+    seg.classList.toggle("done", segIndex < heroFlowIndex);
+  });
+  flow.querySelectorAll(".flow-slide").forEach((slide) => {
+    slide.classList.toggle("active", Number(slide.dataset.step) === heroFlowIndex);
+  });
+
+  const langDict = dict || i18n[getLang()];
+  updateHeroFlowText(langDict);
+}
+
+function initHeroFlow() {
+  const flow = document.getElementById("heroFlow");
+  if (!flow) return;
+
+  const cycleMs = 5200;
+  const restartTimer = () => {
+    if (heroFlowTimer) window.clearInterval(heroFlowTimer);
+    heroFlowTimer = window.setInterval(() => {
+      setHeroFlowStep((heroFlowIndex + 1) % HERO_FLOW_STEPS.length);
+    }, cycleMs);
+  };
+
+  flow.querySelectorAll(".flow-node").forEach((node) => {
+    node.addEventListener("click", () => {
+      setHeroFlowStep(Number(node.dataset.step));
+      restartTimer();
+    });
+  });
+
+  setHeroFlowStep(0);
+  restartTimer();
+}
+
+initHeroFlow();
+
+function initFlowImageLightbox() {
+  const lightbox = document.getElementById("imgLightbox");
+  const lightboxImg = document.getElementById("imgLightboxImg");
+  const lightboxClose = document.getElementById("imgLightboxClose");
+  const flow = document.getElementById("heroFlow");
+  if (!lightbox || !lightboxImg || !flow) return;
+
+  const open = (src, alt) => {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || "";
+    lightbox.classList.add("on");
+    lightbox.setAttribute("aria-hidden", "false");
+  };
+  const close = () => {
+    lightbox.classList.remove("on");
+    lightbox.setAttribute("aria-hidden", "true");
+    lightboxImg.removeAttribute("src");
+  };
+
+  flow.querySelectorAll(".flow-shot-single, .flow-shot-combo img").forEach((img) => {
+    img.addEventListener("click", () => open(img.src, img.alt));
+  });
+  if (lightboxClose) lightboxClose.addEventListener("click", close);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) close();
+  });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lightbox.classList.contains("on")) close();
+  });
+}
+
+initFlowImageLightbox();
 
 // Feedback modal (server-side email)
 const feedbackLink = document.getElementById("feedbackLink");
@@ -623,11 +701,6 @@ if (feedbackSend) feedbackSend.addEventListener("click", () => void sendFeedback
 const isCoarsePointer = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
 const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const enableFloatTip = !isCoarsePointer;
-
-// 全部引擎卡片统一高亮（Beta 开放）
-document.querySelectorAll(".engine-card").forEach((card) => {
-  card.classList.add("engine-card--live");
-});
 
 initEngineStacks();
 

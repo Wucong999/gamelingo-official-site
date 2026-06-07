@@ -4,7 +4,7 @@ window.GAMELINGO_CONTENT = {
     rpgmaker2000: {
       sub: { zh: "RM2K / RM2K3", en: "RM2K / RM2K3" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费完整支持（通过 EasyRPG 工具链）",
           "作弊：不与游戏进程交互（不提供实时作弊）",
@@ -12,7 +12,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: full free support (EasyRPG toolchain)",
           "Cheats: no in-process interaction (no real-time cheats)",
@@ -23,7 +23,7 @@ window.GAMELINGO_CONTENT = {
     rpgxp: {
       sub: { zh: "悬停展开：VX · VX Ace · mkxp · RGSS", en: "Hover: VX · VX Ace · mkxp · RGSS" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费支持（受加密/封包/资源组织影响）",
           "作弊：目标为易用、实时的完整支持 — 持续适配中",
@@ -31,7 +31,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: free (may vary with encryption/packs/layout)",
           "Cheats: aiming for easy real-time edits — adapting",
@@ -42,7 +42,7 @@ window.GAMELINGO_CONTENT = {
     rpgvx: {
       sub: { zh: "RGSS2", en: "RGSS2" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费支持（受加密/封包/资源组织影响）",
           "作弊：目标为易用、实时的完整支持 — 持续适配中",
@@ -50,7 +50,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: free (may vary with encryption/packs/layout)",
           "Cheats: aiming for easy real-time edits — adapting",
@@ -61,7 +61,7 @@ window.GAMELINGO_CONTENT = {
     rpgvxace: {
       sub: { zh: "RGSS3", en: "RGSS3" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费支持（受加密/封包/资源组织影响）",
           "作弊：目标为易用、实时的完整支持 — 持续适配中",
@@ -69,7 +69,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: free (may vary with encryption/packs/layout)",
           "Cheats: aiming for easy real-time edits — adapting",
@@ -80,7 +80,7 @@ window.GAMELINGO_CONTENT = {
     mkxp: {
       sub: { zh: "mkxp-z", en: "mkxp-z" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费支持（受封包/资源组织影响）",
           "作弊：目标为易用、实时的完整支持 — 持续适配中",
@@ -88,7 +88,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: free (pack/layout may affect results)",
           "Cheats: aiming for easy real-time edits — adapting",
@@ -99,7 +99,7 @@ window.GAMELINGO_CONTENT = {
     rgss: {
       sub: { zh: "RGSS1/2/3 运行时", en: "RGSS1/2/3 runtime" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费支持（受封包/资源组织影响）",
           "作弊：目标为易用、实时的完整支持 — 持续适配中",
@@ -107,7 +107,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: free (pack/layout may affect results)",
           "Cheats: aiming for easy real-time edits — adapting",
@@ -118,45 +118,45 @@ window.GAMELINGO_CONTENT = {
     rpgmv: {
       sub: { zh: "NW.js / data.json", en: "NW.js / data.json" },
       zh: {
-        status: "（Beta测试）",
+        status: "（推荐使用）",
         lines: [
           "补丁注入翻译，拖拽启动即可体验",
           "支持部分金手指（道具/开关/变量等）",
-          "持续优化稳定性与兼容性"
+          "当前主力验证引擎，稳定性持续优化中"
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Recommended)",
         lines: [
           "Patch-based translation; drag-and-drop to start",
           "Partial cheats (items/switches/variables, etc.)",
-          "Stability and compatibility improving"
+          "Primary focus engine; stability improving"
         ]
       }
     },
     rpgmz: {
       sub: { zh: "NW.js / data.json", en: "NW.js / data.json" },
       zh: {
-        status: "（Beta测试）",
+        status: "（推荐使用）",
         lines: [
           "补丁注入翻译，拖拽启动即可体验",
           "支持部分金手指（道具/开关/变量等）",
-          "持续优化稳定性与兼容性"
+          "当前主力验证引擎，稳定性持续优化中"
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Recommended)",
         lines: [
           "Patch-based translation; drag-and-drop to start",
           "Partial cheats (items/switches/variables, etc.)",
-          "Stability and compatibility improving"
+          "Primary focus engine; stability improving"
         ]
       }
     },
     wolf: {
       sub: { zh: "WOLF RPG Editor", en: "WOLF RPG Editor" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费完整支持",
           "作弊：完整数据修改（Pro 及以上）— 持续适配",
@@ -164,7 +164,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: full free support",
           "Cheats: full data edits (Pro+) — adapting",
@@ -175,7 +175,7 @@ window.GAMELINGO_CONTENT = {
     bakin: {
       sub: { zh: "Bakin", en: "Bakin" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费完整支持",
           "作弊：目标为易用、实时 — 持续适配中",
@@ -183,7 +183,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: full free support",
           "Cheats: easy real-time edits — adapting",
@@ -194,7 +194,7 @@ window.GAMELINGO_CONTENT = {
     tyrano: {
       sub: { zh: ".ks 脚本", en: ".ks scripts" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费完整支持",
           "作弊：简易数据修改（免费）",
@@ -202,7 +202,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: full free support",
           "Cheats: simple data edits (free)",
@@ -213,7 +213,7 @@ window.GAMELINGO_CONTENT = {
     kirikiri: {
       sub: { zh: "xp3 / ks / tjs", en: "xp3 / ks / tjs" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费支持（部分特殊加密除外）",
           "作弊：简易数据修改（免费）",
@@ -221,7 +221,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: free (some special encryption excluded)",
           "Cheats: simple data edits (free)",
@@ -232,7 +232,7 @@ window.GAMELINGO_CONTENT = {
     renpy: {
       sub: { zh: "game/ 脚本", en: "game/ scripts" },
       zh: {
-        status: "（Beta测试）",
+        status: "（实验中）",
         lines: [
           "脚本明文/补丁路线，拖拽即可开始翻译",
           "部分封包作品可能需要额外解包",
@@ -240,7 +240,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Experimental)",
         lines: [
           "Plain scripts / patch path; drag-and-drop to start",
           "Some packed builds may need extraction",
@@ -251,7 +251,7 @@ window.GAMELINGO_CONTENT = {
     visualnovelmaker: {
       sub: { zh: "VNM", en: "VNM" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费支持（取决于资源组织方式）",
           "作弊：不提供",
@@ -259,7 +259,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: free (depends on asset layout)",
           "Cheats: not provided",
@@ -270,7 +270,7 @@ window.GAMELINGO_CONTENT = {
     choicescript: {
       sub: { zh: "文字互动", en: "Interactive fiction" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费完整支持",
           "作弊：不提供",
@@ -278,7 +278,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: full free support",
           "Cheats: not provided",
@@ -289,7 +289,7 @@ window.GAMELINGO_CONTENT = {
     srpgstudio: {
       sub: { zh: "策略 RPG / SLG 常见", en: "Tactical RPG / SLG" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费完整支持",
           "作弊：免费完整支持（易用、实时）",
@@ -297,7 +297,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: full free support",
           "Cheats: full free support (easy, real-time)",
@@ -308,7 +308,7 @@ window.GAMELINGO_CONTENT = {
     unity: {
       sub: { zh: "BepInEx / XUnity / 运行时翻译", en: "BepInEx / XUnity / runtime" },
       zh: {
-        status: "（Beta测试）",
+        status: "（实验中）",
         lines: [
           "支持 Unity 运行时文本捕获与预翻译注入（BepInEx / XUnity）",
           "运行时替换对话、菜单、UI 等可捕获文本，可生成预翻译字典",
@@ -316,7 +316,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Experimental)",
         lines: [
           "Runtime text capture & pre-translation (BepInEx / XUnity)",
           "Replaces dialogue, menus, UI at runtime; pre-translation dictionaries supported",
@@ -327,7 +327,7 @@ window.GAMELINGO_CONTENT = {
     pixelgamaker: {
       sub: { zh: "像素动作/平台", en: "Pixel action / platform" },
       zh: {
-        status: "（Beta测试）",
+        status: "（未验证支持）",
         lines: [
           "翻译：免费完整支持",
           "作弊：开关/变量修改（Pro 及以上）",
@@ -335,7 +335,7 @@ window.GAMELINGO_CONTENT = {
         ]
       },
       en: {
-        status: "(Beta)",
+        status: "(Unverified)",
         lines: [
           "Translation: full free support",
           "Cheats: switch/variable edits (Pro+)",

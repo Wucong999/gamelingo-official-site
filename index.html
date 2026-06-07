@@ -91,7 +91,7 @@
       .actions { display:flex; align-items:center; gap:10px; }
       .actions select,.actions a { height:34px; border-radius:10px; border:1px solid #2a3a5d; background:#0d1527; color:#e4efff; padding:0 12px; text-decoration:none; display:inline-flex; align-items:center; font-size:13px; transition:.25s ease; }
       .actions a:hover,.actions select:hover { border-color:#4f6a97; transform:translateY(-1px); }
-      .hero { padding:104px 0 74px; display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:center; }
+      .hero { padding:104px 0 74px; display:grid; grid-template-columns:.88fr 1.12fr; gap:36px; align-items:center; }
       .tag { display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border:1px solid #2f466e; border-radius:999px; color:#c3d8ff; font-size:12px; }
       h1 { margin:16px 0 16px; font-size:clamp(40px,5.8vw,76px); line-height:1.03; letter-spacing:-.03em; }
       .lead { color:var(--muted); line-height:1.92; max-width:60ch; font-size:17px; margin:0; }
@@ -101,107 +101,157 @@
       .btn.ghost { color:#dce8ff; background:rgba(255,255,255,.02); }
       .btn:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(0,0,0,.25); }
       .glass { border:1px solid rgba(255,255,255,.12); background:linear-gradient(145deg,rgba(20,30,49,.9),rgba(13,21,36,.96)); border-radius:22px; padding:20px; box-shadow:var(--shadow); }
-      .hero-card { min-height:360px; position:relative; overflow:hidden; isolation:isolate; }
-      .hero-card:before{
-        content:"";
-        position:absolute;
-        inset:-40% -20% auto auto;
-        width:280px;
-        height:280px;
+      .hero-card { min-height:520px; position:relative; overflow:hidden; padding:14px; }
+      .flow-enlarge-hint{ text-align:center; font-size:12px; color:var(--muted2); margin:-6px 0 0; }
+      .hero-flow { display:grid; gap:16px; }
+      .flow-progress{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:0;
+        padding:4px 0 2px;
+      }
+      .flow-node{
+        width:34px;
+        height:34px;
         border-radius:50%;
-        background:radial-gradient(circle,rgba(139,189,255,.32) 0,rgba(139,189,255,0) 70%);
-        opacity:.55;
-        transform:translate3d(0,0,0);
-        animation:heroFloat 10s cubic-bezier(.2,.8,.2,1) infinite;
-        z-index:0;
+        display:grid;
+        place-items:center;
+        font-size:14px;
+        font-weight:800;
+        border:2px solid rgba(255,255,255,.22);
+        background:#f4f8ff;
+        color:#1a2740;
+        cursor:pointer;
+        padding:0;
+        font-family:inherit;
+        transition:background .28s ease, border-color .28s ease, color .28s ease, box-shadow .28s ease;
+        flex:0 0 auto;
+        z-index:1;
       }
-      .hero-card:after{
-        content:"";
+      .flow-node.done{
+        border-color:rgba(132,255,210,.55);
+        background:linear-gradient(135deg,#5ee8b8,#3ecf96);
+        color:#06231a;
+      }
+      .flow-node.active{
+        border-color:rgba(139,189,255,.75);
+        background:linear-gradient(135deg,#6ea8ff,#4d8fff);
+        color:#fff;
+        box-shadow:0 0 0 4px rgba(139,189,255,.18);
+      }
+      .flow-seg{
+        flex:1;
+        max-width:72px;
+        height:2px;
+        background:rgba(255,255,255,.16);
+        transition:background .35s ease;
+      }
+      .flow-seg.done{ background:linear-gradient(90deg,rgba(132,255,210,.75),rgba(132,255,210,.45)); }
+      .flow-card{
+        border:1px solid rgba(255,255,255,.10);
+        border-radius:18px;
+        overflow:hidden;
+        background:rgba(7,11,21,.55);
+      }
+      .flow-card-head{
+        padding:12px 14px 10px;
+        background:linear-gradient(180deg,rgba(228,236,248,.96),rgba(210,222,240,.94));
+        color:#1a2740;
+        text-align:center;
+      }
+      .flow-step-title{
+        font-size:16px;
+        font-weight:900;
+        letter-spacing:-.01em;
+        margin-bottom:4px;
+      }
+      .flow-step-desc{
+        font-size:12px;
+        line-height:1.55;
+        color:#4a5f7d;
+      }
+      .flow-card-body{
+        position:relative;
+        min-height:380px;
+        padding:12px;
+        background:linear-gradient(180deg,rgba(12,18,30,.92),rgba(8,13,24,.96));
+        display:grid;
+        place-items:center;
+      }
+      .flow-slide{
+        display:none;
+        width:100%;
+      }
+      .flow-slide.active{
+        display:block;
+        animation:flowSlideIn .42s cubic-bezier(.2,.8,.2,1);
+      }
+      @keyframes flowSlideIn{
+        from{ opacity:0; transform:translateY(8px); }
+        to{ opacity:1; transform:none; }
+      }
+      .flow-shot-single,
+      .flow-shot-combo img{
+        border-radius:12px;
+        border:1px solid rgba(255,255,255,.10);
+        box-shadow:0 18px 40px rgba(0,0,0,.32);
+        width:100%;
+        display:block;
+        cursor:zoom-in;
+        transition:transform .22s ease, box-shadow .22s ease;
+      }
+      .flow-shot-single:hover,
+      .flow-shot-combo img:hover{
+        transform:scale(1.01);
+        box-shadow:0 22px 48px rgba(0,0,0,.38);
+      }
+      .flow-shot-combo{
+        position:relative;
+        min-height:340px;
+        width:100%;
+      }
+      .flow-shot-combo .shot-folder{
         position:absolute;
+        left:0;
+        top:8px;
+        width:min(58%, 300px);
+        z-index:2;
+      }
+      .img-lightbox{
+        position:fixed;
         inset:0;
-        background:radial-gradient(700px 260px at 20% 10%, rgba(132,255,210,.12) 0%, rgba(132,255,210,0) 55%);
-        z-index:0;
-        pointer-events:none;
+        z-index:95;
+        display:none;
+        align-items:center;
+        justify-content:center;
+        padding:20px;
+        background:rgba(0,0,0,.82);
+        backdrop-filter:blur(6px);
       }
-      @keyframes heroFloat {
-        50% { transform:translate3d(-16px,12px,0) scale(1.02); }
+      .img-lightbox.on{ display:flex; }
+      .img-lightbox img{
+        max-width:min(96vw, 1400px);
+        max-height:92vh;
+        border-radius:14px;
+        border:1px solid rgba(255,255,255,.14);
+        box-shadow:0 28px 70px rgba(0,0,0,.55);
       }
-      .chip { position:absolute; right:14px; top:14px; font-size:12px; color:#b8ffe0; border:1px solid #2f7f67; border-radius:999px; padding:4px 10px; background:rgba(6,45,33,.55); }
-      .bubble { position:absolute; left:22px; right:22px; bottom:22px; padding:14px; border-radius:14px; color:#def8ff; background:rgba(7,17,30,.72); border:1px solid rgba(139,189,255,.22); line-height:1.7; z-index:1; }
-      .chip{ z-index:1; }
-      .demo{ position:absolute; inset:18px; display:grid; grid-template-columns:.95fr 1.05fr; gap:16px; z-index:1; }
-      .demo-panel{ border:1px solid rgba(255,255,255,.10); border-radius:16px; background:rgba(7,11,21,.55); overflow:hidden; }
-      .demo-head{ height:34px; display:flex; align-items:center; justify-content:space-between; padding:0 12px; border-bottom:1px solid rgba(255,255,255,.08); color:#cfe2ff; font-weight:800; letter-spacing:.01em; }
-      .demo-dots{ display:flex; gap:6px; }
-      .demo-dot{ width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.14); }
-      .demo-body{ padding:12px; }
-      .filelist{ font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:12px; line-height:1.65; color:#b7cbe8; }
-      .file{ display:flex; align-items:center; justify-content:space-between; padding:5px 8px; border-radius:10px; border:1px solid transparent; }
-      .file b{ color:#e8f2ff; font-weight:800; }
-      .file .ext{ color:#7f96bb; }
-      .file.hot{ border-color:rgba(132,255,210,.22); background:rgba(6,45,33,.40); box-shadow:0 0 0 1px rgba(132,255,210,.08) inset; transform:scale(1.02); }
-      .dropzone{ position:relative; height:100%; display:grid; grid-template-rows:auto 1fr auto; gap:10px; }
-      .appshot{ height:100%; border-radius:14px; border:1px solid rgba(255,255,255,.10); background:linear-gradient(180deg,rgba(15,23,40,.92),rgba(11,18,34,.92)); overflow:hidden; }
-      .app-top{ height:36px; display:flex; align-items:center; justify-content:space-between; padding:0 12px; border-bottom:1px solid rgba(255,255,255,.08); color:#d8ebff; font-weight:900; }
-      .app-mid{ padding:12px; display:grid; gap:10px; }
-      .kpi{ display:flex; gap:10px; flex-wrap:wrap; }
-      .kpi .pill{ padding:6px 10px; }
-      .progress{ height:10px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; border:1px solid rgba(255,255,255,.08); }
-      .bar{ height:100%; width:0%; background:linear-gradient(90deg,rgba(132,255,210,.85),rgba(139,189,255,.75)); border-radius:999px; }
-      .log{ font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:11px; line-height:1.6; color:#b7cbe8; background:rgba(0,0,0,.18); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:10px; }
-      .drag-file{ position:absolute; left:14px; top:58px; padding:10px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(7,11,21,.70); box-shadow:0 18px 40px rgba(0,0,0,.28); display:flex; align-items:center; gap:10px; transform:translate3d(0,0,0); opacity:0; }
-      .drag-badge{ width:30px; height:30px; border-radius:10px; display:grid; place-items:center; border:1px solid rgba(132,255,210,.25); background:rgba(6,45,33,.45); color:#b8ffe0; font-weight:900; }
-      .drag-text{ display:grid; line-height:1.15; }
-      .drag-text .name{ font-weight:900; }
-      .drag-text .hint{ font-size:11px; color:var(--muted); }
-      .stage{ position:absolute; left:18px; right:18px; bottom:16px; display:flex; gap:8px; justify-content:space-between; z-index:2; }
-      .stage .s{ flex:1; border:1px solid rgba(255,255,255,.10); border-radius:999px; padding:7px 10px; font-size:12px; color:#cfe2ff; background:rgba(255,255,255,.02); text-align:center; }
-      .stage .s.on{ border-color:rgba(132,255,210,.26); background:rgba(6,45,33,.42); color:#b8ffe0; }
-      @keyframes demoCycle {
-        0%{ }
-        8%{ }
-        32%{ }
-        66%{ }
-        100%{ }
+      .img-lightbox .close{
+        position:absolute;
+        top:18px;
+        right:18px;
+        height:40px;
+        padding:0 14px;
+        border-radius:12px;
+        border:1px solid rgba(255,255,255,.18);
+        background:rgba(13,22,40,.88);
+        color:#e8f2ff;
+        cursor:pointer;
+        font-weight:700;
       }
-      @keyframes dragMove {
-        0%{ opacity:0; transform:translate3d(0,0,0) scale(.98); }
-        10%{ opacity:1; transform:translate3d(0,0,0) scale(1); }
-        60%{ opacity:1; transform:translate3d(300px, 22px, 0) scale(1); }
-        80%{ opacity:0; transform:translate3d(320px, 22px, 0) scale(.98); }
-        100%{ opacity:0; transform:translate3d(320px, 22px, 0) scale(.98); }
-      }
-      @keyframes barFill {
-        0%{ width:0%; }
-        35%{ width:0%; }
-        72%{ width:86%; }
-        85%{ width:100%; }
-        100%{ width:100%; }
-      }
-      @keyframes pulseHot {
-        0%, 30%{ transform:none; }
-        36%{ transform:scale(1.02); }
-        44%{ transform:scale(1.00); }
-        100%{ transform:none; }
-      }
-      @keyframes stageSwap {
-        0%, 30%{ opacity:.86; transform:none; }
-        35%, 100%{ opacity:1; transform:none; }
-      }
-      .hero-card .demo{ animation:demoCycle 9.6s linear infinite; }
-      .hero-card .drag-file{ animation:dragMove 9.6s cubic-bezier(.2,.8,.2,1) infinite; }
-      .hero-card .bar{ animation:barFill 9.6s cubic-bezier(.2,.8,.2,1) infinite; }
-      .hero-card .file.hot{ animation:pulseHot 9.6s cubic-bezier(.2,.8,.2,1) infinite; }
-      @keyframes stageActive1{ 0%, 32%{ opacity:1; } 33%,100%{ opacity:.55; } }
-      @keyframes stageActive2{ 0%, 33%{ opacity:.55; } 34%, 66%{ opacity:1; } 67%,100%{ opacity:.55; } }
-      @keyframes stageActive3{ 0%, 66%{ opacity:.55; } 67%, 100%{ opacity:1; } }
-      .hero-card .stage .s:nth-child(1){ animation:stageActive1 9.6s linear infinite; }
-      .hero-card .stage .s:nth-child(2){ animation:stageActive2 9.6s linear infinite; }
-      .hero-card .stage .s:nth-child(3){ animation:stageActive3 9.6s linear infinite; }
       @media (prefers-reduced-motion: reduce){
-        .hero-card .demo, .hero-card .drag-file, .hero-card .bar, .hero-card .file.hot{ animation:none !important; }
-        .hero-card .drag-file{ opacity:1; }
-        .hero-card .bar{ width:60%; }
+        .flow-slide.active{ animation:none; }
       }
       .section { padding:76px 0; border-top:1px solid rgba(255,255,255,.06); }
       .section:first-of-type { border-top:none; }
@@ -261,6 +311,9 @@
       .engine-meta{ display:flex; align-items:center; gap:8px; flex:0 0 auto; }
       .pill{ font-size:12px; border-radius:999px; padding:5px 10px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.03); color:#d7e8ff; }
       .pill.ok{ border-color:rgba(132,255,210,.35); background:rgba(6,45,33,.55); color:#b8ffe0; }
+      .pill.rec{ border-color:rgba(132,255,210,.45); background:rgba(6,45,33,.65); color:#b8ffe0; font-weight:800; }
+      .pill.exp{ border-color:rgba(255,210,120,.45); background:rgba(55,38,8,.55); color:#ffe7b0; font-weight:800; }
+      .pill.unverified{ border-color:rgba(255,255,255,.10); background:rgba(255,255,255,.04); color:#8ea8c9; }
       .pill.beta{ border-color:rgba(255,210,120,.45); background:rgba(55,38,8,.55); color:#ffe7b0; font-weight:800; }
       .pill.runtime{ border-color:rgba(132,255,210,.45); background:rgba(6,45,33,.65); color:#b8ffe0; font-weight:800; }
       .pill.planned{ border-color:rgba(255,255,255,.10); background:rgba(255,255,255,.04); color:#8ea8c9; }
@@ -681,9 +734,12 @@
         .hero{ padding:54px 0 42px; gap:20px; }
         h1{ font-size:clamp(30px, 10vw, 44px); }
         .lead{ font-size:15px; line-height:1.8; }
-        .hero-card{ min-height:420px; }
-        .demo{ grid-template-columns:1fr; gap:12px; }
-        .demo-panel{ display:none; }
+        .hero-card{ min-height:unset; }
+        .flow-card-body{ min-height:260px; padding:10px; }
+        .flow-shot-combo{ min-height:240px; }
+        .flow-shot-combo .shot-folder{ width:min(62%, 240px); top:6px; }
+        .flow-step-title{ font-size:15px; }
+        .flow-step-desc{ font-size:12px; }
         .section{ padding:44px 0; }
         .section h2{ font-size:28px; }
         .pricing{ grid-template-columns:1fr !important; }
@@ -741,66 +797,36 @@
       <section class="hero reveal">
         <div>
           <div id="heroBadge" class="tag">没有汉化，也能玩懂全世界游戏！</div>
-          <h1 id="heroTitle">大模型翻译更贴近游戏术语与风格<br />沉浸汉化体验</h1>
-          <p id="heroLead" class="lead">直接抓取游戏文本并即时翻译回写/覆盖显示，拖拽游戏一键启动、术语统一、角色语气保持，让你专注剧情与战斗！</p>
+          <h1 id="heroTitle">自动识别游戏文本，使用 AI 翻译并回写或覆盖显示，<br />尽量保留变量、换行、角色语气与游戏术语。</h1>
+          <p id="heroLead" class="lead">当前专注 RPG Maker MV/MZ，其他引擎持续验证中</p>
           <div class="btns">
             <a id="heroBtnDownload" class="btn primary" href="./download.html">下载 Windows 版</a>
             <a id="heroBtnEngines" class="btn ghost" href="#engineMatrixTitle">查看支持引擎</a>
           </div>
         </div>
         <div class="glass hero-card">
-          <div class="chip" id="demoChip">3-Step Demo</div>
-          <div class="demo" aria-label="GameLingo workflow demo">
-            <div class="demo-panel">
-              <div class="demo-head">
-                <div style="display:flex;align-items:center;gap:10px;">
-                  <div class="demo-dots" aria-hidden="true"><span class="demo-dot"></span><span class="demo-dot"></span><span class="demo-dot"></span></div>
-                  <div id="demoFolderTitle">Game Folder</div>
-                </div>
-                <div id="demoFolderHint" style="font-size:12px;color:var(--muted2);">Drag `game.exe`</div>
-              </div>
-              <div class="demo-body">
-                <div class="filelist">
-                  <div class="file"><span>data<span class="ext">/</span></span><span class="ext">folder</span></div>
-                  <div class="file"><span>www<span class="ext">/</span></span><span class="ext">folder</span></div>
-                  <div class="file"><span>plugins<span class="ext">/</span></span><span class="ext">folder</span></div>
-                  <div class="file hot"><span><b>game.exe</b></span><span class="ext">exe</span></div>
-                  <div class="file"><span>README<span class="ext">.txt</span></span><span class="ext">file</span></div>
-                </div>
-              </div>
+          <div class="hero-flow" id="heroFlow" aria-label="GameLingo workflow">
+            <div class="flow-progress" role="tablist" aria-label="使用步骤">
+              <button type="button" class="flow-node active" data-step="0" aria-selected="true">1</button>
+              <div class="flow-seg" data-seg="0"></div>
+              <button type="button" class="flow-node" data-step="1" aria-selected="false">2</button>
             </div>
-            <div class="dropzone">
-              <div class="appshot">
-                <div class="app-top">
-                  <div>GameLingo</div>
-                  <div id="demoAppFlow" style="font-size:12px;color:var(--muted2);">Detect → Patch → Launch</div>
-                </div>
-                <div class="app-mid">
-                  <div class="kpi">
-                    <span class="pill beta" id="heroDemoPill">Beta 测试开放</span>
-                  </div>
-                  <div class="progress" aria-label="Translation progress">
-                    <div class="bar"></div>
-                  </div>
-                  <div class="log" aria-label="Demo log">
-                    <div id="demoLog1">[1] Detected engine: RPG Maker</div>
-                    <div id="demoLog2">[2] Building _GameLingo_Patched…</div>
-                    <div id="demoLog3">[3] Applying translations…</div>
-                    <div id="demoLog4">[4] Done. Restart game…</div>
-                  </div>
-                </div>
+            <div class="flow-enlarge-hint" id="flowEnlargeHint">截图较小？点击可放大查看</div>
+            <div class="flow-card">
+              <div class="flow-card-head">
+                <div class="flow-step-title" id="flowStepTitle">步骤1: 拖入游戏</div>
+                <div class="flow-step-desc" id="flowStepDesc">将游戏可执行文件从资源管理器拖入 GameLingo 窗口，工具将自动检测并连接游戏</div>
               </div>
-              <div class="drag-file" aria-hidden="true">
-                <div class="drag-badge">EXE</div>
-                <div class="drag-text">
-                  <div class="name">game.exe</div>
-                  <div class="hint" id="demoDragHint">drag into GameLingo</div>
+              <div class="flow-card-body">
+                <div class="flow-slide active" data-step="0">
+                  <div class="flow-shot-combo">
+                    <img class="shot-app" src="./gamelogo/2.png" alt="GameLingo 主界面" loading="lazy" />
+                    <img class="shot-folder" src="./gamelogo/1.png" alt="游戏文件夹中的 Game.exe" loading="lazy" />
+                  </div>
                 </div>
-              </div>
-              <div class="stage" aria-hidden="true">
-                <div class="s on" id="demoStep1">STEP 1 拖入游戏</div>
-                <div class="s" id="demoStep2">STEP 2 翻译中</div>
-                <div class="s" id="demoStep3">STEP 3 完成重启</div>
+                <div class="flow-slide" data-step="1">
+                  <img class="flow-shot-single" src="./gamelogo/2.png" alt="GameLingo 翻译界面" loading="lazy" />
+                </div>
               </div>
             </div>
           </div>
@@ -820,31 +846,12 @@
 
       <section class="section reveal">
         <h2 id="engineMatrixTitle">支持的游戏引擎</h2>
-        <p class="intro" id="engineMatrixIntro">全部引擎开放 Beta 测试。桌面端鼠标悬停查看详情；RGSS 系列悬停 XP 可展开同系列引擎。手机端点击卡片展开。</p>
+        <p class="intro" id="engineMatrixIntro">RPG Maker MV/MZ 为当前推荐使用；Ren'Py、Unity 为实验中；其余引擎尚未完成验证。桌面端悬停查看详情，手机端点击卡片展开。</p>
 
         <div class="engine-wrap" id="engineMatrix">
           <div class="engine-group">
             <div class="engine-head" id="engineHeadRpg">[RPG] 角色扮演引擎</div>
             <div class="engine-grid">
-              <div class="engine-card engine-card--live" data-engine="rpgmaker2000" tabindex="0">
-                <div class="engine-left">
-                  <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/rm2k.png" alt="" loading="lazy" /></div>
-                  <div style="min-width:0">
-                    <div class="engine-name">RPG Maker 2000/2003</div>
-                    <div class="engine-sub">RM2K / RM2K3</div>
-                  </div>
-                </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
-                <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker 2000/2003 <span class="muted">（已支持）</span></div>
-                  <ul class="tip-list">
-                    <li>翻译：免费完整支持（通过 EasyRPG 工具链）</li>
-                    <li>作弊：不与游戏进程交互（不提供实时作弊）</li>
-                    <li>备注：若资源组织/编码特殊，可能需要额外处理</li>
-                  </ul>
-                </div></div>
-              </div>
-
               <div class="engine-card engine-card--live" data-engine="rpgmv" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/rpgmv.png" alt="" loading="lazy" /></div>
@@ -853,13 +860,13 @@
                     <div class="engine-sub">NW.js / data.json</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="engine-meta"><span class="pill rec">推荐使用</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker MV <span class="muted">（Beta测试）</span></div>
+                  <div class="tip-title">RPG Maker MV <span class="muted">（推荐使用）</span></div>
                   <ul class="tip-list">
                     <li>补丁注入翻译，拖拽启动即可体验</li>
                     <li>支持部分金手指（道具/开关/变量等）</li>
-                    <li>持续优化稳定性与兼容性</li>
+                    <li>当前主力验证引擎，稳定性持续优化中</li>
                   </ul>
                 </div></div>
               </div>
@@ -872,18 +879,37 @@
                     <div class="engine-sub">NW.js / data.json</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="engine-meta"><span class="pill rec">推荐使用</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Maker MZ <span class="muted">（Beta测试）</span></div>
+                  <div class="tip-title">RPG Maker MZ <span class="muted">（推荐使用）</span></div>
                   <ul class="tip-list">
                     <li>补丁注入翻译，拖拽启动即可体验</li>
                     <li>支持部分金手指（道具/开关/变量等）</li>
-                    <li>持续优化稳定性与兼容性</li>
+                    <li>当前主力验证引擎，稳定性持续优化中</li>
                   </ul>
                 </div></div>
               </div>
 
-              <div class="engine-card engine-card--live" data-engine="wolf" tabindex="0">
+              <div class="engine-card" data-engine="rpgmaker2000" tabindex="0">
+                <div class="engine-left">
+                  <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/rm2k.png" alt="" loading="lazy" /></div>
+                  <div style="min-width:0">
+                    <div class="engine-name">RPG Maker 2000/2003</div>
+                    <div class="engine-sub">RM2K / RM2K3</div>
+                  </div>
+                </div>
+                <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
+                <div class="tip"><div class="tip-box">
+                  <div class="tip-title">RPG Maker 2000/2003 <span class="muted">（未验证支持）</span></div>
+                  <ul class="tip-list">
+                    <li>翻译：免费完整支持（通过 EasyRPG 工具链）</li>
+                    <li>作弊：不与游戏进程交互（不提供实时作弊）</li>
+                    <li>备注：若资源组织/编码特殊，可能需要额外处理</li>
+                  </ul>
+                </div></div>
+              </div>
+
+              <div class="engine-card" data-engine="wolf" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/wolf.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -891,9 +917,9 @@
                     <div class="engine-sub">WOLF RPG Editor</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">Wolf RPG <span class="muted">（适配中）</span></div>
+                  <div class="tip-title">Wolf RPG <span class="muted">（未验证支持）</span></div>
                   <ul class="tip-list">
                     <li>翻译：免费完整支持</li>
                     <li>作弊：完整数据修改（Pro 及以上）— 当前适配中</li>
@@ -902,7 +928,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card engine-card--live" data-engine="bakin" tabindex="0">
+              <div class="engine-card" data-engine="bakin" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/Bakin.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -910,9 +936,9 @@
                     <div class="engine-sub">Bakin</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">RPG Developer Bakin <span class="muted">（适配中）</span></div>
+                  <div class="tip-title">RPG Developer Bakin <span class="muted">（未验证支持）</span></div>
                   <ul class="tip-list">
                     <li>翻译：免费完整支持</li>
                     <li>作弊：免费完整支持（易用、实时）— 当前适配中</li>
@@ -922,7 +948,7 @@
               </div>
 
               <div class="engine-stack-wrap">
-                <div class="engine-card engine-card--live engine-stack-main" data-engine="rpgxp" tabindex="0">
+                <div class="engine-card engine-stack-main" data-engine="rpgxp" tabindex="0">
                   <div class="engine-left">
                     <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/xp.png" alt="" loading="lazy" /></div>
                     <div style="min-width:0">
@@ -932,10 +958,10 @@
                   </div>
                   <div class="engine-meta">
                     <span class="stack-more-badge">+4</span>
-                    <span class="pill beta">Beta测试</span>
+                    <span class="pill unverified">未验证支持</span>
                   </div>
                   <div class="tip"><div class="tip-box">
-                    <div class="tip-title">RPG Maker XP <span class="muted">（Beta测试）</span></div>
+                    <div class="tip-title">RPG Maker XP <span class="muted">（未验证支持）</span></div>
                     <ul class="tip-list">
                       <li>翻译：免费支持（受加密/封包/资源组织影响）</li>
                       <li>作弊：目标为易用、实时的完整支持 — 持续适配中</li>
@@ -947,7 +973,7 @@
                   <div class="engine-stack-expand-inner">
                 <div class="engine-stack-more" aria-hidden="true">
                   <div class="engine-stack-item">
-                    <div class="engine-card engine-card--live" data-engine="rpgvx" tabindex="0">
+                    <div class="engine-card" data-engine="rpgvx" tabindex="0">
                       <div class="engine-left">
                         <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/vx.png" alt="" loading="lazy" /></div>
                         <div style="min-width:0">
@@ -955,11 +981,11 @@
                           <div class="engine-sub">RGSS2</div>
                         </div>
                       </div>
-                      <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                      <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
                     </div>
                     <div class="engine-stack-item-detail">
                       <div class="tip-box">
-                        <div class="tip-title">RPG Maker VX <span class="muted">（Beta测试）</span></div>
+                        <div class="tip-title">RPG Maker VX <span class="muted">（未验证支持）</span></div>
                         <ul class="tip-list">
                           <li>翻译：免费支持（受加密/封包/资源组织影响）</li>
                           <li>作弊：目标为易用、实时的完整支持 — 持续适配中</li>
@@ -970,7 +996,7 @@
                   </div>
 
                   <div class="engine-stack-item">
-                    <div class="engine-card engine-card--live" data-engine="rpgvxace" tabindex="0">
+                    <div class="engine-card" data-engine="rpgvxace" tabindex="0">
                       <div class="engine-left">
                         <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/vxace.png" alt="" loading="lazy" /></div>
                         <div style="min-width:0">
@@ -978,11 +1004,11 @@
                           <div class="engine-sub">RGSS3</div>
                         </div>
                       </div>
-                      <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                      <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
                     </div>
                     <div class="engine-stack-item-detail">
                       <div class="tip-box">
-                        <div class="tip-title">RPG Maker VX Ace <span class="muted">（Beta测试）</span></div>
+                        <div class="tip-title">RPG Maker VX Ace <span class="muted">（未验证支持）</span></div>
                         <ul class="tip-list">
                           <li>翻译：免费支持（受加密/封包/资源组织影响）</li>
                           <li>作弊：目标为易用、实时的完整支持 — 持续适配中</li>
@@ -993,7 +1019,7 @@
                   </div>
 
                   <div class="engine-stack-item">
-                    <div class="engine-card engine-card--live" data-engine="mkxp" tabindex="0">
+                    <div class="engine-card" data-engine="mkxp" tabindex="0">
                       <div class="engine-left">
                         <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/mkxp-z.ico" alt="" loading="lazy" /></div>
                         <div style="min-width:0">
@@ -1001,11 +1027,11 @@
                           <div class="engine-sub">mkxp-z</div>
                         </div>
                       </div>
-                      <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                      <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
                     </div>
                     <div class="engine-stack-item-detail">
                       <div class="tip-box">
-                        <div class="tip-title">mkxp <span class="muted">（Beta测试）</span></div>
+                        <div class="tip-title">mkxp <span class="muted">（未验证支持）</span></div>
                         <ul class="tip-list">
                           <li>翻译：免费支持（受封包/资源组织影响）</li>
                           <li>作弊：目标为易用、实时的完整支持 — 持续适配中</li>
@@ -1016,7 +1042,7 @@
                   </div>
 
                   <div class="engine-stack-item">
-                    <div class="engine-card engine-card--live" data-engine="rgss" tabindex="0">
+                    <div class="engine-card" data-engine="rgss" tabindex="0">
                       <div class="engine-left">
                         <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/xp.png" alt="" loading="lazy" /></div>
                         <div style="min-width:0">
@@ -1024,11 +1050,11 @@
                           <div class="engine-sub">RGSS1/2/3 运行时</div>
                         </div>
                       </div>
-                      <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                      <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
                     </div>
                     <div class="engine-stack-item-detail">
                       <div class="tip-box">
-                        <div class="tip-title">RGSS <span class="muted">（Beta测试）</span></div>
+                        <div class="tip-title">RGSS <span class="muted">（未验证支持）</span></div>
                         <ul class="tip-list">
                           <li>翻译：免费支持（受封包/资源组织影响）</li>
                           <li>作弊：目标为易用、实时的完整支持 — 持续适配中</li>
@@ -1047,7 +1073,7 @@
           <div class="engine-group">
             <div class="engine-head" id="engineHeadVn">[VN/ADV/AVG] 视觉小说引擎</div>
             <div class="engine-grid">
-              <div class="engine-card engine-card--live" data-engine="tyrano" tabindex="0">
+              <div class="engine-card" data-engine="tyrano" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/tyrano.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -1055,7 +1081,7 @@
                     <div class="engine-sub">.ks 脚本</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">TyranoBuilder <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
@@ -1066,7 +1092,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card engine-card--live" data-engine="kirikiri" tabindex="0">
+              <div class="engine-card" data-engine="kirikiri" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/kirikiriz.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -1074,7 +1100,7 @@
                     <div class="engine-sub">xp3 / ks / tjs</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">Kirikiri 2/Z <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
@@ -1085,7 +1111,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card engine-card--live" data-engine="renpy" tabindex="0">
+              <div class="engine-card" data-engine="renpy" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/Renpy.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -1093,9 +1119,9 @@
                     <div class="engine-sub">game/ 脚本</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="engine-meta"><span class="pill exp">实验中</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">Ren'Py <span class="muted">（Beta测试）</span></div>
+                  <div class="tip-title">Ren'Py <span class="muted">（实验中）</span></div>
                   <ul class="tip-list">
                     <li>脚本明文/补丁路线，拖拽即可开始翻译</li>
                     <li>部分封包作品可能需要额外解包</li>
@@ -1104,7 +1130,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card engine-card--live" data-engine="visualnovelmaker" tabindex="0">
+              <div class="engine-card" data-engine="visualnovelmaker" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/vnm.jpg" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -1112,7 +1138,7 @@
                     <div class="engine-sub">VNM</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">Visual Novel Maker <span class="muted">（免费支持）</span></div>
                   <ul class="tip-list">
@@ -1123,7 +1149,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card engine-card--live" data-engine="choicescript" tabindex="0">
+              <div class="engine-card" data-engine="choicescript" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/ChoiceScript.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -1131,7 +1157,7 @@
                     <div class="engine-sub">文字互动</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">ChoiceScript <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
@@ -1147,7 +1173,7 @@
           <div class="engine-group">
             <div class="engine-head" id="engineHeadSlg">[SLG] 策略/模拟引擎</div>
             <div class="engine-grid">
-              <div class="engine-card engine-card--live" data-engine="srpgstudio" tabindex="0">
+              <div class="engine-card" data-engine="srpgstudio" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/SRPG.ico" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -1155,7 +1181,7 @@
                     <div class="engine-sub">策略 RPG / SLG 常见</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">SRPG Studio <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
@@ -1171,7 +1197,7 @@
           <div class="engine-group">
             <div class="engine-head" id="engineHeadOther">[OTHER] 其他引擎</div>
             <div class="engine-grid">
-              <div class="engine-card engine-card--live" data-engine="unity" tabindex="0">
+              <div class="engine-card" data-engine="unity" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/Unity.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -1179,9 +1205,9 @@
                     <div class="engine-sub">BepInEx / XUnity / 运行时翻译</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="engine-meta"><span class="pill exp">实验中</span></div>
                 <div class="tip"><div class="tip-box">
-                  <div class="tip-title">Unity <span class="muted">（Beta测试）</span></div>
+                  <div class="tip-title">Unity <span class="muted">（实验中）</span></div>
                   <ul class="tip-list">
                     <li>支持 Unity 运行时文本捕获与预翻译注入（BepInEx / XUnity）</li>
                     <li>运行时替换对话、菜单、UI 等可捕获文本，可生成预翻译字典</li>
@@ -1190,7 +1216,7 @@
                 </div></div>
               </div>
 
-              <div class="engine-card engine-card--live" data-engine="pixelgamaker" tabindex="0">
+              <div class="engine-card" data-engine="pixelgamaker" tabindex="0">
                 <div class="engine-left">
                   <div class="engine-ico" aria-hidden="true"><img src="./gamelogo/PixelGameMakerMV.png" alt="" loading="lazy" /></div>
                   <div style="min-width:0">
@@ -1198,7 +1224,7 @@
                     <div class="engine-sub">像素动作/平台</div>
                   </div>
                 </div>
-                <div class="engine-meta"><span class="pill beta">Beta测试</span></div>
+                <div class="engine-meta"><span class="pill unverified">未验证支持</span></div>
                 <div class="tip"><div class="tip-box">
                   <div class="tip-title">Pixel Game Maker MV <span class="muted">（已支持）</span></div>
                   <ul class="tip-list">
@@ -1261,6 +1287,12 @@
         </div>
       </footer>
     </main>
+
+    <!-- Image lightbox for hero flow screenshots -->
+    <div class="img-lightbox" id="imgLightbox" aria-hidden="true">
+      <button type="button" class="close" id="imgLightboxClose">关闭</button>
+      <img id="imgLightboxImg" src="" alt="" />
+    </div>
 
     <!-- Feedback Modal -->
     <div class="modal" id="feedbackModal" aria-hidden="true">
