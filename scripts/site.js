@@ -7,12 +7,12 @@ const engineMatrixIntro = document.getElementById("engineMatrixIntro");
 
 const i18n = {
   zh: {
-    pageTitle: "游译者 GameLingo - 实时汉化助手官网",
-    siteBrandText: "游译者 GameLingo",
+    pageTitle: "GameLingo",
+    siteBrandText: "GameLingo",
     navDownload: "下载",
     heroBadge: "没有汉化，也能玩懂全世界游戏！",
     heroTitle:
-      "识别游戏文本，AI 翻译回写",
+      "拖入即可游玩，不再关注陌生语言问题",
     heroLead: "当前专注 RPG Maker MV/MZ，其他引擎持续验证中",
     heroBtnDownload: "下载 Windows 版",
     heroBtnEngines: "查看支持引擎",
@@ -75,8 +75,8 @@ const i18n = {
     feedbackCooldown: "发送过于频繁，请 {n}s 后再试。",
     feedbackSendCooldown: "发送（{n}s）",
     metaDescription:
-      "游译者 GameLingo：游戏翻译 / RPG翻译工具。Hook + AI 沉浸式实时汉化，拖拽游戏即可翻译回写，原位覆盖显示。",
-    footerCopy: "游译者 GameLingo © 2026"
+      "GameLingo：游戏翻译 / RPG翻译工具。Hook + AI 沉浸式实时汉化，拖拽游戏即可翻译回写，原位覆盖显示。",
+    footerCopy: "GameLingo © 2026"
   },
   en: {
     pageTitle: "GameLingo - Official Site",

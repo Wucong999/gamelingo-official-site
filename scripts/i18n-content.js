@@ -348,9 +348,9 @@ window.GAMELINGO_CONTENT = {
   pages: {
     download: {
       zh: {
-        pageTitle: "下载 - 游译者 GameLingo",
-        metaDescription: "游译者 GameLingo 下载中心。Windows 后续不久将提供下载；Android 正在规划中。",
-        siteBrandText: "游译者 GameLingo",
+        pageTitle: "下载 - GameLingo",
+        metaDescription: "GameLingo 下载中心。Windows 后续不久将提供下载；Android 正在规划中。",
+        siteBrandText: "GameLingo",
         navHome: "返回首页",
         h1: "下载中心",
         lead: "Windows 后续不久将提供下载。Android 版本正在规划中，后续会在这里同步进度，个人开发项目进度稍慢还请理解。",
@@ -396,9 +396,9 @@ window.GAMELINGO_CONTENT = {
     },
     faq: {
       zh: {
-        pageTitle: "FAQ - 游译者 GameLingo",
+        pageTitle: "FAQ - GameLingo",
         metaDescription: "GameLingo 常见问题：套餐、翻译、依赖与安全说明。",
-        siteBrandText: "游译者 GameLingo",
+        siteBrandText: "GameLingo",
         navHome: "返回首页",
         h1: "常见问题 FAQ",
         lead: "这里整理了新手最容易卡住的点。若仍解决不了，建议在首页“问题反馈”里附上截图/短视频。",
@@ -434,9 +434,9 @@ window.GAMELINGO_CONTENT = {
     },
     privacy: {
       zh: {
-        pageTitle: "隐私政策 - 游译者 GameLingo",
-        metaDescription: "游译者 GameLingo 隐私政策。",
-        siteBrandText: "游译者 GameLingo",
+        pageTitle: "隐私政策 - GameLingo",
+        metaDescription: "GameLingo 隐私政策。",
+        siteBrandText: "GameLingo",
         navHome: "返回首页",
         h1: "隐私政策",
         intro: "我们只收集“为了让软件能正常工作”所必需的最小数据，并做到不上传你的游戏文件。",
@@ -478,9 +478,9 @@ window.GAMELINGO_CONTENT = {
     },
     terms: {
       zh: {
-        pageTitle: "服务条款 - 游译者 GameLingo",
-        metaDescription: "游译者 GameLingo 服务条款。",
-        siteBrandText: "游译者 GameLingo",
+        pageTitle: "服务条款 - GameLingo",
+        metaDescription: "GameLingo 服务条款。",
+        siteBrandText: "GameLingo",
         navHome: "返回首页",
         h1: "服务条款",
         intro: "为了保护你和我们的服务稳定性，请在使用前了解以下条款（通俗版）。",
