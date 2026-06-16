@@ -4,8 +4,8 @@
   "latestVersion": "0.1.2",
   "windows": {
     "arch": "x64",
-    "fileName": "GameLingo Setup 0.1.2.exe",
-    "downloadUrl": "https://gamelingo-download.oss-cn-shanghai.aliyuncs.com/desktop/GameLingo%20Setup%200.1.2.exe",
+    "fileName": "GameLingo Setup 0.1.2-20260617-hotfix2.exe",
+    "downloadUrl": "https://gamelingo-download.oss-cn-shanghai.aliyuncs.com/desktop/GameLingo%20Setup%200.1.2-20260617-hotfix2.exe",
     "sha256": "0048a37e90ae3a020b90c3eadc480f8f00083ac6652f04152ca58ac3aeba1d9f",
     "sizeMb": 96.7
   },
