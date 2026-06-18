@@ -1,14 +1,14 @@
 {
   "product": "GameLingo",
   "channel": "beta",
-  "latestVersion": "0.1.2",
+  "latestVersion": "0.1.3",
   "windows": {
     "arch": "x64",
-    "fileName": "GameLingo Setup 0.1.2-20260617-hotfix2.exe",
-    "downloadUrl": "https://gamelingo-download.oss-cn-shanghai.aliyuncs.com/desktop/GameLingo%20Setup%200.1.2-20260617-hotfix2.exe",
-    "sha256": "0048a37e90ae3a020b90c3eadc480f8f00083ac6652f04152ca58ac3aeba1d9f",
+    "fileName": "GameLingo Setup 0.1.3.exe",
+    "downloadUrl": "https://gamelingo-download.oss-cn-shanghai.aliyuncs.com/desktop/GameLingo%20Setup%200.1.3.exe",
+    "sha256": "6b2e4a2efd2fde2c408bbf43c534427c6b8db8f1f16ec5197f3f94e3e1ccc130",
     "sizeMb": 96.7
   },
-  "updatedAt": "2026-06-15T00:00:00+08:00"
+  "updatedAt": "2026-06-19T00:00:00+08:00"
 }
 
