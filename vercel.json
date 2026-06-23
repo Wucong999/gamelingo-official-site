@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/feedback",
+      "destination": "http://8.136.148.57:3030/api/feedback"
+    }
+  ]
+}
