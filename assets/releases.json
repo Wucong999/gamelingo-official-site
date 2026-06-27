@@ -1,12 +1,12 @@
 {
   "product": "GameLingo",
   "channel": "beta",
-  "latestVersion": "0.1.5",
+  "latestVersion": "0.1.6",
   "windows": {
     "arch": "x64",
-    "fileName": "GameLingo Setup 0.1.5.exe",
-    "downloadUrl": "https://gamelingo-download.oss-cn-shanghai.aliyuncs.com/desktop/GameLingo%20Setup%200.1.5.exe",
-    "sha256": "a70ccda5a55754a214e553e1c5e511ba930b0d19f83fb6ff8682b3ec0caa9852",
+    "fileName": "GameLingo Setup 0.1.6.exe",
+    "downloadUrl": "https://gamelingo-download.oss-cn-shanghai.aliyuncs.com/desktop/GameLingo%20Setup%200.1.6.exe",
+    "sha256": "8577a99e9686766bd51f3ef9395c428ffc900168c14e6567fb55ba066732602a",
     "sizeMb": 96.7
   },
   "updatedAt": "2026-06-27T00:00:00+08:00"
